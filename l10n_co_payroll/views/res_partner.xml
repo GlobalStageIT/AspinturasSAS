@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="l10n_co_payroll_res_partner" model="ir.ui.view">
+            <field name="name">Administradoras</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='category_id']" position="after">
+                        <field name="is_management"/>
+                        <field name="management_id" 
+                               attrs="{'required': [('is_management', '=', True)],
+                                       'invisible': [('is_management', '=', False)]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

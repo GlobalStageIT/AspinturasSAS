@@ -1,0 +1,11 @@
+{
+  "type": [
+      {
+          "name":"Base",
+          "country_id": 49,
+          "wage_type": "monthly",
+          "default_schedule_pay": "monthly",
+          "default_work_entry_type_id": "Base General"
+      }
+  ]
+}

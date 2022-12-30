@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record id="l10n_co_cei_sequence_view" model="ir.ui.view">
+            <field name="name">ir.sequence.form</field>
+            <field name="model">ir.sequence</field>
+            <field name="inherit_id" ref="base.sequence_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//notebook/page/group" position="after">
+                        <group string="Facturación electrónica" name="factura_electronica" col="3" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}">
+                            <group>
+                                <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                                <field name="fe_tipo_secuencia"/>
+                            </group>
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <!-- end:views -->
+    </data>
+</odoo>

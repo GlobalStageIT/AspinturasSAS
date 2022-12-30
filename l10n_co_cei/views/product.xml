@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <!-- view_currency_form -->
+        <record id="l10n_co_cei_product_form_view" model="ir.ui.view">
+            <field name="name">res.product.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                        <div>
+                            <field name="enable_charges"/>
+                            <label for="enable_charges"/>
+                        </div>
+                        <div>
+                             <label for="tipo_aiu"/>
+                            <field name="tipo_aiu"/>
+                        </div>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

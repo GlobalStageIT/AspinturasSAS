@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="tmpl_email_config" model="ir.sequence">
+            <field name="name">Informe Z-PDF</field>
+            <field name="code">ZREP</field>
+            <field name="padding">5</field>
+            <field name="prefix">Z-REPORT-</field>
+        </record>
+    </data>
+</odoo>

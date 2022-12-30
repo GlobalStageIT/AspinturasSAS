@@ -1,0 +1,18 @@
+<odoo>
+    <data noupdate="1">
+        <record id="l10n_co_payroll.dian_nomina_individual_sequence" model="ir.sequence">
+            <field name="name">XML Nomina Individual</field>
+            <field name="implementation">standard</field>
+            <field name="padding">8</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+        <record id="l10n_co_payroll.dian_nomina_individual_ajuste_sequence" model="ir.sequence">
+            <field name="name">XML Nomina Individual de ajuste</field>
+            <field name="implementation">standard</field>
+            <field name="padding">8</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+    </data>
+</odoo>

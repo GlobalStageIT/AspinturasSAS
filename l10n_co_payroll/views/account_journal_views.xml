@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="l10n_co_payroll_view_account_journal_form_inherited" model="ir.ui.view">
+            <field name="name">account.journal.form.inherited</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="journal_payroll" />
+                </xpath>
+                <xpath expr="//page[@name='advanced_settings']" position="before">
+                    <page name="journal_entries" string="Cuentas Nomina" attrs="{'invisible': [('journal_payroll', '=', False)]}">
+                        <group>
+                            <group>
+                                <field name="severance_account_id" />
+                                <field name="severance_interest_account_id" />
+                                <field name="service_bonus_account_id" />
+                                <field name="vacations_account_id" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

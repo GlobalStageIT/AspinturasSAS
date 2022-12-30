@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="company_resolucion_tree_view">
+            <field name="name">l10n_co_cei_company_resolucion_tree</field>
+            <field name="model">l10n_co_cei.company_resolucion</field>
+            <field name="arch" type="xml">
+                <tree string="Resoluciones">
+                    <field name="company_id" />
+                    <field name="journal_id" />
+                    <field name="categoria" />
+                    <field name="name" />
+                    <field name="fe_habilitada_compania" />
+                    <field name="category_resolution_dian_id" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)],
+                                                        'required': [('fe_habilitada_compania', '=', True)]}"/>
+                    <field name="codigo_fe_dian" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)],
+                                                        'required': [('fe_habilitada_compania', '=', True)]}"/>
+                    <field name="xp_category_resolution_dian_id" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                    <field name="rango_desde" />
+                    <field name="rango_hasta" />
+                    <field name="fecha_inicial" />
+                    <field name="fecha_final" />
+
+                    <field name="tipo" />
+                    <field name="state" />
+                    <field name="sequence_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="company_resolucion_form_view">
+            <field name="name">l10n_co_cei_company_resolucion_form</field>
+            <field name="model">l10n_co_cei.company_resolucion</field>
+            <field name="arch" type="xml">
+                <form string="Resolución">
+                    <sheet>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="journal_id"/>
+                            <field name="categoria" />
+                            <field name="name"/>
+                             <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                            <field name="category_resolution_dian_id" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)],
+                                                                'required': [('fe_habilitada_compania', '=', True)]}"/>
+                            <field name="codigo_fe_dian" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)],
+                                                                'required': [('fe_habilitada_compania', '=', True)]}"/>
+
+                            <field name="xp_category_resolution_dian_id" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                            <field name="number"/>
+                            <field name="tipo"/>
+                            <field name="clave_tecnica"
+                                   attrs="{'invisible':[('tipo', '!=', 'facturacion-electronica')],
+                                           'required': [('tipo', '=', 'facturacion-electronica')]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="rango_desde"/>
+                            <field name="rango_hasta"/>
+
+                            <field name="sequence_id" />
+                        </group>
+                        <group>
+                            <field name="fecha_inicial"/>
+                            <field name="fecha_final"/>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window"
+            id="l10n_co_cei_company_resolution_list_action">
+            <field name="name">Resoluciones</field>
+            <field name="res_model">l10n_co_cei.company_resolucion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first Resolución
+                </p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+        <menuitem id="l10n_co_cei_facturacion_electronica_menu"
+            parent="account.menu_finance_configuration"
+			name="Facturación electrónica"
+            groups="l10n_co_cei.group_electronic_billing_manager"
+        />
+
+        <menuitem id="l10n_co_cei_company_resolucion_config_submenu"
+			name="Resoluciones"
+            parent="l10n_co_cei_facturacion_electronica_menu"
+			action="l10n_co_cei_company_resolution_list_action"
+            groups="l10n_co_cei.group_electronic_billing_manager"
+        />
+        <!-- end:menus -->
+    </data>
+</odoo>

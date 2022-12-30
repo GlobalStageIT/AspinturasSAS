@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="tax_type_tree_view">
+            <field name="name">l10n_co_cei_tax_type_tree</field>
+            <field name="model">l10n_co_cei.tax_type</field>
+            <field name="arch" type="xml">
+                <tree string="Tipo Impuestos">
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tax_type_form_view">
+            <field name="name">l10n_co_cei_tax_type_form</field>
+            <field name="model">l10n_co_cei.tax_type</field>
+            <field name="arch" type="xml">
+                <form string="Tipo Impuestos">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window"
+            id="l10n_co_cei_tax_type_list_action">
+            <field name="name">Tipos de Impuestos</field>
+            <field name="res_model">l10n_co_cei.tax_type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first tax type
+                </p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+
+        <menuitem id="l10n_co_cei_tax_type_config_submenu"
+			name="Tipo de Impuestos"
+            parent="l10n_co_cei_facturacion_electronica_menu"
+			action="l10n_co_cei_tax_type_list_action"
+            groups="l10n_co_cei.group_electronic_billing_manager"
+        />
+        <!-- end:menus -->
+    </data>
+</odoo>

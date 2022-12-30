@@ -1,0 +1,8 @@
+id,name,model_id:id,domain_force,perm_read,perm_write,perm_create,perm_unlink
+rule_hr_payslip_user,l10n_co_payroll.hr_payslip,model_hr_payslip,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,1
+rule_hr_payroll_structure_user,l10n_co_payroll.hr_payroll_structure,model_hr_payroll_structure,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,1
+rule_hr_contract_user,hr_payroll.hr_contract,hr_payroll.model_hr_contract,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,1
+rule_hr_salary_rule_user,l10n_co_payroll.hr_salary_rule,model_hr_salary_rule,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,1
+rule_hr_salary_rule_category_user,l10n_co_payroll.hr_salary_rule_category,hr_payroll.model_hr_salary_rule_category,"['|',['company_id','=',False],['company_id','in',user.company_ids.ids]]",1,1,1,1
+rule_hr_payslip_electronic,l10n_co_payroll.hr_payslip_electronic,l10n_co_payroll.model_hr_payslip_electronic,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,0
+rule_book_vacations_rule_user,l10n_co_payroll.book_vacations_rule,l10n_co_payroll.model_book_vacations,"['|',['company_id','=',False],['company_id','in',company_ids]]",1,1,1,1

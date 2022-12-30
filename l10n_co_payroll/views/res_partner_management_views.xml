@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_res_partner_management" model="ir.actions.act_window">
+        <field name="name">Administradoras de la protección social</field>
+        <field name="res_model">res.partner.management</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Lista de administradoras de la Proteccion Social
+            </p>
+        </field>
+    </record>
+            
+    <record id="res_partner_management_view_form" model="ir.ui.view">
+        <field name="name">res_partner_management.view.form</field>
+        <field name="model">res.partner.management</field>
+        <field name="arch" type="xml">
+            <form string="Administradoras de la Protección Social">
+                <group name="info">
+                    <field name="name"/>
+                    <field name="codigo"/>
+                </group>
+                <group name="info2">
+                    <field name="subsistema"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_management_view_tree" model="ir.ui.view">
+        <field name="name">res_partner_management.view.tree</field>
+        <field name="model">res.partner.management</field>
+        <field name="arch" type="xml">
+            <tree string="Administradoras de la Protección Social">
+                <field name="name"/>
+                <field name="codigo"/>
+                <field name="subsistema"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_partner_management_search" model="ir.ui.view">
+        <field name="name">res_partner_management.search</field>
+        <field name="model">res.partner.management</field>
+        <field name="arch" type="xml">
+            <search string="Administradoras de la Protección Social">
+                <filter name="subsistema" string="Subsistema" context="{'group_by':'subsistema'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!--Administradoras Menu Entry-->
+    <menuitem id="menu_management" name="Administradoras"
+        parent="contacts.res_partner_menu_config" sequence="10"
+    />
+
+    <menuitem
+        id="menu_action_res_partner_management"
+        action="action_res_partner_management"
+        parent="menu_management"
+    />
+
+</odoo>

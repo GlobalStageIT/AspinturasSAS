@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record id="l10n_co_cei_payment_term_form" model="ir.ui.view">
+            <field name="name">account.payment.term.form</field>
+            <field name="model">account.payment.term</field>
+            <field name="inherit_id" ref="account.view_payment_term_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                        <field name="codigo_fe_dian" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <!-- end:views -->
+    </data>
+</odoo>

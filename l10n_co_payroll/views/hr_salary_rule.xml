@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!--  ocultando los campos cuenta deudora y cuenta acrededora -->
+    <!--  agregando campos del modelo salary.rule.account -->
+    <record model="ir.ui.view" id="hr_salary_rule_form_view_inherit">
+      <field name="name">Cuentas de Reglas Salariales</field>
+      <field name="model">hr.salary.rule</field>
+      <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='account_debit']" position="attributes">
+              <attribute name='invisible'>1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='account_credit']" position="attributes">
+              <attribute name='invisible'>1</attribute>
+          </xpath>
+           <xpath expr="//field[@name='not_computed_in_net']" position="after">
+               <field name="account_rule" widget="one2many_list" nolabel="0" >
+                   <tree string="regla de la cuenta" editable="bottom" >
+                       <field name="regla_salarial" />
+                       <field name="account_debit" />
+                       <field name="account_credit" />
+                       <field name="area_trabajo" />
+                   </tree>
+               </field>
+           </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

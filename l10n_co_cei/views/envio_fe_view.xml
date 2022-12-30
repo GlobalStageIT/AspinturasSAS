@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="envio_fe_tree_view">
+            <field name="name">l10n_co_cei_envio_fe_tree</field>
+            <field name="model">l10n_co_cei.envio_fe</field>
+            <field name="arch" type="xml">
+                <tree string="Facturas electrónicas enviadas">
+                    <field name="invoice_id" />
+                    <field name="partner_id" />
+                    <field name="fecha_envio" />
+                    <field name="respuesta_envio" />
+                    <field name="fecha_validacion" />
+                    <field name="respuesta_validacion" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="envio_fe_form_view">
+            <field name="name">l10n_co_cei_envio_fe_form</field>
+            <field name="model">l10n_co_cei.envio_fe</field>
+            <field name="arch" type="xml">
+                <form string="Resolucion">
+                    <sheet>
+                        <group>
+                            <field name="invoice_id" readonly="1"/>
+                            <field name="partner_id" />
+                        </group>
+                        <group>
+                            <field name="fecha_envio" readonly="1"/>
+                            <field name="codigo_respuesta_envio" readonly="1"/>
+                            <field name="respuesta_envio" readonly="1"/>
+                            <!--field name="envio_attachment_id"/-->
+                            <field widget="binary" name="archivo_envio" filename="nombre_archivo_envio"/>
+                            <field name="nombre_archivo_envio" readonly="1" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="fecha_validacion" readonly="1"/>
+                            <field name="codigo_respuesta_validacion" readonly="1"/>
+                            <field name="respuesta_validacion" readonly="1"/>
+                            <!--field name="validacion_attachment_id"/-->
+                            <field widget="binary" name="archivo_validacion" filename="nombre_archivo_validacion"/>
+                            <field name="nombre_archivo_validacion" readonly="1" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window"
+            id="l10n_co_cei_envio_fe_list_action">
+            <field name="name">Facturas electrónicas enviadas</field>
+            <field name="res_model">l10n_co_cei.envio_fe</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Aún no ha enviado ninguna factura electrónica.
+                </p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+        <menuitem id="l10n_co_cei_company_envio_fe_submenu"
+			name="Facturas electrónicas enviadas"
+            parent="account.menu_finance_receivables"
+			action="l10n_co_cei_envio_fe_list_action"
+            groups="l10n_co_cei.group_electronic_billing_manager"
+        />
+        <!-- end:menus -->
+
+        <!-- INICIO consulta factura electronica-->
+		<record id="consulta_factura_electronica_dian" model="ir.actions.server">
+            <field name="name">Consultar estado de validación</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_l10n_co_cei_envio_fe" />
+            <field name="binding_model_id" ref="model_l10n_co_cei_envio_fe" />
+            <field name="state">code</field>
+            <field name="code">records.consulta_fe_dian()</field>
+        </record>
+		<!-- FIN consulta factura electronica-->
+    </data>
+</odoo>

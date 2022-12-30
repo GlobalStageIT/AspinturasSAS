@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="funcion.trozo" id="ft_pcts_incapacidades">
+            <field name="nombre">Porcentajes pago incapacidades</field>
+        </record>
+        <record model="funcion.trozo.detalle" id="ft_pcts_incapacidades_empresa">
+            <field name="funcion_trozo_id" eval="ref('ft_pcts_incapacidades')"/>
+            <field name="desde">1</field>
+            <field name="hasta">2</field>
+            <field name="valor_inicial">100</field>
+            <field name="valor_adicional">0</field>
+        </record>
+        <record model="funcion.trozo.detalle" id="ft_pcts_incapacidades_eps_90">
+            <field name="funcion_trozo_id" eval="ref('ft_pcts_incapacidades')"/>
+            <field name="desde">3</field>
+            <field name="hasta">90</field>
+            <field name="valor_inicial">66.67</field>
+            <field name="valor_adicional">0</field>
+        </record>
+        <record model="funcion.trozo.detalle" id="ft_pcts_incapacidades_eps_180">
+            <field name="funcion_trozo_id" eval="ref('ft_pcts_incapacidades')"/>
+            <field name="desde">91</field>
+            <field name="hasta">180</field>
+            <field name="valor_inicial">50</field>
+            <field name="valor_adicional">0</field>
+        </record>
+        <record model="funcion.trozo.detalle" id="ft_pcts_incapacidades_eps">
+            <field name="funcion_trozo_id" eval="ref('ft_pcts_incapacidades')"/>
+            <field name="desde">181</field>
+            <field name="hasta">540</field>
+            <field name="valor_inicial">50</field>
+            <field name="valor_adicional">0</field>
+        </record>
+
+    </data>
+</odoo>
