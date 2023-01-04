@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><CreditNote xmlns="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:sts="dian:gov:co:facturaelectronica:Structures-2-1" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2 http://docs.oasis-open.org/ubl/os-UBL-2.1/xsd/maindoc/UBL-CreditNote-2.1.xsd">
+   <ext:UBLExtensions>
+      <ext:UBLExtension>
+         <ext:ExtensionContent>
+            <sts:DianExtensions>
+               <sts:InvoiceSource>
+                  <cbc:IdentificationCode listAgencyID="6" listAgencyName="United Nations Economic Commission for Europe" listSchemeURI="urn:oasis:names:specification:ubl:codelist:gc:CountryIdentificationCode-2.1">CO</cbc:IdentificationCode>
+               </sts:InvoiceSource>
+               <sts:SoftwareProvider>
+                  <sts:ProviderID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeID="{{provider_id_digit}}" schemeName="31">{{provider_id}}</sts:ProviderID>
+                  <sts:SoftwareID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)">{{software_id}}</sts:SoftwareID>
+               </sts:SoftwareProvider>
+               <sts:SoftwareSecurityCode schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)">{{software_security_code}}</sts:SoftwareSecurityCode>
+               <sts:AuthorizationProvider>
+                  <sts:AuthorizationProviderID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeID="4" schemeName="31">800197268</sts:AuthorizationProviderID>
+               </sts:AuthorizationProvider>
+               {% set date = invoice_issue_date.split('-') %}
+               {% set two_digit_key = creditnote_cuds[:2] %}
+               <sts:QRCode>{{creditnote_qrcode}}</sts:QRCode>
+            </sts:DianExtensions>
+         </ext:ExtensionContent>
+      </ext:UBLExtension>
+      <ext:UBLExtension>
+         <ext:ExtensionContent/>
+      </ext:UBLExtension>
+   </ext:UBLExtensions>
+   <cbc:UBLVersionID>UBL 2.1</cbc:UBLVersionID>
+   <cbc:CustomizationID>{{invoice_customization_id}}</cbc:CustomizationID>
+   <cbc:ProfileID>DIAN 2.1: Nota de ajuste al documento soporte en adquisiciones efectuadas a sujetos no obligados a expedir factura o documento equivalente</cbc:ProfileID>
+   <cbc:ProfileExecutionID>{{profile_execution_id}}</cbc:ProfileExecutionID>
+   <cbc:ID>{{invoice_number}}</cbc:ID>
+   <cbc:UUID schemeID="{{profile_execution_id}}" schemeName="CUDS-SHA384">{{creditnote_cuds}}</cbc:UUID>
+   <cbc:IssueDate>{{invoice_issue_date}}</cbc:IssueDate>
+   <cbc:IssueTime>{{invoice_issue_time}}</cbc:IssueTime>
+   <cbc:CreditNoteTypeCode>95</cbc:CreditNoteTypeCode>
+   <cbc:Note>{{invoice_note}}</cbc:Note>
+   {% if currency_id != 'COP'%}
+   <cbc:DocumentCurrencyCode listAgencyID="6" listAgencyName="United Nations Economic Commission for Europe" listID="ISO 4217 Alpha">{{currency_id}}</cbc:DocumentCurrencyCode>
+   {% else %}
+   <cbc:DocumentCurrencyCode>COP</cbc:DocumentCurrencyCode>
+   {% endif %}
+   <cbc:LineCountNumeric>{{creditnote_lines|length}}</cbc:LineCountNumeric>
+   <cac:DiscrepancyResponse>
+      <cbc:ReferenceID>{{billing_reference_id}}</cbc:ReferenceID>
+      <cbc:ResponseCode>{{discrepancy_response_code}}</cbc:ResponseCode>
+      <cbc:Description>{{credit_note_reason}}</cbc:Description>
+   </cac:DiscrepancyResponse>
+
+   <cac:BillingReference>
+      <cac:InvoiceDocumentReference>
+         <cbc:ID>{{billing_reference_id}}</cbc:ID>
+         <cbc:UUID schemeName="CUDS-SHA384">{{billing_reference_cufe}}</cbc:UUID>
+         <cbc:IssueDate>{{billing_reference_issue_date}}</cbc:IssueDate>
+      </cac:InvoiceDocumentReference>
+   </cac:BillingReference>
+
+   {% if order_reference and order_reference_date %}
+   <cac:OrderReference>
+      <cbc:ID>{{order_reference}}</cbc:ID>
+      <cbc:IssueDate>{{order_reference_date}}</cbc:IssueDate>
+   </cac:OrderReference>
+   {% elif order_reference and not order_reference_date %}
+   <cac:OrderReference>
+      <cbc:ID>{{order_reference}}</cbc:ID>
+   </cac:OrderReference>
+   {% else %}
+   {% endif %}
+
+   <cac:AccountingSupplierParty>
+      <cbc:AdditionalAccountID>{{invoice_supplier_additional_account_id}}</cbc:AdditionalAccountID>
+      <cac:Party>
+         <cac:PhysicalLocation>
+            <cac:Address>
+               <cbc:ID>{{invoice_supplier_city_code}}</cbc:ID>
+               <cbc:CityName>{{invoice_supplier_city}}</cbc:CityName>
+               <cbc:PostalZone>{{invoice_supplier_postal_code}}</cbc:PostalZone>
+               <cbc:CountrySubentity>{{invoice_supplier_department}}</cbc:CountrySubentity>
+               <cbc:CountrySubentityCode>{{invoice_supplier_department_code}}</cbc:CountrySubentityCode>
+               <cac:AddressLine>
+                  <cbc:Line>{{invoice_supplier_address_line}}</cbc:Line>
+               </cac:AddressLine>
+               <cac:Country>
+                  <cbc:IdentificationCode>CO</cbc:IdentificationCode>
+                  <cbc:Name languageID="es">Colombia</cbc:Name>
+               </cac:Country>
+            </cac:Address>
+         </cac:PhysicalLocation>
+         <cac:PartyTaxScheme>
+            <cbc:RegistrationName>{{invoice_supplier_party_name}}</cbc:RegistrationName>
+            {% if invoice_supplier_document_type == '31' %}
+            <cbc:CompanyID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeID="{{invoice_supplier_identification_digit}}" schemeName="31">{{invoice_supplier_identification}}</cbc:CompanyID>
+            {% else %}
+            <cbc:CompanyID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeName="{{invoice_supplier_document_type}}">{{invoice_supplier_identification}}</cbc:CompanyID>
+            {% endif %}
+            <cbc:TaxLevelCode>{{invoice_supplier_tax_level_code}}</cbc:TaxLevelCode>
+            <cac:TaxScheme>
+               <cbc:ID>{{invoice_supplier_responsabilidad_tributaria}}</cbc:ID>
+               <cbc:Name>{{invoice_supplier_responsabilidad_tributaria_text}}</cbc:Name>
+            </cac:TaxScheme>
+         </cac:PartyTaxScheme>
+      </cac:Party>
+   </cac:AccountingSupplierParty>
+
+   <cac:AccountingCustomerParty>
+      <cbc:AdditionalAccountID>{{invoice_customer_additional_account_id}}</cbc:AdditionalAccountID>
+      <cac:Party>
+         <cac:PartyTaxScheme>
+            <cbc:RegistrationName>{{invoice_customer_party_name}}</cbc:RegistrationName>
+            {% if invoice_customer_document_type == '31' %}
+            <cbc:CompanyID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeID="{{invoice_customer_identification_digit}}" schemeName="31">{{invoice_customer_identification}}</cbc:CompanyID>
+            {% else %}
+            <cbc:CompanyID schemeAgencyID="195" schemeAgencyName="CO, DIAN (Dirección de Impuestos y Aduanas Nacionales)" schemeName="{{invoice_customer_document_type}}">{{invoice_customer_identification}}</cbc:CompanyID>
+            {% endif %}
+            <cbc:TaxLevelCode>{{invoice_customer_tax_level_code}}</cbc:TaxLevelCode>
+            <cac:TaxScheme>
+               <cbc:ID>{{invoice_customer_responsabilidad_tributaria}}</cbc:ID>
+               <cbc:Name>{{invoice_customer_responsabilidad_tributaria_text}}</cbc:Name>
+            </cac:TaxScheme>
+         </cac:PartyTaxScheme>
+      </cac:Party>
+   </cac:AccountingCustomerParty>
+
+   <cac:PaymentMeans>
+      <cbc:ID>{{payment_means_id}}</cbc:ID>
+      <cbc:PaymentMeansCode>{{payment_means_code}}</cbc:PaymentMeansCode>
+      <cbc:PaymentDueDate>{{date_due}}</cbc:PaymentDueDate>
+      <cbc:PaymentID>{{payment_id}}</cbc:PaymentID>
+   </cac:PaymentMeans>
+
+   {% if currency_id != 'COP'%}
+   <cac:PaymentExchangeRate>
+      <cbc:SourceCurrencyCode>{{currency_id}}</cbc:SourceCurrencyCode>
+      <cbc:SourceCurrencyBaseRate>1.00</cbc:SourceCurrencyBaseRate>
+      <cbc:TargetCurrencyCode>COP</cbc:TargetCurrencyCode>
+      <cbc:TargetCurrencyBaseRate>1.00</cbc:TargetCurrencyBaseRate>
+      <cbc:CalculationRate>{{'%0.2f'| format(calculation_rate|float)}}</cbc:CalculationRate>
+      <cbc:Date>{{rate_date}}</cbc:Date>
+   </cac:PaymentExchangeRate>
+   {% endif %}
+
+   {% set id = 1%}
+   {% if (invoice_charges_freight|float) > 0 %}
+   <cac:AllowanceCharge>
+       <cbc:ID>{{id}}</cbc:ID>
+       <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+       <cbc:AllowanceChargeReason>{{invoice_charges_freight_text}}</cbc:AllowanceChargeReason>
+       <cbc:MultiplierFactorNumeric>100.00</cbc:MultiplierFactorNumeric>
+       <cbc:Amount currencyID="{{currency_id}}">{{'%0.2f'| format(invoice_charges_freight|float)}}</cbc:Amount>
+       <cbc:BaseAmount currencyID="{{currency_id}}">{{'%0.2f'| format(invoice_charges_freight|float)}}</cbc:BaseAmount>
+   </cac:AllowanceCharge>
+   {% set id = 2%}
+   {% endif %}
+   {% if (line_extension_amount|float) > 0 and (invoice_discount|float) > 0 %}
+   <cac:AllowanceCharge>
+       <cbc:ID>{{id}}</cbc:ID>
+       <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+       <cbc:AllowanceChargeReasonCode>{{invoice_discount_code}}</cbc:AllowanceChargeReasonCode>
+       <cbc:AllowanceChargeReason>{{invoice_discount_text}}</cbc:AllowanceChargeReason>
+       <cbc:MultiplierFactorNumeric>{{'%0.2f'| format((invoice_discount|float * 100/ line_extension_amount|float))}}</cbc:MultiplierFactorNumeric>
+       <cbc:Amount currencyID="{{currency_id}}">{{'%0.2f'| format(invoice_discount|float)}}</cbc:Amount>
+       <cbc:BaseAmount currencyID="{{currency_id}}">{{'%0.2f'| format(line_extension_amount|float)}}</cbc:BaseAmount>
+   </cac:AllowanceCharge>
+   {% endif %}
+   {% for tax_id, data in tax_total_values.items() %}
+   <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="{{currency_id}}">{{'%0.2f'| format(data['total']|float)}}</cbc:TaxAmount>
+      {% for amount, info in data['info'].items() %}
+      <cac:TaxSubtotal>
+         <cbc:TaxableAmount currencyID="{{currency_id}}">{{'%0.2f'| format(info['taxable_amount']|float)}}</cbc:TaxableAmount>
+         <cbc:TaxAmount currencyID="{{currency_id}}">{{'%0.2f'| format(info['value']|float)}}</cbc:TaxAmount>
+         <cac:TaxCategory>
+            <cbc:Percent>{{'%0.2f'| format(amount|float)}}</cbc:Percent>
+            <cac:TaxScheme>
+               <cbc:ID>{{tax_id}}</cbc:ID>
+               <cbc:Name>{{info['technical_name']}}</cbc:Name>
+            </cac:TaxScheme>
+         </cac:TaxCategory>
+      </cac:TaxSubtotal>
+      {% endfor %}
+   </cac:TaxTotal>
+   {% endfor %}
+   <cac:LegalMonetaryTotal>
+      <cbc:LineExtensionAmount currencyID="{{currency_id}}">{{'%0.2f'| format(line_extension_amount|float)}}</cbc:LineExtensionAmount>
+      <cbc:TaxExclusiveAmount currencyID="{{currency_id}}">{{'%0.2f'| format(tax_exclusive_amount|float)}}</cbc:TaxExclusiveAmount>
+      <cbc:TaxInclusiveAmount currencyID="{{currency_id}}">{{'%0.2f'| format(tax_inclusive_amount|float)}}</cbc:TaxInclusiveAmount>
+      {%if invoice_discount!=0%}
+      <cbc:AllowanceTotalAmount currencyID="{{currency_id}}">{{'%0.2f'| format(invoice_discount|float)}}</cbc:AllowanceTotalAmount>
+      {%endif%}
+      <cbc:ChargeTotalAmount currencyID="{{currency_id}}">{{'%0.2f'| format(invoice_charges_freight|float)}}</cbc:ChargeTotalAmount>
+      <cbc:PayableAmount currencyID="{{currency_id}}">{{'%0.2f'| format(payable_amount|float)}}</cbc:PayableAmount>
+   </cac:LegalMonetaryTotal>
+   {% for creditnote_line in creditnote_lines %}
+   <cac:CreditNoteLine>
+      <cbc:ID>{{creditnote_line['id']}}</cbc:ID>
+      {% if creditnote_line['note'] %}
+      <cbc:Note>{{creditnote_line['note']}}</cbc:Note>
+      {% endif %}
+      {% if creditnote_line['uom_product_id']  %}
+      <cbc:CreditedQuantity unitCode="{{creditnote_line['uom_product_id']}}">{{creditnote_line['credited_quantity']}}</cbc:CreditedQuantity>
+      {% else %}
+      <cbc:CreditedQuantity unitCode="EA">{{creditnote_line['credited_quantity']}}</cbc:CreditedQuantity>
+      {% endif %}
+      <cbc:LineExtensionAmount currencyID="{{currency_id}}">{{'%0.2f'| format(creditnote_line['line_extension_amount']|float)}}</cbc:LineExtensionAmount>
+      {% for tax_id, data in creditnote_line['tax_info'].items() %}
+      <cac:TaxTotal>
+         <cbc:TaxAmount currencyID="{{currency_id}}">{{'%0.2f'| format(data['total']|float)}}</cbc:TaxAmount>
+         {% for amount, info in data['info'].items() %}
+         <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="{{currency_id}}">{{'%0.2f'| format(info['taxable_amount']|float)}}</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="{{currency_id}}">{{'%0.2f'| format(info['value']|float)}}</cbc:TaxAmount>
+            <cac:TaxCategory>
+               <cbc:Percent>{{'%0.2f'| format(amount|float)}}</cbc:Percent>
+               <cac:TaxScheme>
+                  <cbc:ID>{{tax_id}}</cbc:ID>
+                  <cbc:Name>{{info['technical_name']}}</cbc:Name>
+               </cac:TaxScheme>
+            </cac:TaxCategory>
+         </cac:TaxSubtotal>
+         {% endfor %}
+      </cac:TaxTotal>
+      {% endfor %}
+      {% if (creditnote_line['line_extension_amount']|float) > 0 and (creditnote_line['discount']|float) > 0 %}
+      {% set amount_base= (creditnote_line['line_extension_amount'])|float + (creditnote_line['discount'])|float %}
+      <cac:AllowanceCharge>
+         <cbc:ID>1</cbc:ID>
+         <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+         <cbc:AllowanceChargeReasonCode>{{creditnote_line['discount_code']}}</cbc:AllowanceChargeReasonCode>
+         <cbc:AllowanceChargeReason>{{creditnote_line['discount_text']}}</cbc:AllowanceChargeReason>
+         <cbc:MultiplierFactorNumeric>{{'%0.2f'| format(creditnote_line['discount']|float * 100 / amount_base|float)}}</cbc:MultiplierFactorNumeric>
+         <cbc:Amount currencyID="{{currency_id}}">{{'%0.2f'| format(creditnote_line['discount']|float)}}</cbc:Amount>
+         <cbc:BaseAmount currencyID="{{currency_id}}">{{'%0.2f'| format(amount_base|float)}}</cbc:BaseAmount>
+      </cac:AllowanceCharge>
+      {% endif %}
+      <cac:Item>
+         <cbc:Description>{{creditnote_line['item_description']}}</cbc:Description>
+         <cac:StandardItemIdentification>
+            <cbc:ID schemeID="999" schemeName="Estándar de adopción del contribuyente">{{creditnote_line['product_id']}}</cbc:ID>
+         </cac:StandardItemIdentification>
+      </cac:Item>
+      <cac:Price>
+         <cbc:PriceAmount currencyID="{{currency_id}}">{{'%0.2f'| format(creditnote_line['price']|float)}}</cbc:PriceAmount>
+         {% if creditnote_line['uom_product_id']  %}
+         <cbc:BaseQuantity unitCode="{{creditnote_line['uom_product_id']}}">{{creditnote_line['credited_quantity']}}</cbc:BaseQuantity>     
+         {% else %}
+         <cbc:BaseQuantity unitCode="EA">{{creditnote_line['credited_quantity']}}</cbc:BaseQuantity>
+         {% endif %}
+      </cac:Price>
+   </cac:CreditNoteLine>
+   {% endfor %}
+</CreditNote>

@@ -1,0 +1,20 @@
+<odoo>
+    <data noupdate="1">
+        <record id="l10n_co_esd.dian_support_document_squence" model="ir.sequence">
+            <field name="name">XML documento soporte</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">DS</field>
+            <field name="padding">8</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+        <record id="l10n_co_esd.dian_adjustment_support_document_sequence" model="ir.sequence">
+            <field name="name">XML Nota de ajuste documento soporte</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">NAS</field>
+            <field name="padding">8</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+        </record>
+    </data>
+</odoo>

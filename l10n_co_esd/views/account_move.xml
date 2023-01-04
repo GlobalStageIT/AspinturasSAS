@@ -1,0 +1,180 @@
+<odoo>
+    <data>
+        <record id="action_send_electronic_support_document" model="ir.actions.server">
+            <field name="name">Enviar documento soporte electrónico</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_account_move" />
+            <field name="binding_model_id" ref="model_account_move" />
+            <field name="state">code</field>
+            <field name="code">action = records.send_electronic_support_document()</field>
+        </record>
+
+        <record id="action_download_sd_xml" model="ir.actions.server">
+            <field name="name">Descargar XML documento soporte electrónico</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_account_move" />
+            <field name="binding_model_id" ref="model_account_move" />
+            <field name="state">code</field>
+            <field name="code">action = records.download_sd_xml()</field>
+        </record>
+
+        <record id="action_sdownload_sd_xml_signed" model="ir.actions.server">
+            <field name="name">Descargar XML firmado documento soporte electrónico</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_account_move" />
+            <field name="binding_model_id" ref="model_account_move" />
+            <field name="state">code</field>
+            <field name="code">action = records.download_sd_xml_signed()</field>
+        </record>
+    </data>
+    <!-- formulario de factura -->
+    <data>
+        <record id="l10n_co_esd_invoice_form" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='numero_factura_origen']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|',('move_type', 'not in', ('out_refund','in_refund')),('reversed_entry_id','!=',False)],'required': [('move_type', 'in', ('out_refund','in_refund')),('reversed_entry_id','=',False)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='cufe_factura_origen']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|',('move_type', 'not in', ('out_refund','in_refund')),('reversed_entry_id','!=',False)],'required': [('move_type', 'in', ('out_refund','in_refund')),('reversed_entry_id','=',False)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='fecha_factura_origen']" position="attributes">
+                        <attribute name="attrs">{'invisible': ['|',('move_type', 'not in', ('out_refund','in_refund')),('reversed_entry_id','!=',False)],'required': [('move_type', 'in', ('out_refund','in_refund')),('reversed_entry_id','=',False)]}</attribute>
+                    </xpath>
+
+
+                    <!-- Pestaña de Asignacion de pagos.-->
+                    <xpath expr="//form/sheet/notebook/page" position="after">
+                        <page string="Anticipos a usar en conciliación" attrs="{'invisible': [('move_type', 'in', ('out_refund','in_refund'))]}">
+                            <group>
+                                 <field name="pre_payment_line_ids" domain="[('partner_id','=',partner_id),('move_id.state', '=', 'posted'),('reconciled', '=', False),('amount_residual','&lt;',0)]">
+                                    <tree editable="bottom" >
+                                        <field name="name"/>
+                                        <field name="amount_residual" string="Valor por conciliar"/>
+                                        <field name="amount_residual_currency" string="Valor por conciliar moneda extranjera"/>
+                                    </tree>
+                                </field>
+                                <field name="subtotal_pendiente_pago"/>
+
+                            </group>
+
+                        </page>
+                    </xpath>
+                    <!-- Pestaña de documento soporte-->
+                    <xpath expr="//form/sheet/notebook/page" position="after">
+                        <page string="Documento Soporte" attrs="{'invisible': ['|','|',('tipo_resolucion', '!=', 'support-document'),('sd_enable_company', '!=', True),('move_type','not in',('in_invoice','in_refund','entry'))]}">
+                            <group>
+                                <field name="invoice_sent"
+                                    string="Enviada a la DIAN"
+                                    attrs="{'invisible': [('state', 'in', 'draft')]}"
+                                    readonly="1"
+                                />
+                                <field name="sd_sending_id"
+                                    string="Registro de envío"
+                                    attrs="{'invisible': [('sd_sending_id', '=', False)]}"
+                                    readonly="1"
+                                />
+                                <field name="fe_approved"
+                                    attrs="{'invisible': [('state', 'in', 'draft')]}"
+                                    readonly="1"
+                                />
+                                <field name="fe_feedback"
+                                    attrs="{'invisible': [('fe_approved', '!=', 'rechazada')]}"
+                                    readonly="1"
+                                />
+
+                            </group>
+                        </page>
+                    </xpath>
+                    <!--Establece el campo incoterms como obligatorio para facturas de exportación -->
+                    <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
+                        <attribute name="attrs">{'required': [('es_factura_exportacion', '=', True),'|', ('fe_habilitada_compania', '=', True),('sd_enable_company', '=', True)]}</attribute>
+                    </xpath>
+
+                    <!-- Desplegable para medios de pago -->
+                    <xpath expr="//form/sheet/group/group[@id='header_left_group']" position="inside" options="{'no_create': True}">
+                        <field name='sd_enable_company' invisible="1" />
+                        <field name='resolution_type_support_document_journal' invisible="1" />
+                        <field name='resolution_type_adjustment_support_document_journal' invisible="1" />
+                        <field name='transmission_type' attrs="{'invisible': ['|',('sd_enable_company', '!=', True),('move_type','!=','in_invoice')]}"/>
+                        <field name='start_date_period' attrs="{'invisible': [('transmission_type', '!=', 'accumulated')], 'required': [('transmission_type', '=', 'accumulated')] }" />
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@id='header_right_group']/field[@name='fecha_entrega']" position="attributes" >
+                        <attribute name="attrs">{'required': ['|','|','|',('tipo_resolucion_diario_f', '=', 'facturacion-electronica'),('tipo_resolucion_diario_n', '=', 'facturacion-electronica'),('resolution_type_support_document_journal','=','support-document'),('resolution_type_adjustment_support_document_journal','=','support-document'),'|',('sd_enable_company','=',True),('fe_habilitada_compania', '=', True)],'invisible': [('move_type', 'not in', ('out_refund','out_invoice','in_refund','in_invoice')),'|',('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@id='header_right_group']/field[@name='forma_de_pago']" position="attributes" >
+                        <attribute name="attrs">{'required': ['|','|','|',('tipo_resolucion_diario_f', '=', 'facturacion-electronica'),('tipo_resolucion_diario_n', '=', 'facturacion-electronica'),('resolution_type_support_document_journal','=','support-document'),('resolution_type_adjustment_support_document_journal','=','support-document'),'|',('sd_enable_company','=',True),('fe_habilitada_compania', '=', True)],'invisible': [('move_type', 'not in', ('out_refund','out_invoice','in_refund','in_invoice')),'|',('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@id='header_right_group']/field[@name='payment_mean_id']" position="attributes">
+                        <attribute name="attrs">{'required': ['|','|','|',('tipo_resolucion_diario_f', '=', 'facturacion-electronica'),('tipo_resolucion_diario_n', '=', 'facturacion-electronica'),('resolution_type_support_document_journal','=','support-document'),('resolution_type_adjustment_support_document_journal','=','support-document'),'|',('sd_enable_company','=',True),('fe_habilitada_compania', '=', True)],'invisible': [('move_type', 'not in', ('out_refund','out_invoice','in_refund','in_invoice')),'|',('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@id='header_right_group']/field[@name='es_factura_exportacion']" position="attributes">
+                        <attribute name="attrs">{'readonly': [('state', 'in', ('open','in_payment','paid','posted'))],'invisible': [('move_type', 'not in', ('out_refund','out_invoice','in_refund','in_invoice')),'|',('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@id='header_right_group']/field[@name='concepto_correccion_credito']" position="attributes">
+                        <attribute name="attrs">{'readonly': [('state', 'in', ('open','in_payment','paid','posted'))],'invisible': [('move_type', 'not in', ('out_refund','in_refund')),'|',('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)],'required':[('move_type', 'in', ('out_refund','in_refund')),'|',('fe_habilitada_compania', '=', True),('sd_enable_company', '=', True)]}</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='order_reference']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+
+
+                    <!-- Descuentos -->
+                    <xpath expr="//field[@name='enable_invoice_discount']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_discount']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('enable_invoice_discount', '!=', 'value'),('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)],'required': [('enable_invoice_discount', '=', 'value')]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_discount_base']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('enable_invoice_discount', '!=', 'percent'),('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_discount_percent']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('enable_invoice_discount', '!=', 'percent'),('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)],'required': [('enable_invoice_discount', '=', 'percent')]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_discount_text']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('enable_invoice_discount', 'not in', ('value','percent')),('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)], 'required': [('enable_invoice_discount', 'in', ('value','percent'))]}</attribute>
+                    </xpath>
+
+                    <xpath expr="//field[@name='invoice_discount_view']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_charges_freight_view']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+
+
+
+                    <!--Establece el campo Términos de pago como obligatorio -->
+                    <xpath expr="//field[@name='invoice_payment_term_id']" position="attributes">
+                        <attribute name="attrs">{'required': ['|','|','|',('tipo_resolucion_diario_f', '=', 'facturacion-electronica'),('tipo_resolucion_diario_n', '=', 'facturacion-electronica'),('resolution_type_support_document_journal','=','support-document'),('resolution_type_adjustment_support_document_journal','=','support-document'),('move_type', 'not in', ('out_refund','out_invoice','in_invoice','in_refund')),'|',('sd_enable_company','=',True),('fe_habilitada_compania', '=', True)]}</attribute>
+                    </xpath>
+
+                    <xpath expr="//button[@name='button_draft']" position="before">
+                        <field name="dian_state_sd" attrs="{'invisible': True}"/>
+                        <field name="is_support_document" attrs="{'invisible': True}"/>
+                        <button name="action_regenerar_xml_sd" type="object"
+                            string="Regenerar documento soporte electrónico" groups="account.group_account_invoice"
+                            attrs="{'invisible':['|','|','|','|','|',('dian_state_sd','in', ['Procesado Correctamente.','']),('is_support_document','!=',True),('move_type', 'not in', ('in_invoice','in_refund','entry')),('sd_enable_company', '!=', True),('tipo_resolucion', '!=', 'support-document'),('state','!=','posted')]}"
+                        />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="l10n_co_esd_invoice_form_invoice_tree">
+            <field name="name">Vista facturas de venta</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                     <field name="dian_state_sd" attrs="{'invisible': ('move_type','not in',('in_invoice','in_refund'))}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

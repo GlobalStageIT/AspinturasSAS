@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="kumbal_support_document_co_res_company_form_view" model="ir.ui.view">
+            <field name="name">ID para documento soporte electrónico</field>
+            <field name="model">res.company</field>
+            <field name="priority">14</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Pestaña de facturación electrónica -->
+                    <xpath expr="//form/sheet/notebook" position="inside">
+                        <page name="documento_soporte" string="Documento Soporte">
+                            <group string="Documento Soporte">
+                                <!-- Pestaña de facturación electrónica -->
+                                    <field name='enable_support_document'/>
+                                    <field name="sd_environment_type" attrs="{'required': [('enable_support_document','=',True)]}"/>
+                                    <field name='sd_software_id' attrs="{'required': [('enable_support_document','=',True)]}"/>
+                                    <field name='view_sd_software_pin' password='True' attrs="{'required': [('sd_software_pin', '=', False), ('enable_support_document','=',True)]}"/>
+                                    <field name='sd_software_pin' invisible='1'/>
+                                    <field name='sd_email' attrs="{'required': [('enable_support_document','=',True)]}"/>
+                                    <field name='sd_legend'/>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>
