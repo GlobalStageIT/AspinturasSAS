@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_co_cities
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-21 14:07+0000\n"
+"PO-Revision-Date: 2019-06-21 14:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_country__alpha_code_three
+msgid "Alpha Code Three"
+msgstr "Código alpha tres"
+
+#. module: l10n_co_cities
+#: model:ir.actions.act_window,name:l10n_co_cities.city
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_partner__cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_users__cities
+#: model:ir.ui.menu,name:l10n_co_cities.submenu_cities
+msgid "Cities"
+msgstr "Ciudades"
+
+#. module: l10n_co_cities
+#: model_terms:ir.ui.view,arch_db:l10n_co_cities.l10n_co_cities_res_partner_view
+msgid "City"
+msgstr "Ciudad"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__city_code
+msgid "City Code"
+msgstr "Códido ciudad"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__city_name
+msgid "City Name"
+msgstr "Nombre ciudad"
+
+#. module: l10n_co_cities
+#: model:ir.model,name:l10n_co_cities.model_l10n_co_cities_city
+msgid "Ciudades de Colombia"
+msgstr ""
+
+#. module: l10n_co_cities
+#: model:ir.model,name:l10n_co_cities.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: l10n_co_cities
+#: model:ir.actions.act_window,name:l10n_co_cities.country
+#: model:ir.ui.menu,name:l10n_co_cities.submenu_countries
+msgid "Countries"
+msgstr "Países"
+
+#. module: l10n_co_cities
+#: model:ir.model,name:l10n_co_cities.model_res_country
+msgid "Country"
+msgstr "País"
+
+#. module: l10n_co_cities
+#: model:ir.model,name:l10n_co_cities.model_res_country_state
+msgid "Country state"
+msgstr "Provincia"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__create_date
+msgid "Created on"
+msgstr "Creado"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__display_name
+msgid "Display Name"
+msgstr "Nombre Público"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_co_cities
+#: model_terms:ir.ui.view,arch_db:l10n_co_cities.l10n_co_states_tree_view
+msgid "ISO Code"
+msgstr "Código ISO"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_country__iso_name
+msgid "Iso Name"
+msgstr "Nombre ISO"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__write_date
+msgid "Last Updated on"
+msgstr "Actualizado"
+
+#. module: l10n_co_cities
+#: model:ir.ui.menu,name:l10n_co_cities.menu_principal
+msgid "Locations"
+msgstr "Lugares"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_country__numeric_code
+msgid "Numeric Code"
+msgstr "Código numérico"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__state_id
+msgid "State"
+msgstr "Estado"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__state_code
+#: model:ir.model.fields,field_description:l10n_co_cities.field_res_country_state__state_code
+msgid "State Code"
+msgstr "Código de Provincia"
+
+#. module: l10n_co_cities
+#: model:ir.model.fields,field_description:l10n_co_cities.field_l10n_co_cities_city__state_name
+msgid "State Name"
+msgstr "Nombre provincia"
+
+#. module: l10n_co_cities
+#: model:ir.actions.act_window,name:l10n_co_cities.state
+#: model:ir.ui.menu,name:l10n_co_cities.submenu_states
+msgid "States"
+msgstr "Estados"

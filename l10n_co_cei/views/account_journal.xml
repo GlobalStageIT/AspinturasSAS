@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record id="l10n_co_cei_journal_form" model="ir.ui.view">
+            <field name="name">	account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='code']" position="before">
+                        <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                        <field name="categoria" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                        <field name="company_resolucion_factura_id" attrs="{'invisible': ['|','|',('fe_habilitada_compania', '!=', True),('type','!=','sale'),('categoria','not in',('factura-venta','nota-debito','contingencia'))]}"/>
+                        <field name="company_resolucion_credito_id" attrs="{'invisible':['|','|',('fe_habilitada_compania', '!=', True),('type','!=','sale'),('categoria','not in',('factura-venta','nota-debito','contingencia'))]}"/>
+                        <field name="send_acknowledgement_electronic_invoice_sequence_id" attrs="{'invisible':[('fe_habilitada_compania', '!=', True)]}"/>
+                        <field name="electronic_sales_invoice_claim_sequence_id" attrs="{'invisible':[('fe_habilitada_compania', '!=', True)]}"/>
+                        <field name="receipt_services_sequence_id" attrs="{'invisible':[('fe_habilitada_compania', '!=', True)]}"/>
+                        <field name="express_acceptance_sequence_id" attrs="{'invisible':[('fe_habilitada_compania', '!=', True)]}"/>
+                        <field name="tacit_acceptance_sequence_id" attrs="{'invisible':[('fe_habilitada_compania', '!=', True)]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='code']" position="after">
+                        <field name="default_credit_discount_id" />
+                        <field name="default_debit_discount_id" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <!-- end:views -->
+    </data>
+</odoo>

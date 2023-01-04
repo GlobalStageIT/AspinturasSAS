@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.actions.server" id="action_hr_payslip_run_compute_sheet">
+            <field name="name">Recalcular Hojas</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_run"/>
+
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.compute_sheet()
+            </field>
+        </record>
+
+
+        <record model="ir.actions.server" id="action_hr_payslip_run_action_payslip_cancel">
+            <field name="name">Cancelar</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_run"/>
+
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_payslip_cancel()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_hr_payslip_run_action_payslip_regenerar_asiento">
+            <field name="name">Traer novedades del contrato</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_run"/>
+
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.create_other_entries_from_contract()
+            </field>
+        </record>
+
+
+    <!-- Agregando campos que permiten definir el tercero para el registro contable de la regla salarial -->
+
+        <record id="hr_salary_rule_co_form_inherit" model="ir.ui.view">
+            <field name="name">Reglas salariales - Colombia</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='not_computed_in_net']" position="before">
+                    <field name="origin_partner" help="Permite definir de dónde será tomado el tercero para el registro contable"/>
+                    <field name="partner_id" help="Tercero para el registro contable cuando se ha seleccionado - Tipo de tercero: Regla Salarial"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hr_payslip_co_inherit_form">
+            <field name="name">hr.payslip.co.inherit.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_payslip_view_form"/>
+
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='refund_sheet']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <field name="struct_id" position="after">
+                    <field name="contract_struct_id" invisible="1"/>
+                </field>
+                <field name="struct_id" position="attributes">
+                    <attribute name="domain">['|',('type','=','payroll'),('id','=',contract_struct_id)]</attribute>
+                </field>
+
+              <xpath expr="//page[@name='account_info']" position="after">
+                  <page string="Base cálculos" name="calculation_base">
+                      <group col="4">
+                        <field name="nod_paid_leaves" invisible="0"/>
+                        <field name="nod_unpaid_leaves"/>
+                        <field name="dias_a_pagar"/>
+                        <field name="dias"/>
+                        <field name="valor_incapacidad_comun" invisible="1"/>
+                        <field name="first_day_month" invisible="1"/>
+                        <field name="last_day_month" invisible="1"/>
+                        <field name="days_paid" invisible="1"/>
+                        <field name="dias_trabajados_mes_hecho" invisible="0"/>
+                        <field name="dias_a_pagar_hecho" invisible="0"/>
+                        <field name="sueldo_proyectado_pendiente_hasta" invisible="0"/>
+                        <field name="promedio_variable_sin_extras_ni_rdominicalf_360" invisible="0"/>
+                        <field name="promedio_sal_aux_tras_90" invisible="0"/>
+                        <field name="dias_trabajados" invisible="0"/>
+                        <field name="dias_incapacidad_comun" invisible="0"/>
+                        <field name="dias_licencia_mat_pat" invisible="0"/>
+                        <field name="dias_licencia_mat_pat_hecho" invisible="0"/>
+                        <field name="dias_vacaciones" invisible="0"/>
+                        <field name="dias_vacaciones_hecho" invisible="0"/>
+                        <field name="dias_cesantias" invisible="0"/>
+                        <field name="dias_intereses_cesantias" invisible="0"/>
+                        <field name="dias_prima" invisible="0"/>
+                        <field name="base_fondo_solidaridad_hecho" invisible="0"/>
+                        <field name="smlv" invisible="0"/>
+                        <field name="aux_trans" invisible="0"/>
+                        <field name="valor_uvt" invisible="0"/>
+                        <field name="tipo_variacion_salario" invisible="0"/>
+                        <field name="ibc_seguridad_social_mes_anterior" invisible="0"/>
+                        <field name="promedio_sal_aux_tras_180" invisible="0"/>
+                        <field name="promedio_sal_aux_tras_360" invisible="0"/>
+                        <field name="promedio_wage_360" invisible="0"/>
+                        <field name="valor_dia_reemplazo_hecho" invisible="0"/>
+                        <field name="wage" invisible="0"/>
+                          <field name="date_from_cesantias" invisible="0"/>
+                          <field name="date_from_prima" invisible="0"/>
+                        <field name="base_fondo_solidaridad_hecho" invisible="0"/>
+                        <field name="subsistence_fund_paid" invisible="0"/>
+                        <field name="solidarity_fund_paid" invisible="0"/>
+                    </group>
+                  </page>
+                </xpath>
+                <data>
+                    <xpath expr="//field[@name='name']" position="before">
+                           <field name="liquidar_por" required="True" string="Tipo liquidación"/>
+                            <field name="dias_vacaciones_compensadas" attrs="{'invisible': [('liquidar_por', 'not in', ('nomina', 'vacaciones'))]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_hr_payslip_form_descripcion_entrada">
+            <field name="name">hr.payslip.co.inherit.form1</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//button[@name='compute_sheet']" position="replace">
+                     <button string="Calcular hoja" name="compute_sheet" type="object" states="draft,verify" class="oe_highlight"/>
+                </xpath>
+                 <xpath expr="//field[@name='input_type_id']" position="after">
+                     <field name="descripcion"/>
+                     <field name="totaliza" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="view_hr_payslip_form_contabilidad_asiento_pago">
+            <field name="name">hr_payslip_view_form_contabilidad_asiento_pago</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_payslip_view_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='move_id']" position="after">
+                     <field name="move_id_pago"/>
+                     <field name="third_move_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Payslip Run View -->
+        <!--record id="hr_payslip_run_co_search_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.run.co.search.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_filter"/>
+            <field name="arch" type="xml">
+
+            </field>
+
+
+        </record-->
+
+        <!--record id="hr_payslip_run_co_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.run.co.tree.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_tree"/>
+            <field name="arch" type="xml">
+
+
+            </field>
+        </record-->
+
+        <record id="hr_payslip_run_co_form_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.run.co.form.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='company_id']" position="before">
+                     <field name="liquidar_por"  required="True"/>
+                 </xpath>
+
+                <xpath expr="//button[@name='%(hr_payroll.action_hr_payslip_by_employees)d']" position="attributes">
+                    <attribute name="states">draft,verify</attribute>
+                    <attribute name="context">{'default_liquidar_por':liquidar_por}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_validate']" position="attributes">
+                    <attribute name="string">Generar borrador de asiento contable</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_payroll_structure_co_form_inherit" model="ir.ui.view">
+            <field name="name">hr_payroll_structure_co_form_inherit</field>
+            <field name="model">hr.payroll.structure</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_employee_grade_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                </field>
+
+                <xpath expr="//field[@name='journal_id']" position="after">
+                     <field name="journal_payment_id"/>
+                    <field name="journal_third_payment_id"/>
+                    <field name="account_receivable_employee_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+	<!-- INICIO Desprendible de nomina -->
+    <!--
+	<template id="pragmatic_report_payslip" inherit_id="hr_payroll.report_payslip">
+			<xpath expr="//table[2]" position="replace">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th style="text-align:right;">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="p">
+                                <td><span t-field="p.name"/></td>
+                                <t t-if="p.category_id.code != 'DED'" >
+                                	<td style="text-align:right;">
+                                       <span t-esc="p.total"  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/>
+                                    </td>
+                                </t>
+                                <t t-if="p.category_id.code == 'DED'" >
+                                	<td style="text-align:right;">
+                                       <span t-esc="-p.total"  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+			</xpath>
+			<xpath expr="//p[hasclass('text-right')]" position="replace">
+			</xpath>
+	</template>
+	-->
+	<!-- FIN Desprendible de nomina -->
+
+        <record model="ir.actions.server" id="action_hr_payslip_calcular_entradas">
+            <field name="name">Recalcular dias trabajados y otras entradas</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">
+                for record in records:
+                    record.message_post(body='Recalculó días trabajados y otras entradas')
+                    record._onchange_employee()
+                    if record.state=='verify':
+                        record.compute_sheet()
+
+            </field>
+        </record>
+        <record model="ir.actions.server" id="action_hr_payslip_regenerar_asiento">
+            <field name="name">Regenerar asientos contable</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_regenerar_asiento()
+            </field>
+        </record>
+        <record model="ir.actions.server" id="action_hr_payslip_validar_datos_fiscales">
+            <field name="name">Validar datos fiscales</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.validate_info_electronic_payslip()
+            </field>
+        </record>
+        <record model="ir.actions.server" id="action_hr_payslip_run_action_payslip_regenerar_asiento">
+            <field name="name">Regenerar asientos contable</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip_run"/>
+
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_regenerar_asiento()
+            </field>
+        </record>
+    </data>
+</odoo>

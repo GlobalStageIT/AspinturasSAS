@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="kal_stock_picking_ticket_paperformat" model="report.paperformat">
+                <field name="name">Ticket</field>
+                <field name="default" eval="False"/>
+                <field name="format">custom</field>
+                <field name="page_height">100</field>
+                <field name="page_width">50</field>
+                <field name="orientation">Portrait</field>
+                <field name="margin_top">2</field>
+                <field name="margin_bottom">2</field>
+                <field name="margin_left">2</field>
+                <field name="margin_right">2</field>
+                <field name="header_line" eval="False"/>
+                <field name="header_spacing">0</field>
+                <field name="dpi">120</field>
+            </record>
+
+        <report id="kal_stock_picking_ticket_report"
+                model="stock.picking"
+                string="Ticket"
+                report_type="qweb-pdf"
+                name="kal_stock_picking_ticket.report_stock_picking_template"
+                paperformat="kal_stock_picking_ticket_paperformat"
+                />
+
+        <template id="report_stock_picking_template">
+            <t t-call="web.basic_layout">
+                         <style type="text/css">
+                                .resaltado{
+                                    background: black;
+                                    color: white;
+                                    padding: 3px;
+                                    text-transform: uppercase;
+                                    font-size:60px;
+                                }
+                                td{
+                                    font-size:15px;
+                                }
+                                table{
+                                    text-align:center;
+                                    width:100%;
+                                }
+
+                            </style>
+                        <t t-foreach="docs" t-as="o">
+                                <table >
+                                    <tbody>
+                                        <tr>
+                                            <td >
+                                                <div>
+                                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', o.name, 600, 100, 0)" style="width:300px;height:50px;" alt="Barcode"/>
+
+                                                </div>
+                                                <br/>
+                                                <span t-esc="o.name" style="font-size:10px;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold;border-bottom: 3px solid;border-top: 3px solid; padding: 5px;">
+                                                <table>
+                                                    <tr>
+                                                        <td style="border-right: 3px solid; width:50%;">
+                                                            <strong><span t-esc="o.scheduled_date.strftime('%d/%m/%Y')"/></strong>
+                                                        </td>
+                                                        <td>
+                                                            <strong>
+                                                                <span t-esc="o.scheduled_date.strftime('%H:%M')"/>
+                                                            </strong>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td  style="text-align:left;">
+                                                <strong><span style="8px;">ORIGEN:</span></strong> <br/>
+                                                <span t-field="o.origin"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  style="text-align:left;">
+                                                <strong><span style="8px;">CLIENTE:</span></strong> <br/>
+                                                <span t-field="o.partner_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  style="text-align:left;">
+                                                <strong><span style="8px;">DIRECCION:</span></strong> <br/>
+                                                <span t-esc="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

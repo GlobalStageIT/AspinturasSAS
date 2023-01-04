@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="stock_report_report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
+
+         <xpath expr="//div[@name='div_sched_date']" position="after">
+
+             <t t-set="has_barcode" t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>
+             <t t-set="has_location_id" t-value="o.picking_type_id.code != 'incoming'"/>
+         </xpath>
+
+         <xpath expr="//table[@name='stock_move_table']/thead/tr" position="inside">
+             <th name="th_from" t-if="o.picking_type_id.code != 'incoming'"  >
+                 <strong>Desde</strong>
+             </th>
+            <th t-if="has_barcode"><strong>Código de barras</strong></th>
+        </xpath>
+
+        <xpath expr="//table[@name='stock_move_table']/tbody/tr" position="inside">
+            <td t-if="o.picking_type_id.code != 'incoming'">
+                <span t-esc="move.move_line_ids.location_id.display_name"/>
+            </td>
+            <td class="text-center" t-if="has_barcode">
+                <t t-if="product_barcode != move.product_id.barcode">
+                    <span t-if="move.product_id and move.product_id.barcode">
+                        <img t-if="len(move.product_id.barcode) == 13"
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN13', move.product_id.barcode, 400, 100, 0)"
+                             style="height:35px" alt="Barcode"/>
+                        <img t-elif="len(move.product_id.barcode) == 8"
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN8', move.product_id.barcode, 400, 100, 0)"
+                             style="height:35px" alt="Barcode"/>
+                        <img t-else=""
+                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', move.product_id.barcode, 400, 100, 0)"
+                             style="height:35px" alt="Barcode"/>
+
+                    </span>
+                    <t t-set="product_barcode" t-value="move.product_id.barcode"/>
+                </t>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[@name='stock_move_line_table']/thead/tr" position="inside">
+            <th name="th_from" t-if="o.picking_type_id.code != 'incoming'" >
+                 <strong>Desde</strong>
+             </th>
+            <th t-if="has_barcode"><strong>Codigo de Barras</strong></th>
+        </xpath>
+
+
+     </template>
+
+        <template id="stock_report_delivery_has_serial_move_line_inherit_kal_stock_report" inherit_id="stock.stock_report_delivery_has_serial_move_line">
+            <xpath expr="//td[@name='move_line_lot_qty_done']" position="after">
+                 <td t-if="has_location_id" >
+                    <span t-esc="aggregated_lines[line]['location_id']"/>
+                 </td>
+
+                <td class="text-center" t-if="has_barcode">
+                    <t t-if="product_barcode != aggregated_lines[line]['barcode']">
+                        <span t-if="aggregated_lines[line]['barcode']">
+                            <img t-if="len(aggregated_lines[line]['barcode']) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN13', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                            <img t-elif="len(aggregated_lines[line]['barcode']) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN8', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                            <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+
+                        </span>
+                        <t t-set="product_barcode" t-value="aggregated_lines[line]['barcode']"/>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+
+        <template id="stock_report_delivery_aggregated_move_lines_inherit_kal_stock_report" inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+            <xpath expr="//td[@name='move_line_aggregated_qty_done']" position="after">
+                <td t-if="has_location_id" >
+                    <span t-esc="aggregated_lines[line]['location_id']"/>
+                 </td>
+                <td class="text-center" t-if="has_barcode">
+                    <t t-if="product_barcode != aggregated_lines[line]['barcode']">
+                        <span t-if="aggregated_lines[line]['barcode']">
+                            <img t-if="len(aggregated_lines[line]['barcode']) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN13', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                            <img t-elif="len(aggregated_lines[line]['barcode']) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN8', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                            <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', aggregated_lines[line]['barcode'], 400, 100, 0)" style="height:35px" alt="Barcode"/>
+
+                        </span>
+                        <t t-set="product_barcode" t-value="aggregated_lines[line]['barcode']"/>
+                    </t>
+                </td>
+            </xpath>
+        </template>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="l10n_co_cep_res_partner_bank" model="ir.ui.view">
+            <field name="name">Banco</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='acc_number']" position="after">
+                        <field name="tipo_cuenta"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="postal_code_tree_view">
+            <field name="name">l10n_co_cei_postal_code_tree</field>
+            <field name="model">l10n_co_cei.postal_code</field>
+            <field name="arch" type="xml">
+                <tree string="Codigos Postales">
+                    <field name="name" />
+                    <field name="country_id" />
+                    <field name="state_id" />
+                    <field name="city_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="postal_code_form_view">
+            <field name="name">l10n_co_cei_postal_code_form</field>
+            <field name="model">l10n_co_cei.postal_code</field>
+            <field name="arch" type="xml">
+                <form string="Codigos Postales">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="country_id" />
+                            <field name="state_id" />
+                            <field name="city_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window" id="l10n_co_cei_postal_code_list_action">
+            <field name="name">Codigos Postales</field>
+            <field name="res_model">l10n_co_cei.postal_code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first postal code
+                </p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+
+        <!--<menuitem name="Locations" id="l10n_co_cities.menu_principal" parent="base.menu_administration" groups="l10n_co_cei_fe.group_electronic_billing_manager"/>
+        <menuitem name="Countries" id="l10n_co_cities.submenu_countries" parent="l10n_co_cities.menu_principal"
+              action="l10n_co_cities.country" sequence="1"/>
+        -->
+        <menuitem id="l10n_co_cei_menu"
+            parent="base.menu_administration"
+			name="Codigos Postales"
+            groups=""
+        />
+
+        <menuitem id="l10n_co_cei_postal_code_submenu"
+			name="Codigos postales"
+            parent="l10n_co_cei_menu"
+			action="l10n_co_cei_postal_code_list_action"
+            groups=""
+        />
+        <!-- end:menus -->
+    </data>
+</odoo>

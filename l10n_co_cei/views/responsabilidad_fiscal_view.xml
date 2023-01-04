@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="responsabilidad_fiscal_tree_view">
+            <field name="name">l10n_co_cei_responsabilidad_fiscal_tree</field>
+            <field name="model">l10n_co_cei.responsabilidad_fiscal</field>
+            <field name="arch" type="xml">
+                <tree string="Responsabilidades fiscales">
+                    <field name="codigo_fe_dian" />
+                    <field name="significado" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="responsabilidad_fiscal_form_view">
+            <field name="name">l10n_co_cei_responsabilidad_fiscal_form</field>
+            <field name="model">l10n_co_cei.responsabilidad_fiscal</field>
+            <field name="arch" type="xml">
+                <form string="Responsabilidades fiscales">
+                    <sheet>
+                        <group>
+                            <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                            <field name="codigo_fe_dian" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                            <field name="significado" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window"
+            id="l10n_co_cei_responsabilidad_fiscal_list_action">
+            <field name="name">Responsabilidads fiscales</field>
+            <field name="res_model">l10n_co_cei.responsabilidad_fiscal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Configure aquí las responsabilidades fiscales</p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+
+<!--        <menuitem id="l10n_co_cei_responsabilidad_fiscal_config_submenu"-->
+<!--			name="Medios de pago"-->
+<!--            parent="l10n_co_cei_facturacion_electronica_menu"-->
+<!--			action="l10n_co_cei_responsabilidad_fiscal_list_action" />-->
+        <!-- end:menus -->
+    </data>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_retefuente_table" model="ir.actions.act_window">
+        <field name="name">Withholding tax table</field>
+        <field name="res_model">retefuente.table</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Table of withholdings tax for labor income.
+            </p>
+        </field>
+    </record>
+            
+    <record id="retefuente_table_view_form" model="ir.ui.view">
+        <field name="name">retefuente_table.view.form</field>
+        <field name="model">retefuente.table</field>
+        <field name="arch" type="xml">
+            <form string="Withholding tax table">
+                <sheet>
+                    <group>
+                        <group name="range">
+                            <field name="range_from"/>
+                            <field name="range_to"/>
+                        </group>
+                        <group name="tax">
+                            <field name="marginal_rate"/>
+                            <field name="tax"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="retefuente_table_view_tree" model="ir.ui.view">
+        <field name="name">retefuente_table.view.tree</field>
+        <field name="model">retefuente.table</field>
+        <field name="arch" type="xml">
+            <tree string="Retefuente Table">
+                <field name="range_from"/>
+                <field name="range_to"/>
+                <field name="marginal_rate"/>
+                <field name="uvt_added"/>
+                <field name="tax"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Retefuente Menu Entry-->
+    <menuitem
+        id="menu_action_retefuente_table"
+        name="Rte. Fuente"
+        action="action_retefuente_table"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="25"
+    />
+
+</odoo>
