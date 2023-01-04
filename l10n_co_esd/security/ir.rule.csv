@@ -1,0 +1,2 @@
+id,name,model_id:id,groups:id,perm_read,perm_write,perm_create,perm_unlink
+rule_l10n_co_esd_history_user,l10n_co_esd.history,model_l10n_co_esd_history,,"['|',['company_id','=',False],['company_id','in',user.company_id.ids]]",1,1,1,1

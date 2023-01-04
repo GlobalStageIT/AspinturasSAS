@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="l10n_co_esd_res_partner_view" model="ir.ui.view">
+            <field name="name">l10n_co_esd.tree.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_co_cei.l10n_co_cei_res_partner_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='fiscal_data']/group[@name='fiscal_data_group']/group[@name='group_1']/field[@name='fe_es_compania']" position="after">
+                    <field name="sd_enable"/>
+                    <field name="sd_enable_company" attrs="{'invisible': True}"/>
+                    <field name="sd_enable_son" attrs="{'invisible': ['|',('sd_enable_company', '!=', True),('parent_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

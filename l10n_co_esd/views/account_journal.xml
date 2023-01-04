@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="l10n_co_esd_journal_form" model="ir.ui.view">
+            <field name="name">	account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='code']" position="before">
+                        <field name="sd_enable_company" attrs="{'invisible': True}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='categoria']" position="attributes">
+                        <attribute name="attrs">{'invisible': [('fe_habilitada_compania', '!=', True),('sd_enable_company', '!=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_resolucion_credito_id']" position="after">
+                        <field name="company_resolution_support_document_id" attrs="{'invisible': ['|','|',('sd_enable_company', '!=', True),('type','!=','purchase'),('categoria','not in',('support_document','adjustment_support_document'))]}"/>
+                        <field name="company_resolution_adjustment_support_document_id" attrs="{'invisible': ['|','|',('sd_enable_company', '!=', True),('type','!=','purchase'),('categoria','not in',('support_document','adjustment_support_document'))]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>
