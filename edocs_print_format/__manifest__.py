@@ -17,7 +17,7 @@
              'views/report_z_tmpl.xml',
              'views/pos_config.xml',
              'data/mail_attachment.xml',
-             #'data/ir_sequence.xml',   
+             'data/ir_sequence.xml',   
              'security/ir.model.access.csv',            
             ],
     'qweb': [
