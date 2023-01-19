@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="tmpl_email_config" model="mail.template">
+            <field name="name">Informe Z - Cierre POS INTERNO</field>
+            <field name="subject">Informe Z Interno</field>
+            <field name="model_id" ref="edocs_print_format.model_pos_session"/>
+            <field name="report_template" ref="edocs_print_format.report_pos_sales_pdf"/>
+            <field name="lang"></field>
+            <field name="body_html"></field>
+        </record>
+    </data>
+</odoo>
