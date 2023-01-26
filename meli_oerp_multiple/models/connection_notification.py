@@ -391,7 +391,7 @@ class MercadoLibreConnectionNotification(models.Model):
         if vals:
             noti = self.create(vals)
 
-        if noti:
-            noti._process_notification_internal_job()
+        #if noti:
+        #    noti._process_notification_internal_job()
 
         return  noti
