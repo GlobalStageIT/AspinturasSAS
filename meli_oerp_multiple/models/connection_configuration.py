@@ -130,6 +130,7 @@ class MercadoLibreConnectionConfiguration(models.Model):
                                                 ("paid_delivered", "Pagado>Entregado"),
                                                 ("paid_confirm_with_invoice", "Pagado>Facturado"),
                                                 ("paid_delivered_with_invoice", "Pagado>Facturado y Entregado")],
+                                                default='manual',
                                                 string='Acción al recibir un pedido',
                                                 help='Acción al confirmar una orden o pedido de venta')
     mercadolibre_order_confirmation_full = fields.Selection([ ("manual", "Manual"),
@@ -137,11 +138,13 @@ class MercadoLibreConnectionConfiguration(models.Model):
                                                 ("paid_delivered", "Pagado>Entregado"),
                                                 ("paid_confirm_with_invoice", "Pagado>Facturado"),
                                                 ("paid_delivered_with_invoice", "Pagado>Facturado y Entregado")],
+                                                default='manual',
                                                 string='Acción al recibir un pedido en FULL',
                                                 help='Acción al confirmar una orden o pedido de venta en FULL')
     mercadolibre_product_attribute_creation = fields.Selection([ ("manual", "Manual"),
                                                 ("full", "Sincronizado completo (uno a uno, sin importar si se usa o no)"),
                                                 ("dynamic", "Dinámico (cuando se asocia un producto a una categoría (ML) con atributos (ML))") ],
+                                                default='manual',
                                                 string='Create Product Attributes')
     #'mercadolibre_login': fields.selection( [ ("unknown", "Desconocida"), ("logged","Abierta"), ("not logged","Cerrada")],string='Estado de la sesión'), )
     mercadolibre_overwrite_template = fields.Boolean(string='Overwrite product template',help='Sobreescribir siempre Nombre y Descripción de la plantilla.')

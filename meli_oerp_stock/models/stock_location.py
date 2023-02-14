@@ -107,7 +107,7 @@ class stock_move_line(models.Model):
     _inherit = "stock.move.line"
 
     #@api.onchange('location_id')
-    def onchange_location_id_ml(self):
+    def __onchange_location_id_ml(self):
         """ When the user is encoding a move line for a tracked product, we apply some logic to
         help him. This includes:
             - automatically switch `qty_done` to 1.0
@@ -142,7 +142,7 @@ class stock_move_line(models.Model):
 
 
     #@api.onchange('lot_id')
-    def onchange_lot_id_ml(self):
+    def __onchange_lot_id_ml(self):
         """ When the user is encoding a move line for a tracked product, we apply some logic to
         help him. This includes:
             - automatically switch `qty_done` to 1.0

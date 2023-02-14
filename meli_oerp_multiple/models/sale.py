@@ -314,7 +314,7 @@ class MercadoLibreOrder(models.Model):
                             prod_fields['default_code'] = seller_sku
                         #prod_fields['default_code'] = rjson3['id']
                         #productcreated = False
-                        if config.mercadolibre_create_product_from_order:
+                        if config.mercadolibre_create_product_from_order and seller_sku:
                             productcreated = self.env['product.product'].create((prod_fields))
                         if (productcreated):
                             if (productcreated.product_tmpl_id):

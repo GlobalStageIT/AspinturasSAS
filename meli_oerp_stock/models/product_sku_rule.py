@@ -57,7 +57,7 @@ class meli_oerp_sku_rule(models.Model):
     _description = "Meli Sku Rule"
 
     name = fields.Char(string="Name",help="Sku Name received",required=True,index=True)
-    type = fields.Selection([('map','Map'),('regex','Formula')],string="Rule type", index=True, default='map')
+    type = fields.Selection([('map','Map'),('regex','Formula'),('stock','Stock Rule')],string="Rule type", index=True, default='map')
 
     sku = fields.Char(string="Sku",help="Sku Map in Odoo",required=False,index=True)
     barcode = fields.Char(string="Barcode",help="Barcode Map in Odoo",required=False,index=True)

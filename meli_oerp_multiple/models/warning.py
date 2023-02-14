@@ -14,5 +14,3 @@ class warning(models.TransientModel):
         """
         res = self.env['ir.model.data'].get_object_reference( WARNING_MODULE, 'warning_form')
         return res and res[1] or False
-
-warning()

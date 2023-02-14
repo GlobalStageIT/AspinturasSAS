@@ -55,11 +55,11 @@ class MercadoLibreConnectionBindingProductTemplate(models.Model):
     image_bindings = fields.One2many('mercadolibre.product.image', "binding_product_tmpl_id", string="Product Template Images")
 
 
-    meli_title = fields.Char(string='Nombre del producto en Mercado Libre',size=256)
+    meli_title = fields.Char(string='Nombre del producto en Mercado Libre',size=256,index=True)
     meli_description = fields.Text(string='Descripción')
-    meli_category = fields.Many2one("mercadolibre.category","Categoría de MercadoLibre")
+    meli_category = fields.Many2one("mercadolibre.category",string="Categoría de MercadoLibre")
     meli_buying_mode = fields.Selection( [("buy_it_now","Compre ahora"),("classified","Clasificado")], string='Método de compra')
-    meli_price = fields.Char(string='Precio de venta', size=128)
+    meli_price = fields.Char(string='Precio de venta', size=128,index=True)
     meli_price_fixed = fields.Boolean(string='Price is fixed')
     meli_pricelist = fields.Many2one("product.pricelist",string="Pricelist")
 
@@ -930,13 +930,13 @@ class MercadoLibreConnectionBindingProductVariant(models.Model):
 #    meli_pub_variant_attributes = fields.Many2many(prod_att_line, relation='meli_pub_variant_attributes',column1='ml_template_id',column2='att_line_id', string='Atributos a publicar en ML',help='Seleccionar los atributos a publicar')
 
     #typical values
-    meli_title = fields.Char(string='Nombre del producto en Mercado Libre',size=256)
+    meli_title = fields.Char(string='Nombre del producto en Mercado Libre',size=256,index=True)
     meli_description = fields.Text(string='Descripción')
     meli_category = fields.Many2one("mercadolibre.category","Categoría de MercadoLibre")
-    meli_price = fields.Char( string='Precio',help='Precio de venta en ML', size=128)
+    meli_price = fields.Char( string='Precio',help='Precio de venta en ML', size=128,index=True)
     meli_price_fixed = fields.Boolean(string='Price is fixed')
     meli_pricelist = fields.Many2one("product.pricelist",string="Pricelist")
-    active = fields.Boolean(string="Product Active",related="product_id.active")
+    #active = fields.Boolean(string="Product Active",related="product_id.active")
 
     @api.onchange('meli_price_fixed')
     def _onchange_meli_price_fixed( self ):
@@ -1052,6 +1052,8 @@ class MercadoLibreConnectionBindingProductVariant(models.Model):
     meli_shipping_mode = fields.Char(string="Shipping Mode",help="Shipping modes (por usuario): custom, not_specified, me2. https://api.mercadolibre.com/users/USERID/shipping_preferences",index=True)
     meli_shipping_method = fields.Char(string="Shipping Method",help="Shipping methods: https://api.mercadolibre.com/sites/SITEID/shipping_methods",index=True)
 
+    meli_max_purchase_quantity = fields.Integer(string='Max Compra', help='Cantidad maxima por compra en ML')
+    meli_manufacturing_time = fields.Char(string='Manufacturing time', help='Tiempo de fabricacion (30 días)')
 
     def copy_from_meli_oerp( self ):
         for bind in self:

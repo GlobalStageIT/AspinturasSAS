@@ -1132,6 +1132,25 @@ class MercadoLibreConnectionAccount(models.Model):
         if (config.mercadolibre_cron_post_update_stock):
             auto_commit = not getattr(threading.currentThread(), 'testing', False)
             topcommits = 40
+
+            query = """SELECT melip.id, melip.connection_account, melip.meli_id, melip.stock_update  FROM   mercadolibre_product as melip WHERE melip.connection_account=%i AND melip.meli_id!='' AND NOT melip.meli_id IS NULL AND melip.stock_update IS NULL""" % (account.id)
+            cr = self._cr
+            respquery = cr.execute(query)
+            results = cr.fetchall()
+            product_bind_ids_null = results
+
+            _logger.info("query: "+str(query)+" results update null:"+str(results))
+
+            query = """SELECT melip.id, melip.connection_account, melip.meli_id, melip.stock_update  FROM   mercadolibre_product as melip WHERE  melip.connection_account=%i AND melip.meli_id!='' AND NOT melip.meli_id IS NULL AND melip.stock_update IS NOT NULL""" % (account.id)
+            cr = self._cr
+            respquery = cr.execute(query)
+            results = cr.fetchall()
+            product_bind_ids_not_null = results
+
+            _logger.info("query: "+str(query)+" results update not null:"+str(results))
+
+            #return {}
+            """
             product_bind_ids_null = self.env['mercadolibre.product'].search([
                 #('meli_pub','=',True),
                 ('meli_id','!=',False),
@@ -1140,6 +1159,8 @@ class MercadoLibreConnectionAccount(models.Model):
                 ('stock_update','=',False),
                 #'|',('company_id','=',False),('company_id','=',company.id)
                 ], order='id asc',limit=topcommits)
+            """
+            """
             product_bind_ids_not_null = self.env['mercadolibre.product'].search([
                 #('meli_pub','=',True),
                 ('meli_id','!=',False),
@@ -1148,7 +1169,9 @@ class MercadoLibreConnectionAccount(models.Model):
                 ('stock_update','!=',False)
                 #'|',('company_id','=',False),('company_id','=',company.id)
                 ], order='stock_update asc',limit=topcommits)
+            """
             product_bind_ids = product_bind_ids_null + product_bind_ids_not_null
+
             _logger.info("product_bind_ids stock to update:" + str(product_bind_ids))
             _logger.info("account updating stock #" + str(len(product_bind_ids)) + " on " + str(account.name))
             icommit = 0
@@ -1170,7 +1193,8 @@ class MercadoLibreConnectionAccount(models.Model):
             try:
                 if auto_commit:
                     self.env.cr.commit()
-                for bind in product_bind_ids:
+                for bindx in product_bind_ids:
+                    bind = self.env['mercadolibre.product'].browse(bindx[0])
                     obj = bind #.product_id
                     #_logger.info( "Product check if active: " + str(obj.id)+ ' meli_id:'+str(obj.meli_id)  )
                     if (obj and obj.meli_id and icount<=topcommits):
@@ -1179,6 +1203,7 @@ class MercadoLibreConnectionAccount(models.Model):
                         try:
                             _logger.info( "Update Stock: #" + str(icount) +'/'+str(maxcommits)+ ' meli_id:'+str(obj.meli_id)  )
                             resjson = obj.product_post_stock(meli=meli)
+                            #resjson = None
                             logs+= str(obj.sku)+" "+str(obj.meli_id)+": "+str(obj.meli_available_quantity)+"\n"
                             if resjson and "error" in resjson:
                                 errors+= str(obj.sku)+" "+str(obj.meli_id)+" >> "+str(resjson)+"\n"
@@ -1270,8 +1295,8 @@ class MercadoLibreConnectionAccount(models.Model):
 
                 _logger.info("Processing model_ids (product.product) : "+str(product_ids))
                 product_bind_ids = self.env['mercadolibre.product'].search([
-                    #('connection_account', '=', account.id )
-                    #'|',('company_id','=',False),('company_id','=',company.id)
+                    ##('connection_account', '=', account.id )
+                    ##'|',('company_id','=',False),('company_id','=',company.id)
                     ('product_id', 'in', product_ids )],
                     order='stock_update asc, product_id asc')
                 _logger.info("product_bind_ids stock to update:" + str(product_bind_ids))

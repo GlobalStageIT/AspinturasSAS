@@ -17,7 +17,7 @@ class stock_move(models.Model):
         #_logger.info("context: "+str(context))
         company = self.env.user.company_id
         #_logger.info("company: "+str(company))
-        _logger.info("meli_oerp_stock >> stock.move _action_done ")
+        #_logger.info("meli_oerp_stock >> stock.move _action_done ")
         ret = super( stock_move, self)._action_done(cancel_backorder=cancel_backorder)
         _logger.info("meli_oerp_multiple >> stock.move _action_done OK. Posting Job Notification ")
         #return
@@ -50,8 +50,8 @@ class stock_move(models.Model):
                         "model_ids_count_processed": 0
                     }
                     _logger.info(internals)
-                    noti = self.env["mercadolibre.notification"].start_internal_notification( internals=internals, account=account )
-                    _logger.info(noti)                    
+                    noti = self.env["mercadolibre.notification"].start_internal_notification( internals=internals, account=account )      
+                    _logger.info(noti)          
         except Exception as e:
             _logger.error(e, exc_info=True)
             raise ValidationError("Error creando proceso de actualizacion de stock de MercadoLibre, intente nuevamente en unos sergundos. Error: "+str(e))

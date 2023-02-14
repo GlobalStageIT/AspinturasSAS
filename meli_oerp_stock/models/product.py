@@ -140,8 +140,8 @@ class product_product(models.Model):
 
         loc_oper = ("mercadolibre_stock_location_operation" in config._fields) and config.mercadolibre_stock_location_operation
         qty_method = ("mercadolibre_stock_virtual_available" in config._fields) and config.mercadolibre_stock_virtual_available
-
-        #_logger.info("loc_oper: "+str(loc_oper)+" qty_method: "+str(qty_method))
+        loc_oper = loc_oper or "sum"
+        _logger.info("loc_oper: "+str(loc_oper)+" qty_method: "+str(qty_method))
 
         last_qty_available_op = 0
         qty_available_op = 0

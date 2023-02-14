@@ -73,7 +73,8 @@ class MeliPayment(models.Model):
             #return self.total_paid_amount
             so = self._get_ml_customer_order()
             #return (so and so.meli_paid_amount) or (self.transaction_amount)
-            return (self.total_paid_amount)
+            #return (self.total_paid_amount)
+            return self.transaction_amount
 
         #without shipment amount
         if total_config in ['total_amount']:
