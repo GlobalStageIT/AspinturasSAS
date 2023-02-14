@@ -524,7 +524,7 @@
             <field name="barcode"/>
             <!--field name="active" /-->
             <field name="product_tmpl_id" />
-            <filter string="MercadoLibre Active"
+            <!--filter string="MercadoLibre Active"
         						domain="[('active', '!=', False)]"
         						name="binding_active" />
             <filter string="Product Template desasignado"
@@ -628,15 +628,15 @@
             <field name="stock" />
             <!--field name="meli_status"/>
             <field name="meli_sub_status"/-->
-            <field name="meli_permalink" widget="url"/>
-            <field name="meli_permalink_edit" widget="url"/>
+            <!--field name="meli_permalink" widget="url"/-->
+            <!--field name="meli_permalink_edit" widget="url"/-->
             <field name="product_id"/>
             <!--field name="active"  optional="hide"/-->
             <field name="full_update" optional="hide"/>
             <field name="image_update" optional="hide"/>
             <field name="price_update" optional="hide"/>
             <field name="stock_update" optional="hide"/>
-            <field name="stock_move_update" optional="hide"/>
+            <field name="meli_stock_moves_update" optional="hide"/>
       		</tree>
       	</field>
       </record>
