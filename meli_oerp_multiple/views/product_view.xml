@@ -526,7 +526,7 @@
             <field name="product_tmpl_id" />
             <!--filter string="MercadoLibre Active"
         						domain="[('active', '!=', False)]"
-        						name="binding_active" />
+        						name="binding_active" /-->
             <filter string="Product Template desasignado"
         						domain="[('product_tmpl_id', '=', False)]"
         						name="binding_product_template_unassigned" />
