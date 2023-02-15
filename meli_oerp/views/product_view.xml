@@ -98,6 +98,22 @@
                     <page string="MercadoLibre Plantilla">
                       <group name="ML actions">
                         <div class="oe_button_box" name="button_box_mel" style="width: auto;">
+                          <button type="object"
+                              name="action_meli_pause"
+                              attrs="{'invisible':[('meli_variants_status', '!=', 'active')] }"
+                              confirm="Esta seguro de Pausar este Producto en Mercado Libre, esto bloqueara las publicaciones?"
+                              class="oe_stat_button">
+                              <img src="/meli_oerp/static/src/img/logo_ML.png" width="48" alt="logo ml"/>
+                              <span>Pausar en ML</span>
+                          </button>
+                          <button type="object"
+                              name="action_meli_activate"
+                              attrs="{'invisible':[('meli_variants_status', '!=', 'paused')]}"
+                              confirm="Esta seguro de Pausar este Producto en Mercado Libre, esto activara las publicaciones?"
+                              class="oe_stat_button">
+                              <img src="/meli_oerp/static/src/img/logo_ML.png" width="48"  alt="logo ml"/>
+                              <span>Activar</span>
+                          </button>                          
                           <button name='%(action_product_template_post)d' type="action"
                             string="Publicar"
                             title="Publicar/Actualizar en ML"
@@ -249,16 +265,16 @@
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
                 <field name="default_code" position="before">
-                    <field name="meli_pub"/>
-                    <field name="meli_id" invisible="0"/>
-                    <field name="meli_id_variation" invisible="0"/>
-                    <field name="meli_status" invisible="0"/>
-                    <field name="meli_sub_status" invisible="0"/>
-                    <field name="meli_stock_error" invisible="0"/>
-                    <field name="meli_permalink_edit" invisible="0"/>
-                    <field name="meli_stock_update"/>
-                    <field name="meli_stock_error"/>
-                    <field name="meli_available_quantity"/>
+                  <field name="meli_pub"/>
+                      <!--field name="meli_id" invisible="0"/-->
+                      <!--field name="meli_id_variation" invisible="0"/-->
+                      <!--field name="meli_status" invisible="0"/-->
+                      <!--field name="meli_sub_status" invisible="0"/-->
+                      <!--field name="meli_stock_error" invisible="0"/-->
+                      <!--field name="meli_permalink_edit" invisible="0"/-->
+                      <!--field name="meli_stock_update"/-->
+                      <!--field name="meli_stock_error"/-->
+                      <!--field name="meli_available_quantity"/-->
                 </field>
             </field>
         </record>
