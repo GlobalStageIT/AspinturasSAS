@@ -214,7 +214,7 @@
             <field name="arch" type="xml">
                 <tree string="Lineas de la Orden" >
                     <field name="seller_sku"/>
-                    <field name="seller_custom_field" string="SCF" help="Viejo seller_custom_field"/>
+                    <field name="seller_custom_field" string="SCF"/>
                     <field name="posting_id"/>
                     <field name="product_id"/>
                     <!--field name="order_id"/-->
