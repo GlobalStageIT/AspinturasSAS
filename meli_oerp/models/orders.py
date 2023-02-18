@@ -1840,7 +1840,7 @@ class mercadolibre_orders(models.Model):
                     order and order.message_post(body=str(error["error"])+"\n"+str(error["item"]),message_type=order_message_type)
 
                 order._order_product_sku()
-                prod_name = (product_related_obj==False and str("["+order.order_product_sku+"] [NO ENCONTRADO]")) or product_related_obj.display_name
+                prod_name = (product_related_obj==False and str("["+order.order_product_sku+"] [NO ENCONTRADO] "+str(Item['item']['title']))) or product_related_obj.display_name
                 order.name = "MO [%s] %s" % ( str(order.order_id), prod_name )
 
                 if (sorder and product_related_obj):
