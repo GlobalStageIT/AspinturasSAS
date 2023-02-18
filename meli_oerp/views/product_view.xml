@@ -214,6 +214,7 @@
                         <button type="object"
                             name="action_meli_pause"
                             attrs="{'invisible':[('meli_variants_status', '!=', 'active')] }"
+                            confirm="Esta seguro de Pausar este Producto en Mercado Libre, esto bloqueara las publicaciones?"
                             class="oe_stat_button">
                             <img src="/meli_oerp/static/src/img/logo_ML.png" width="48" alt="logo ml"/>
                             <span>Pausar en ML</span>
@@ -221,6 +222,7 @@
                         <button type="object"
                             name="action_meli_activate"
                             attrs="{'invisible':[('meli_variants_status', '!=', 'paused')]}"
+                            confirm="Esta seguro de Pausar este Producto en Mercado Libre, esto activara las publicaciones?"
                             class="oe_stat_button">
                             <img src="/meli_oerp/static/src/img/logo_ML.png" width="48"  alt="logo ml"/>
                             <span>Activar</span>
@@ -388,7 +390,7 @@
                               attrs="{'invisible':['|',('meli_state','=',True),('meli_id','=',False)]}"
                               class="oe_stat_button"
                               icon="fa-pause-circle"
-              								confirm="Esta seguro de Pausar este Producto en Mercado Libre?"/>
+              		      confirm="Esta seguro de Pausar este Producto en Mercado Libre, esto bloqueara la publicacion?"/>
                             <button name='product_meli_status_close' type="object"
                               string="Cerrar"
                               title="Cerrar producto en ML"

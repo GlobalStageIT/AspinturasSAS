@@ -43,6 +43,7 @@ class ResCompany(models.Model):
 
     mercadolibre_order_confirmation = fields.Selection(selection_add=[("paid_confirm_with_invoice", "Pagado>Facturado"),
                                                 ("paid_delivered_with_invoice", "Pagado>Facturado y Entregado")],
+                                                ondelete={"paid_confirm_with_invoice": "set default"},
                                                 string='Acción al recibir un pedido',
                                                 help='Acción al confirmar una orden o pedido de venta')
 
@@ -73,8 +74,8 @@ class ResCompany(models.Model):
 
     mercadolibre_set_fully_invoice = fields.Boolean( string="Set Fully Invoice", help="Marcar como completamente facturado la orden correspondiente (incluido linea de envio)" )
 
-    #mercadolibre_invoice_journal_id = fields.Many2one( "account.journal", string="Diario Facturacion" )
-    #mercadolibre_invoice_journal_id_full = fields.Many2one( "account.journal", string="Diario Facturacion Full" )
+    mercadolibre_invoice_journal_id = fields.Many2one( "account.journal", string="Diario Facturacion" )
+    mercadolibre_invoice_journal_id_full = fields.Many2one( "account.journal", string="Diario Facturacion Full" )
 
     #mercadolibre_account_payment_receiptbook_id = fields.Many2one( "account.payment.receiptbook", string="Recibos")
     #mercadolibre_account_payment_supplier_receiptbook_id = fields.Many2one( "account.payment.receiptbook", string="Ordenes de pago")

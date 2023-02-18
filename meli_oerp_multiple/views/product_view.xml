@@ -550,9 +550,9 @@
             <field name="barcode"/>
             <!--field name="active" /-->
             <field name="product_id" />
-            <filter string="MercadoLibre Active"
+            <!--filter string="MercadoLibre Active"
         						domain="[('active', '!=', False)]"
-        						name="binding_active" />
+        						name="binding_active" /-->
             <filter string="Product desasignado"
         						domain="[('product_id', '=', False)]"
         						name="binding_product_unassigned" />
@@ -598,7 +598,6 @@
       	<field name="model">mercadolibre.product_template</field>
       	<field name="arch" type="xml">
       		<tree create="1" edit="1" delete="1" default_order='name asc, connection_account asc'>
-            <!--field name="sku" /-->
       			<field name="name" />
             <!--field name="active" /-->
             <field name="connection_account" />

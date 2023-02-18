@@ -57,7 +57,7 @@ class SaleOrder(models.Model):
                 #_logger.info("order_type:"+str(order_type))
 
     def meli_deliver( self, meli=None, config=None, data=None):
-        #_logger.info("meli_deliver")
+        _logger.info("meli_deliver stock")
         res= {}
         if "mercadolibre_stock_mrp_production_process" in config._fields and config.mercadolibre_stock_mrp_production_process:
             self.meli_produce( meli=meli, config=config, data=data )
@@ -65,15 +65,15 @@ class SaleOrder(models.Model):
         if self.picking_ids:
             for spick in self.picking_ids:
                 _logger.info(spick)
-                if self.warehouse_id and spick.location_id:
-                    
-                    if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
-                        _logger.info("Fixing location!")
-                        spick.location_id = self.warehouse_id.lot_stock_id
+                #if self.warehouse_id and spick.location_id:
 
-                    if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
-                        _logger.info("Fixing location NOT POSSIBLE! Aborting delivery.")
-                        return { "error": "Fixing location NOT POSSIBLE! Aborting delivery." }
+                    #if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                        #_logger.info("Fixing location!")
+                        #spick.location_id = self.warehouse_id.lot_stock_id
+
+                    #if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                    #    _logger.info("Fixing location NOT POSSIBLE! Aborting delivery.")
+                    #    return { "error": "Fixing location NOT POSSIBLE! Aborting delivery." }
 
 
                 if (spick.move_line_ids):
@@ -167,6 +167,26 @@ class SaleOrder(models.Model):
         condition = condition or (self.meli_shipment_logistic_type=="" and shipped_or_delivered and delinofull and  "paid_confirm_shipped_deliver" in delinofull )
         #last check:
         condition = condition and ("paid" in self.meli_status) and self.state in ['sale','done']
+
+
+        if self.picking_ids:
+            for spick in self.picking_ids:
+                _logger.info(spick)
+                #if self.warehouse_id and spick.location_id:
+
+                    #if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                    #    _logger.info("Fixing location!")
+                        #spick.location_id = self.warehouse_id.lot_stock_id
+                        #if spick.state=="assigned":
+                        #    spick.move_line_ids_without_package = None
+                        #    spick.do_unreserve()
+                        #    if self.warehouse_id.lot_stock_id.id == spick.location_id.id:
+                        #        spick.action_assign()
+
+                     #if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                    #    _logger.info("Fixing location NOT POSSIBLE! Aborting delivery.")
+                    #    return { "error": "Fixing location NOT POSSIBLE! Aborting delivery." }
+
 
         #_logger.info("delivery condition: "+str(condition))
         if (condition or force):
@@ -373,6 +393,7 @@ class MercadolibreOrder(models.Model):
             so_type_log = None
 
             #check first for sale_type_id from sale.order > seller team
+            so_type_log_id = sale_order and sale_order.team_id and "sale_type_id" in sale_order.team_id._fields and sale_order.team_id.sale_type_id and sale_order.team_id.sale_type_id.id
 
             so_type_log = self.env['sale.order.type'].search([('name','like','SO-MELI')],limit=1)
             if not so_type_log:
@@ -388,7 +409,7 @@ class MercadolibreOrder(models.Model):
                 if "fulfillment" in logistic_type:
                     so_type_log = self.env['sale.order.type'].search([('name','like','SO-MLF')],limit=1)
 
-            so_type_log_id = so_type_log and so_type_log.id
+            so_type_log_id = so_type_log_id or (so_type_log and so_type_log.id)
             meli_order_fields["type_id"] = so_type_log_id
 
         return meli_order_fields

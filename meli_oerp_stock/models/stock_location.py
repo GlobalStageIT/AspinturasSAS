@@ -191,4 +191,11 @@ class DeliveryCarrier(models.Model):
             return self.ml_tracking_url+str(picking.carrier_tracking_ref)
 
         return super(DeliveryCarrier, self).get_tracking_link(picking)
-    
+
+
+#class stock_valuation_layer( models.Model):
+
+#    _inherit = "stock.valuation.layer"
+
+    #unit_cost = fields.Monetary('Unit Value', readonly=False)
+    #value = fields.Monetary('Total Value', readonly=False)

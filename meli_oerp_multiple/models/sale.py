@@ -453,9 +453,9 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    meli_sale_id = fields.Many2one("sale.order",string="Orden ML")
-    meli_sale_name = fields.Char(string="Label ML")
-    meli_sale_invoice_status = fields.Selection(string="Invoice",related="meli_sale_id.invoice_status")
+    #meli_sale_id = fields.Many2one("sale.order",string="Orden ML")
+    #meli_sale_name = fields.Char(string="Label ML")
+    #meli_sale_invoice_status = fields.Selection(string="Invoice",related="meli_sale_id.invoice_status")
 
 class ResPartner(models.Model):
 
