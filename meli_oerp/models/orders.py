@@ -2333,10 +2333,9 @@ class mercadolibre_orders(models.Model):
             ord.order_product_sku = ""
 
             if ord.order_items and ord.order_items[0]:
-                ord.order_product_sku = ord.order_items[0].seller_sku
+                ord.order_product_sku = ord.order_items[0].seller_sku or ord.order_items[0].seller_custom_field
 
-    order_product_sku = fields.Char(string='Order Product Sku', compute=_order_product_sku )
-
+    order_product_sku = fields.Char(string='Order Product Sku', compute=_order_product_sku, store=True, index=True )
 
     payments = fields.One2many('mercadolibre.payments','order_id',string='Payments' )
 
