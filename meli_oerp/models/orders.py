@@ -1838,12 +1838,13 @@ class mercadolibre_orders(models.Model):
                     order_item_ids.write( ( order_item_fields ) )
 
                 if (product_related_obj == False or len(product_related_obj)==0):
-                    error = { 'error': 'No product related to meli_id '+str(Item['item']['id']), 'item': str(Item['item']) }
+                    error = { 'error': 'No product related to meli_id '+str(Item['item']['id']), 'item': str(Item['item']), 'product_related_obj': str(product_related_obj) }
                     _logger.error(error)
                     order and order.message_post(body=str(error["error"])+"\n"+str(error["item"]),message_type=order_message_type)
 
                 order._order_product_sku()
-                prod_name = (product_related_obj==False and str("(NO ENCONTRADO) ["+order.order_product_sku+"] "+str(Item['item']['title']))) or product_related_obj.display_name
+                prod_name = ( not product_related_obj and str("(NO ENCONTRADO) ["+order.order_product_sku+"] "+str(Item['item']['title']))) or product_related_obj.display_name
+                _logger.info("prod_name: "+str(prod_name))
                 order.name = "MO [%s] %s" % ( str(order.order_id), prod_name )
 
                 if (sorder and product_related_obj):
