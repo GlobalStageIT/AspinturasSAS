@@ -1684,8 +1684,10 @@ class mercadolibre_orders(models.Model):
                 if len(post_related):
                     post_related_obj = post_related
                 else:
-                    _logger.info( "No post related, exiting" )
-                    return { 'error': 'No post related, exiting'}
+                    error =  { 'error': 'No post related, exiting'}
+                    _logger.error( "No post related, exiting" )
+                    return error
+
 
                 product_related = order.search_meli_product( meli=meli, meli_item=Item['item'], config=config )
                 if ( product_related and len(product_related)==0 and ('seller_custom_field' in Item['item'] or 'seller_sku' in Item['item'])):
@@ -1822,8 +1824,9 @@ class mercadolibre_orders(models.Model):
                         error = { 'error': "Error products duplicated for item:"+str(Item and 'item' in Item and Item['item']) }
                         _logger.error(error)
                         order and order.message_post(body=str(error["error"]),message_type=order_message_type)
-                        return error
-                    order_item_fields['product_id'] = product_related.id
+                        #return error
+                    else:
+                        order_item_fields['product_id'] = product_related.id
 
                 order_item_ids = order_items_obj.search( [('order_item_id','=',order_item_fields['order_item_id']),
                                                             ('order_id','=',order.id)] )
