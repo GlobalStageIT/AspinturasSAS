@@ -1812,7 +1812,9 @@ class mercadolibre_orders(models.Model):
                     'order_item_category_id': Item['item']['category_id'],
                     'unit_price': Item['unit_price'],
                     'quantity': Item['quantity'],
-                    'currency_id': Item['currency_id']
+                    'currency_id': Item['currency_id'],
+                    'seller_sku': ('seller_sku' in Item['item'] and Item['item']['seller_sku']) or '',
+                    'seller_custom_field': ('seller_custom_field' in Item['item'] and Item['item']['seller_custom_field']) or ''
                 }
 
                 if (product_related):
