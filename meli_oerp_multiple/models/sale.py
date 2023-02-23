@@ -237,6 +237,10 @@ class MercadoLibreOrder(models.Model):
         else:
             product_related = product_obj.search([('meli_id','=', meli_id)])
 
+        if product_related:
+            product_related.mercadolibre_bind_to( account=account, binding_product_tmpl_id=False, meli_id=meli_id, meli=meli, bind_only=True )
+
+
         _logger.info("product_related from product:"+str(product_related))
 
         if check_sku and seller_sku and product_related and len(product_related)>0:
