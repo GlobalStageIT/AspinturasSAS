@@ -97,20 +97,22 @@ class sale_order(models.Model):
 
     meli_status = fields.Selection( [
         #Initial state of an order, and it has no payment yet.
-                                        ("confirmed","Confirmado"),
+        ("confirmed","Confirmado"),
         #The order needs a payment to become confirmed and show users information.
-                                      ("payment_required","Pago requerido"),
+        ("payment_required","Pago requerido"),
         #There is a payment related with the order, but it has not accredited yet
-                                    ("payment_in_process","Pago en proceso"),
+        ("payment_in_process","Pago en proceso"),
         #The order has a related payment and it has been accredited.
-                                    ("paid","Pagado"),
+        ("paid","Pagado"),
         #The order has a related partial payment and it has been accredited.
-                                    ("partially_paid","Parcialmente Pagado"),
+        ("partially_paid","Parcialmente Pagado"),
         #The order has not completed by some reason.
-                                    ("cancelled","Cancelado"),
+        ("cancelled","Cancelado"),
         #The order has been invalidated as it came from a malicious buyer.
-                                    ("invalid","Invalido: malicious")
-                                    ], string='Order Status')
+        ("invalid","Invalido: malicious"),
+        #The order status is cancelled, but an action is pending to complete the process.
+        ("pending_cancel", "Pendiente de cancelar"),
+        ], string='Order Status')
 
     meli_status_brief = fields.Char(string="Meli Status Brief", compute="_meli_status_brief", search=search_meli_status_brief, store=False, index=True)
 
@@ -128,12 +130,15 @@ class sale_order(models.Model):
     meli_paid_amount = fields.Float(string='Paid amount',help='Paid amount (include shipping cost)')
     meli_fee_amount = fields.Float(string='Fee amount',help="Comisión")
     meli_coupon_amount = fields.Float(string='Coupont amount',help="Descuento",default=0.0)
+    meli_financing_fee_amount = fields.Float(string='Financing fee amount',help="Financiamiento",default=0.0)
+
     meli_currency_id = fields.Char(string='Currency ML')
 #        'buyer': fields.many2one( "mercadolibre.buyers","Buyer"),
 #       'meli_seller': fields.text( string='Seller' ),
     meli_shipping_id =  fields.Char('Meli Shipping Id')
     meli_shipment = fields.Many2one('mercadolibre.shipment',string='Meli Shipment Obj')
     meli_shipment_logistic_type = fields.Char(string="Logistic Type",index=True)
+    meli_update_forbidden = fields.Boolean(string="Bloqueado para actualizar desde ML",default=False, index=True)
 
     def action_confirm(self):
         #_logger.info("meli order action_confirm: " + str(self.mapped("name")) )
@@ -619,15 +624,15 @@ class mercadolibre_orders(models.Model):
         full_phone = ''
         if "alternative_phone" in buyer_json:
             phone_json = buyer_json["alternative_phone"]
-            if 'area_code' in phone_json:
+            if phone_json and 'area_code' in phone_json:
                 if phone_json['area_code']:
                     full_phone+= phone_json['area_code']
 
-            if 'number' in phone_json:
+            if phone_json and 'number' in phone_json:
                 if phone_json['number']:
                     full_phone+= phone_json['number']
 
-            if 'extension' in phone_json:
+            if phone_json and 'extension' in phone_json:
                 if phone_json['extension']:
                     full_phone+= phone_json['extension']
 
@@ -673,6 +678,7 @@ class mercadolibre_orders(models.Model):
             "total_amount": self.total_amount,
             "paid_amount": self.paid_amount,
             "coupon_amount": self.coupon_amount,
+            "financing_fee_amount": self.financing_fee_amount,
 
             "date_created": self.date_created,
             "date_closed": self.date_closed,
@@ -707,6 +713,8 @@ class mercadolibre_orders(models.Model):
         if config.mercadolibre_seller_user:
             seller_id = config.mercadolibre_seller_user.id
 
+        financing_fee_amount = 0
+
         order_fields = {
             'name': "MO [%s]" % ( str(order_json["id"]) ),
             'company_id': company.id,
@@ -718,6 +726,7 @@ class mercadolibre_orders(models.Model):
             'total_amount': order_json["total_amount"],
             'paid_amount': order_json["paid_amount"],
             'coupon_amount': ("coupon" in order_json and order_json["coupon"] and "amount" in order_json["coupon"] and order_json["coupon"]["amount"]) or 0.0,
+            'financing_fee_amount': financing_fee_amount,
             'currency_id': order_json["currency_id"],
             'date_created': ml_datetime(order_json["date_created"]),
             'date_closed': ml_datetime(order_json["date_closed"]),
@@ -745,6 +754,7 @@ class mercadolibre_orders(models.Model):
     def prepare_sale_order_vals( self, meli=None, order_json=None, config=None, sale_order=None, shipment=None ):
         if not order_json:
             return {}
+        financing_fee_amount = ("financing_fee_amount" in order_json and order_json["financing_fee_amount"]) or 0
         meli_order_fields = {
             #TODO: "add parameter for":
             'name': "ML %s" % ( str(order_json["id"]) ),
@@ -756,6 +766,7 @@ class mercadolibre_orders(models.Model):
             'meli_total_amount': ("total_amount" in order_json and order_json["total_amount"]),
             'meli_paid_amount': ("paid_amount" in order_json and order_json["paid_amount"]),
             'meli_coupon_amount': ("coupon" in order_json and order_json["coupon"] and "amount" in order_json["coupon"] and order_json["coupon"]["amount"]) or 0.0,
+            'meli_financing_fee_amount': financing_fee_amount,
             'meli_currency_id': ("currency_id" in order_json and order_json["currency_id"]),
             'meli_date_created': ml_datetime(order_json["date_created"]),
             'meli_date_closed': ml_datetime(order_json["date_closed"]),
@@ -980,6 +991,11 @@ class mercadolibre_orders(models.Model):
                     sorder = sorder_s
             #if (sorder_s and len(sorder_s)>0):
             #    sorder = saleorder_obj.browse(sorder_s[0] )
+
+        if (sorder and sorder.meli_update_forbidden):
+            _logger.error("Forbidden to upate by meli_oerp" )
+            return {'error': 'Forbidden to upate by meli_oerp' }
+
         seller_id = None
         if config.mercadolibre_seller_user:
             seller_id = config.mercadolibre_seller_user.id
@@ -1759,6 +1775,7 @@ class mercadolibre_orders(models.Model):
                                     'meli_id': rjson3['id'],
                                     'meli_pub': True,
                                 }
+                                prod_fields.update(ProductType())
                                 if (seller_sku):
                                     prod_fields['default_code'] = seller_sku
                                 #prod_fields['default_code'] = rjson3['id']
@@ -1872,6 +1889,8 @@ class mercadolibre_orders(models.Model):
 
         if 'payments' in order_json:
             payments = order_json['payments']
+            #sumar los financing fee aprobados
+            financing_fee_amount = 0
             cn = 0
             for Payment in payments:
                 cn = cn + 1
@@ -1891,7 +1910,8 @@ class mercadolibre_orders(models.Model):
                     'full_payment': '',
                     'fee_amount': 0,
                     'shipping_amount': 0,
-                    'taxes_amount': 0
+                    'taxes_amount': 0,
+                    'financing_fee_amount': 0
                 }
 
                 headers = {'Accept': 'application/json', 'User-Agent': 'Odoo', 'Content-type':'application/json'}
@@ -1908,12 +1928,18 @@ class mercadolibre_orders(models.Model):
                             if fee_detail and "amount" in fee_detail:
                                 fee_type = fee_detail["type"]
                                 fee_payer = fee_detail["fee_payer"]
-                                if (fee_payer and fee_payer == "collector"):
+                                if (fee_payer and fee_payer == "collector" and fee_type == "application_fee"):
                                     payment_fields["fee_amount"] = fee_detail["amount"]
+                                if (fee_payer and fee_payer == "payer" and fee_type == "financing_fee"):
+                                    payment_fields["financing_fee_amount"] = fee_detail["amount"]
+                                    if ('status' in Payment and Payment['status'] == "approved"):
+                                        financing_fee_amount+= payment_fields["financing_fee_amount"]
                         if (order):
                             order.fee_amount = payment_fields["fee_amount"]
+                            order.financing_fee_amount = financing_fee_amount
                             if (sorder):
                                 sorder.meli_fee_amount = order.fee_amount
+                                sorder.meli_financing_fee_amount = order.financing_fee_amount
                     payment_fields["taxes_amount"] = payment_fields["full_payment"]["taxes_amount"]
 
                 payment_ids = payments_obj.search( [  ('payment_id','=',payment_fields['payment_id']),
@@ -2359,6 +2385,7 @@ class mercadolibre_orders(models.Model):
     shipment_logistic_type = fields.Char(string="Logistic Type",index=True)
 
     fee_amount = fields.Float(string='Fee total amount')
+    financing_fee_amount = fields.Float(string='Financing fee amount',help="Financiamiento",default=0.0)
     total_amount = fields.Float(string='Total amount')
     shipping_cost = fields.Float(string='Shipping Cost',help='Gastos de envío')
     shipping_list_cost = fields.Float(string='Shipping List Cost',help='Gastos de envío, costo de lista/interno')
@@ -2418,6 +2445,8 @@ class mercadolibre_payments(models.Model):
     fee_amount = fields.Float('Fee Amount')
     shipping_amount = fields.Float('Shipping Amount')
     taxes_amount = fields.Float('Taxes Amount')
+
+    financing_fee_amount = fields.Float('Financing fee amount')
 
     def _get_config( self, config=None ):
         config = config or (self and self.order_id and self.order_id._get_config(config=config))

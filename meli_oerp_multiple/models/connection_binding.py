@@ -1264,7 +1264,6 @@ class MercadoLibreConnectionBindingProductVariant(models.Model):
                             'fixed_price': float(ml_price_converted)
                              })
 
-
     def update_price( self, meli_price=False, meli_pricelist=False, meli_price_fixed=False ):
         for bind in self:
 
@@ -1343,7 +1342,6 @@ class MercadoLibreConnectionBindingProductVariant(models.Model):
             bind.price = bind.meli_price
 
             bind._onchange_meli_price()
-
 
     def product_post( self, meli=None ):
         _logger.info("MercadoLibre Bind Product Post")

@@ -24,6 +24,8 @@
                   <field name="meli_order_id" string="MercadoLibre Order Id"/>
                   <field name="meli_status_brief" string="MercadoLibre Status Brief"/>
                   <field name="meli_status" string="MercadoLibre Status"/>
+                  <field name="meli_update_forbidden" string="No actualizar desde ML"/>
+
                   <separator/>
                   <filter string="MercadoLibre Quotations" name="sale_orders_ml" domain="[('meli_order_id','!=',False)]" />
                   <filter string='MercadoLibre Status' domain="[]"
@@ -77,6 +79,7 @@
                         <page string="MercadoLibre" attrs="{'invisible':[('meli_order_id', '=', False)]}">
                             <field name="meli_orders" invisible="0"/>
                             <group>
+                              <field name="meli_update_forbidden" string="No actualizar desde ML"/>
                               <field name="meli_order_id" invisible="0"/>
                               <field name="meli_status" invisible="0"/>
                               <field name="meli_status_brief" invisible="0"/>
@@ -89,6 +92,7 @@
                               <field name="meli_fee_amount" invisible="0"/>
                               <field name="meli_paid_amount" invisible="0"/>
                               <field name="meli_coupon_amount" invisible="0"/>
+                              <field name="meli_financing_fee_amount" invisible="0"/>
                               <field name="meli_currency_id" invisible="0"/>
                               <field name="meli_date_created" invisible="0"/>
                               <field name="meli_date_closed" invisible="0"/>
@@ -173,6 +177,7 @@
                         <field name="fee_amount"  widget="monetary"/>
                         <field name="paid_amount"  widget="monetary"/>
                         <field name="coupon_amount" widget="monetary"/>
+                        <field name="financing_fee_amount"  widget="monetary"/>
                         <field name="currency_id"/>
                         <field name="company_id"/>
                         <field name="seller_id"/>
@@ -236,6 +241,7 @@
                     <field name="total_paid_amount"/>
                     <field name="shipping_amount"/>
                     <field name="fee_amount"/>
+                    <field name="financing_fee_amount"/>
                     <field name="taxes_amount"/>
                     <field name="currency_id"/>
                     <field name="status"/>
