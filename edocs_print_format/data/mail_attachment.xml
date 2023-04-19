@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <record id="tmpl_email_config" model="mail.template">
+        <record id="tmipl_email_config" model="mail.template">
             <field name="name">Informe Z - Cierre POS INTERNO</field>
             <field name="subject">Informe Z Interno</field>
             <field name="model_id" ref="edocs_print_format.model_pos_session"/>
