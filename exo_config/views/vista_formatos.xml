@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-        <template id="assets_config_exogena" name="Assets modelo configuracion exogena" inherit_id="web.assets_backend">
+        <template id="assets_config_exogena" name="Assets modelo configuracion exogena" inherit_id="">
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/exo_config/static/src/css/custom.css"/>
             </xpath>

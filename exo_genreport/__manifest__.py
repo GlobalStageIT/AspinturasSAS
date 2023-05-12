@@ -9,9 +9,9 @@
         Módulo que permite la gestión de la generación de reportes de medios magnéticos, particularizado con el PUC de cada empresa
     """,
 
-    'author': "globalstageit",
-    'website': "https://www.globalstageit.com",
-    
+    'author': "Pragmatic SAS",
+    'website': "https://www.pragmatic.com.co/",
+
     'category': 'Uncategorized',
     'version': '14.2.0.0.5',
     'images': ['static/description/icon.png'],

@@ -9,14 +9,20 @@
         Módulo que permite la configuración generación de reportes Exógena, DIAN y distritales
     """,
 
-    'author': "globalstageit",
-    'website': "https://www.globalstageit.com",
+    'author': "Servisoft Latam",
     
+
     'category': 'Uncategorized',
-    'version': '14.2.0.0.3',
+    'version': '15.2.0.0.3',
     'images': ['static/description/icon.png'],
 
     'depends': ['base','account','exo_params'],
+
+    'assets': {
+    'web.assets_backend': [
+        'static/src/css/custom.css',
+    
+}
 
     'data': [
         'data/formato.xml',
