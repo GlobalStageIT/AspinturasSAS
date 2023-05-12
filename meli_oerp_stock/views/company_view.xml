@@ -27,7 +27,15 @@
                       <field name="mercadolibre_order_confirmation_delivery_full" invisible="0"/>
                     </group>
                     <group>
-                      <field name="mercadolibre_stock_sku_mapping" invisible="0"/>
+                      <field name="mercadolibre_stock_sku_mapping" invisible="0">
+                        <tree>
+                          <field name="type"/>
+                          <field name="name"/>
+                          <field name="sku"/>
+                          <field name="security_virtual_stock_to_pause"/>
+                          <field name="security_quantity_stock_to_pause"/>
+                        </tree>
+                      </field>
                     </group>
                     <group>
                       <field name="mercadolibre_cron_get_shipments" invisible="0"/>

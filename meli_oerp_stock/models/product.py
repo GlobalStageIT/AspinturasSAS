@@ -78,11 +78,14 @@ class product_product(models.Model):
         #_logger.info("_meli_get_location_id > meli_shipping_logistic_type:"+str(meli_shipping_logistic_type))
 
         loc_id = self.env["stock.location"].search([('mercadolibre_active','=',True),('company_id', '=', company.id)])
+        #loc_id = self.env["stock.location"].search([('mercadolibre_active','=',True)])
+        #_logger.info("_meli_get_location_id > loc_id:"+str(loc_id)+ " company:"+str(company.name))
 
         #CHECK ALL COMPANY LOCATIONS
         if loc_id:
             loc_ids = []
             for lid in loc_id:
+                #_logger.info("_meli_get_location_id > lid:"+str(lid.display_name)+" company:"+str(lid.company_id.name)+" log:"+str(lid.mercadolibre_logistic_type) )
                 if (meli_shipping_logistic_type != "fulfillment"):
                     if (not lid.mercadolibre_logistic_type or (lid.mercadolibre_logistic_type and 'fulfillment' not in lid.mercadolibre_logistic_type)):
                         loc_ids.append(lid)
@@ -90,11 +93,13 @@ class product_product(models.Model):
                     if (lid.mercadolibre_logistic_type and 'fulfillment' in lid.mercadolibre_logistic_type):
                         loc_ids.append(lid)
             loc_id = loc_ids
+            #_logger.info( "_meli_get_location_id > loc_ids: " + str(loc_id) )
 
         #JUST OCAPI PUBLISH STOCK LOCATION
         multi_stock_locations = ("publish_stock_locations" in config._fields and config.publish_stock_locations)
         multi_stock_locations = multi_stock_locations or ("mercadolibre_stock_location_to_post_many" in config._fields and config.mercadolibre_stock_location_to_post_many)
         if multi_stock_locations:
+            #_logger.info( "_meli_get_location_id > multi_stock_locations: " + str(multi_stock_locations) )
             loc_ids = []
             for lid in multi_stock_locations.filtered(lambda x: not x.company_id or (x.company_id and x.company_id.id == company.id ) ):
                 if (meli_shipping_logistic_type != "fulfillment"):
@@ -140,7 +145,7 @@ class product_product(models.Model):
 
         loc_oper = ("mercadolibre_stock_location_operation" in config._fields) and config.mercadolibre_stock_location_operation
         qty_method = ("mercadolibre_stock_virtual_available" in config._fields) and config.mercadolibre_stock_virtual_available
-
+        loc_oper = loc_oper or "sum"
         #_logger.info("loc_oper: "+str(loc_oper)+" qty_method: "+str(qty_method))
 
         last_qty_available_op = 0
@@ -151,12 +156,15 @@ class product_product(models.Model):
             #Cantidad disponible en esta ubicacion
             if ( not qty_method or qty_method=='virtual' ):
                 qty_available_op = quant_obj._get_available_quantity( product_id, loc )
+                #_logger.info("qty_available_op virtual: "+str(loc.name)+" "+str(qty_available_op))
             else:
                 if (qty_method=='theoretical'):
                     qty_available_op = product_id.get_theoretical_quantity( product_id.id, loc.id )
+                    #_logger.info("qty_available_op theoretical: "+str(loc.name)+" "+str(qty_available_op))
 
                 if (qty_method=='qty_reserved'):
                     qty_available_op = product_id.get_theoretical_quantity( product_id.id, loc.id )
+                    #_logger.info("qty_available_op qty_reserved: "+str(loc.name)+" "+str(qty_available_op))
 
             #Operacion entre ubicaciones
             if (loc_oper and loc_oper=="sum" or not loc_oper):

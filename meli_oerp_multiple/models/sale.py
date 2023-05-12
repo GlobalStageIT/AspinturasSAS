@@ -237,6 +237,10 @@ class MercadoLibreOrder(models.Model):
         else:
             product_related = product_obj.search([('meli_id','=', meli_id)])
 
+        if product_related:
+            product_related.mercadolibre_bind_to( account=account, binding_product_tmpl_id=False, meli_id=meli_id, meli=meli, bind_only=True )
+
+
         _logger.info("product_related from product:"+str(product_related))
 
         if check_sku and seller_sku and product_related and len(product_related)>0:
@@ -314,7 +318,7 @@ class MercadoLibreOrder(models.Model):
                             prod_fields['default_code'] = seller_sku
                         #prod_fields['default_code'] = rjson3['id']
                         #productcreated = False
-                        if config.mercadolibre_create_product_from_order:
+                        if config.mercadolibre_create_product_from_order and seller_sku:
                             productcreated = self.env['product.product'].create((prod_fields))
                         if (productcreated):
                             if (productcreated.product_tmpl_id):
@@ -453,9 +457,9 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    meli_sale_id = fields.Many2one("sale.order",string="Orden ML")
-    meli_sale_name = fields.Char(string="Label ML")
-    meli_sale_invoice_status = fields.Selection(string="Invoice",related="meli_sale_id.invoice_status")
+    #meli_sale_id = fields.Many2one("sale.order",string="Orden ML")
+    #meli_sale_name = fields.Char(string="Label ML")
+    #meli_sale_invoice_status = fields.Selection(string="Invoice",related="meli_sale_id.invoice_status")
 
 class ResPartner(models.Model):
 

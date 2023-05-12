@@ -580,15 +580,15 @@ class product_template_import(models.TransientModel):
             mli_rec = {'meli_sku': '', 'meli_id': mli, 'meli_status': 'paused', 'imp_status': 'synced' }
             #fetchm = meli.get("/items/"+mli, { 'access_token': meli.access_token })
             rjson = account.fetch_meli_product( meli_id = mli, meli=meli )
-            if rjson:
+            if rjson and "id" in rjson:
                 mli_rec["meli_sku"] = account.fetch_meli_sku( meli_id = mli, meli=meli, rjson=rjson )
                 mli_rec["meli_variations"] = ( "variations" in rjson and rjson["variations"] and len(rjson["variations"]) ) or 1
                 mli_rec["odoo_binds"] =  '0'
 
-                mli_rec["meli_price"] = rjson["price"]
+                mli_rec["meli_price"] = ("price" in rjson and rjson["price"]) or ""
                 mli_rec["odoo_price"] =  ''
                 
-                mli_rec["meli_qty"] = rjson["available_quantity"]
+                mli_rec["meli_qty"] = ("available_quantity" in rjson and rjson["available_quantity"]) or ""
                 mli_rec["odoo_stock"] =  ''
                 
             if mli not in odoo_meli_ids:

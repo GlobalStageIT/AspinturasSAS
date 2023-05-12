@@ -524,9 +524,9 @@
             <field name="barcode"/>
             <!--field name="active" /-->
             <field name="product_tmpl_id" />
-            <filter string="MercadoLibre Active"
+            <!--filter string="MercadoLibre Active"
         						domain="[('active', '!=', False)]"
-        						name="binding_active" />
+        						name="binding_active" /-->
             <filter string="Product Template desasignado"
         						domain="[('product_tmpl_id', '=', False)]"
         						name="binding_product_template_unassigned" />
@@ -550,9 +550,9 @@
             <field name="barcode"/>
             <!--field name="active" /-->
             <field name="product_id" />
-            <filter string="MercadoLibre Active"
+            <!--filter string="MercadoLibre Active"
         						domain="[('active', '!=', False)]"
-        						name="binding_active" />
+        						name="binding_active" /-->
             <filter string="Product desasignado"
         						domain="[('product_id', '=', False)]"
         						name="binding_product_unassigned" />
@@ -598,7 +598,6 @@
       	<field name="model">mercadolibre.product_template</field>
       	<field name="arch" type="xml">
       		<tree create="1" edit="1" delete="1" default_order='name asc, connection_account asc'>
-            <!--field name="sku" /-->
       			<field name="name" />
             <!--field name="active" /-->
             <field name="connection_account" />
@@ -626,16 +625,17 @@
             <field name="conn_id" string="MercadoLibre Id"/>
             <field name="conn_variation_id"  string="Variant Id"/>
             <field name="stock" />
-            <field name="meli_status"/>
-            <field name="meli_sub_status"/>
-            <field name="meli_permalink" widget="url"/>
-            <field name="meli_permalink_edit" widget="url"/>
+            <!--field name="meli_status"/>
+            <field name="meli_sub_status"/-->
+            <!--field name="meli_permalink" widget="url"/-->
+            <!--field name="meli_permalink_edit" widget="url"/-->
             <field name="product_id"/>
-            <field name="active"  optional="hide"/>
+            <!--field name="active"  optional="hide"/-->
             <field name="full_update" optional="hide"/>
             <field name="image_update" optional="hide"/>
             <field name="price_update" optional="hide"/>
             <field name="stock_update" optional="hide"/>
+            <field name="meli_stock_moves_update" optional="hide"/>
       		</tree>
       	</field>
       </record>

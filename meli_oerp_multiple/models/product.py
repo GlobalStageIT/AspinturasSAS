@@ -1538,13 +1538,13 @@ class product_product(models.Model):
             body["seller_custom_field"] = product.sku
 
 
-        if product.meli_max_purchase_quantity:
+        if "meli_max_purchase_quantity" in product._fields and product.meli_max_purchase_quantity:
             body["sale_terms"].append({
                 "id": "PURCHASE_MAX_QUANTITY",
                 "value_name": str(product.meli_max_purchase_quantity)
             })
 
-        if product.meli_manufacturing_time:
+        if "meli_manufacturing_time" in product._fields and product.meli_manufacturing_time:
             body["sale_terms"].append({
                 "id": "MANUFACTURING_TIME",
                 "value_name": str(product.meli_manufacturing_time)

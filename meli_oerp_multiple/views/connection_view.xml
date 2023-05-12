@@ -64,6 +64,15 @@
           <tree create="1" edit="1" delete="1" default_order='id desc'>
             <field name="name" />
             <field name="mode" />
+            <field name="mercadolibre_order_confirmation"/>
+            <field name="mercadolibre_order_confirmation_full"/>
+            <field name="mercadolibre_stock_virtual_available"/>
+            <field name="mercadolibre_stock_warehouse"/>
+            <field name="mercadolibre_cron_post_update_stock"/>
+            <field name="mercadolibre_pricelist"/>
+            <field name="mercadolibre_pricelist_usd"/>
+            <field name="mercadolibre_cron_post_update_price"/>
+            <field name="mercadolibre_invoice_journal_id"/>
           </tree>
         </field>
       </record>

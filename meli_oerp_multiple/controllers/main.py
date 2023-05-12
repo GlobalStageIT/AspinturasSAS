@@ -107,7 +107,7 @@ class MercadoLibre(MercadoLibre):
 #        access_token = post.get("access_token")
 
 #        if not access_token:
-            return False
+#            return False
 
 #        connection_account = request.env['mercadolibre.account'].sudo().search([('access_token','=',access_token)])
 
@@ -127,6 +127,19 @@ class MercadoLibre(MercadoLibre):
 #        else:
 #            return super(OcapiCatalog, self).get_connection(connector,**post)
 
+#        return connection_account
+
+    def get_mercadolibre_connection(self, **post):
+        connector = "mercadolibre"
+        access_token = post.get("access_token")
+        if not access_token:
+            return False
+        connection_account = request.env['mercadolibre.account'].sudo().search([('access_token','=',access_token)])
+        _logger.info(connection_account)
+        if not connection_account or not len(connection_account)==1:
+            return False
+        if not (connector == connection_account.type):
+            return False
         return connection_account
 
     def get_connection_account(self, connector,**post):
