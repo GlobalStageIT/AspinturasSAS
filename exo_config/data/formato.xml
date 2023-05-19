@@ -1,0 +1,105 @@
+<odoo>
+    <!-- registros sobre modulo de formatos -->
+    <data>
+        <record id="dian_1001" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1001</field>
+            <field name="description">Pagos y abonos en cuenta y retenciones</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1003" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1003</field>
+            <field name="description">Retenciones en la fuente que le practicaron</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1004" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1004</field>
+            <field name="description">Descuentos Tributarios</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1005" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1005</field>
+            <field name="description">Impuesto a las ventas por pagar (Descontable)</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1006" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1006</field>
+            <field name="description">Impuesto a las ventas por pagar (Generado)</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1007" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1007</field>
+            <field name="description">Ingresos recibidos</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1008" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1008</field>
+            <field name="description">Saldo de cuentas por cobrar</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_1009" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 1009</field>
+            <field name="description">Saldo de cuentas por pagar</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="dian_2276" model="exo_config.formato">
+            <field name="format_type">dian</field>
+            <field name="format_name">Formato 2276</field>
+            <field name="description">Información de rentas de trabajo y pensiones</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+
+        <!-- DISTRITALES -->
+        <record id="distrital_1" model="exo_config.formato">
+            <field name="format_type">distrital</field>
+            <field name="format_name">Art. 1</field>
+            <field name="description">Información de ingresos obtenidos por actividades excluidas o no sujetas y otros ingresos no gravados, deducciones o exenciones de los contribuyentes del ICA en Bogotá</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="distrital_2" model="exo_config.formato">
+            <field name="format_type">distrital</field>
+            <field name="format_name">Art. 2</field>
+            <field name="description">Información de compras de bienes y/o servicios</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="distrital_3" model="exo_config.formato">
+            <field name="format_type">distrital</field>
+            <field name="format_name">Art. 3</field>
+            <field name="description">Información de ventas de bienes</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="distrital_4" model="exo_config.formato">
+            <field name="format_type">distrital</field>
+            <field name="format_name">Art. 4</field>
+            <field name="description">Información que deben reportar los agentes de retención del impuesto de Industria y Comercio</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+        <record id="distrital_6" model="exo_config.formato">
+            <field name="format_type">distrital</field>
+            <field name="format_name">Art. 6</field>
+            <field name="description">Información que deben reportar los sujetos de retención del impuesto de Industria y Comercio</field>
+            <field name="has_categories" eval="1"></field>
+            <field name="active" eval="1"></field>
+        </record>
+    </data>
+</odoo>
