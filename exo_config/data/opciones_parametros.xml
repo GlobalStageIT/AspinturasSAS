@@ -1,0 +1,61 @@
+<odoo>
+    <!-- Opciones de parámetros asociados a las cabeceras de los formatos -->
+    <data>
+        <record id="opt1" model="exo_config.opciones_parametros">
+            <field name="name_opt">Tipo de documento</field>
+            <field name="value_opt">tipo_doc</field>
+        </record>
+        <record id="opt2" model="exo_config.opciones_parametros">
+            <field name="name_opt">Número de documento</field>
+            <field name="value_opt">nro_doc</field>
+        </record>
+        <record id="opt3" model="exo_config.opciones_parametros">
+            <field name="name_opt">Primer nombre</field>
+            <field name="value_opt">primer_nombre</field>
+        </record>
+        <record id="opt4" model="exo_config.opciones_parametros">
+            <field name="name_opt">Segundo nombre</field>
+            <field name="value_opt">segundo_nombre</field>
+        </record>
+        <record id="opt5" model="exo_config.opciones_parametros">
+            <field name="name_opt">Primer apellido</field>
+            <field name="value_opt">primer_apellido</field>
+        </record>
+        <record id="opt6" model="exo_config.opciones_parametros">
+            <field name="name_opt">Segundo apellido</field>
+            <field name="value_opt">segundo_apellido</field>
+        </record>
+        <record id="opt7" model="exo_config.opciones_parametros">
+            <field name="name_opt">Razón social</field>
+            <field name="value_opt">razon_social</field>
+        </record>
+        <record id="opt8" model="exo_config.opciones_parametros">
+            <field name="name_opt">Digito de verificación</field>
+            <field name="value_opt">digito_verif</field>
+        </record>
+        <record id="opt9" model="exo_config.opciones_parametros">
+            <field name="name_opt">País</field>
+            <field name="value_opt">pais</field>
+        </record>
+        <record id="opt10" model="exo_config.opciones_parametros">
+            <field name="name_opt">Departamento</field>
+            <field name="value_opt">departamento</field>
+        </record>
+        <record id="opt11" model="exo_config.opciones_parametros">
+            <field name="name_opt">Ciudad</field>
+            <field name="value_opt">ciudad</field>
+        </record>
+        <record id="opt12" model="exo_config.opciones_parametros">
+            <field name="name_opt">Dirección</field>
+            <field name="value_opt">direccion</field>
+        </record>
+        <record id="opt13" model="exo_config.opciones_parametros">
+            <field name="name_opt">Correo electrónico</field>
+            <field name="value_opt">mail</field>
+        </record>
+        <record id="opt14" model="exo_config.opciones_parametros">
+            <field name="name_opt">Teléfono</field>
+            <field name="value_opt">movil</field>
+        </record>
+    </data>
+</odoo>
