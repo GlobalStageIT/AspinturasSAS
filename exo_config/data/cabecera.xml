@@ -1,0 +1,653 @@
+<odoo>
+    <!-- registros relacion cabeceras - formato - parámetros -->
+    <data>
+        <record id="cabecera1" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab1')"></field> <!--concepto-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera2" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab2')"></field> <!--Tipo de documento-->
+            <field name="parameter_id" eval="ref('opt1')"></field>
+            <field name="max_length">3</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera3" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab3')"></field> <!--Número identificacion-->
+            <field name="parameter_id" eval="ref('opt2')"></field>
+            <field name="max_length">25</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera4" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab4')"></field> <!--DV-->
+            <field name="parameter_id" eval="ref('opt8')"></field>
+            <field name="max_length">5</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera5" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab5')"></field> <!--Primer apellido del informado-->
+            <field name="parameter_id" eval="ref('opt5')"></field>
+            <field name="max_length">25</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera6" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab6')"></field> <!--Segundo apellido del informado-->
+            <field name="parameter_id" eval="ref('opt6')"></field>
+            <field name="max_length">25</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera7" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab7')"></field> <!--Primer nombre del informado-->
+            <field name="parameter_id" eval="ref('opt3')"></field>
+            <field name="max_length">25</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera8" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab8')"></field> <!--Otros nombres del informado-->
+            <field name="parameter_id" eval="ref('opt4')"></field>
+            <field name="max_length">25</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera9" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab9')"></field> <!--Razón social informado-->
+            <field name="parameter_id" eval="ref('opt7')"></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera10" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab10')"></field> <!--Dirección-->
+            <field name="parameter_id" eval="ref('opt12')"></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera11" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab11')"></field> <!--Código dpto.-->
+            <field name="parameter_id" eval="ref('opt10')"></field>
+            <field name="max_length">5</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera12" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab12')"></field> <!--Código mcp-->
+            <field name="parameter_id" eval="ref('opt11')"></field>
+            <field name="max_length">5</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera13" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab13')"></field> <!--Valor acumulado del pago o abono sujeto a retención en la fuente-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera14" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab14')"></field> <!--Retención en la fuente que le practicaron-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <!-- ///////////////////////////////////////////////////////////////////// -->
+        <record id="cabecera15" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab15')"></field> <!--Vigencia-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">4</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="True"></field>
+        </record>
+        <record id="cabecera16" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab16')"></field> <!-- CONCEPTO DE INGRESOS POR ACTIVIDADES NO SUJETAS, DEDUCCIONES O EXENCIONES -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera17" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab17')"></field> <!-- VALOR DE LAS ACTIVIDADES NO SUJETAS, DEDUCCIONES Y EXENCIONES -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- ///////////////////////////////////////////////////////////////////// -->
+        <record id="cabecera18" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab18')"></field> <!--Correo electronico-->
+            <field name="parameter_id" eval="ref('opt13')"></field>
+            <field name="max_length">56</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record> <record id="cabecera19" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab19')"></field> <!--VALOR DEL PAGO O ABONO EN CUENTA-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera19_2021" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab19_2021')"></field> <!--VALOR DEL DESCUENTO TRIBUTARIO TOTAL DEL AÑO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera20" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab20')"></field> <!-- VALOR DEL DESCUENTO TRIBUTARIO -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="True"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1001//////////////////////////////////////// -->
+        <record id="cabecera21" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab21')"></field> <!--Pago o abono en cuenta deducible-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera22" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab22')"></field> <!--Pago o abono en cuenta no deducible-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera23" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab23')"></field> <!--IVA mayor valor del costo o gasto, deducible -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera24" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab24')"></field> <!--IVA mayor valor del costo o gasto no deducible-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera25" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab25')"></field> <!--Retención en la fuente practicada Renta Crédito-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera26" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab26')"></field> <!--Retención en la fuente asumida Renta-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera27" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab27')"></field> <!--País de residencia-->
+            <field name="parameter_id" eval="ref('opt9')"></field>
+            <field name="max_length">56</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera67" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab67')"></field> <!--Retención en la fuente practica Iva regimén común-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera68" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab68')"></field> <!--Retención en la fuente practica Iva no domiciliados-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera69" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab69')"></field> <!--TOTAL INGRESOS BRUTOS DE RENTAS DE TRABAJO O PENSIÓN-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera70" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab70')"></field> <!--APORTES A CUENTAS AVC-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera71" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab71')"></field> <!--PAGOS REALIZADOS CON BONOS ELECTRÓNICOS O DE PAPEL DE SERVICIOS. CHEQUES. TARJETAS. VALES. ETC-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera72" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab72')"></field> <!--Apoyos economicos no reembolsables o condonados, entregados emtregados por el Estado o financiados con recursos públicos, para fonanciar programas de educación-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera73" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab73')"></field> <!--PAGOS POR ALIMENTACIÓN MAYORES A 41 UVT-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera74" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab74')"></field> <!--PAGOS POR ALIMENTACIÓN HASTA A 41 UVT-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera75" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab75')"></field> <!--identificación del fideicomiso o contrato-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="True"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera76" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab76')"></field> <!--Tipo de documento participante en contrato de colaboración -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="True"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera77" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab77')"></field> <!--Identificación participante en contrato colaboración -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="True"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1005//////////////////////////////////////// -->
+        <record id="cabecera28" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab28')"></field> <!--IMPUESTO DESCONTABLE-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera29" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab29')"></field> <!-- IVA RESULTANTE POR DEVOLUCIONES EN VENTAS ANULADAS. RESCINDIDAS O RESUELTAS -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1006//////////////////////////////////////// -->
+        <record id="cabecera30" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab30')"></field> <!--IMPUESTO GENERADO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera31" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab31')"></field> <!-- IVA RECUPERADO EN DEVOLUCIONES EN COMPRAS ANULADAS. RESCINDIDAS O RESUELTAS -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera32" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab32')"></field> <!-- IMPUESTO AL CONSUMO -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1007//////////////////////////////////////// -->
+        <record id="cabecera33" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab33')"></field> <!--INGRESOS BRUTOS RECIBIDOS-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera34" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab34')"></field> <!-- DEVOLUCIONES. REBAJAS Y DESCUENTOS -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1008//////////////////////////////////////// -->
+        <record id="cabecera35" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab35')"></field> <!--SALDO CUENTAS POR COBRAR AL 31-12-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////1009//////////////////////////////////////// -->
+        <record id="cabecera36" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab36')"></field> <!--SALDO CUENTAS POR PAGAR AL 31-12-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////2276//////////////////////////////////////// -->
+        <record id="cabecera37" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab37')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera38" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab38')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera39" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab39')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera40" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab40')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera41" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab41')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera42" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab42')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera43" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab43')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera44" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab44')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera45" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab45')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera46" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab46')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera47" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab47')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera48" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab48')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera49" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab49')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera50" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab50')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera51" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab51')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera52" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab52')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera53" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab53')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera54" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab54')"></field> <!--SALDO-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera55" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab55')"></field> <!--Código beneficiario-->
+            <field name="parameter_id" eval="ref('opt11')"></field>
+            <field name="max_length">5</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- /////////////////////////////distrital articulo 2//////////////////////////////////////// -->
+        <record id="cabecera56" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab56')"></field> <!--Concepto del pago o abono en cuenta -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">120</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera57" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab57')"></field> <!--Valor bruto acumulado anual de las compras de bienes o servicios-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera58" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab58')"></field> <!--Valor total de las devoluciones, rebajas y descuentos-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera59" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab59')"></field> <!--Teléfono -->
+            <field name="parameter_id" eval="ref('opt14')"></field>
+            <field name="max_length">15</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- //// art 3 /// -->
+        <record id="cabecera60" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab60')"></field> <!--Valor total del ingreso bruto-->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera61" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab61')"></field> <!--Valor total de las devoluciones. rebajas y descuentos por ventas realizadas -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- //// art 4 /// -->
+        <record id="cabecera62" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab62')"></field> <!-- Base retención -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera63" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab63')"></field> <!--Tarifa aplicada -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera64" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab64')"></field> <!--MONTO RETENIDO ANUALMENTE -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+
+        <!-- //// art 6 /// -->
+        <record id="cabecera65" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab65')"></field> <!-- Base retención -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+        <record id="cabecera66" model="exo_config.cabecera">
+            <field name="head_id" eval="ref('cab66')"></field> <!--Tarifa aplicada -->
+            <field name="parameter_id" eval=""></field>
+            <field name="max_length">11</field>
+            <field name="mandatory" eval="1"></field>
+            <field name="default_value" eval="False"></field>
+            <field name="has_rule" eval="False"></field>
+        </record>
+    </data>
+</odoo>
