@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <record id="incoterm_DPU" model="account.incoterms">
-            <field name="code">DPU</field>
-            <field name="name">Entregada en Lugar Descargada</field>
-        </record>
-    </data>
-</odoo>
