@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_exo_params_exo_params_assistant,exo_params.exo_params_assistant,model_exo_params_parameter_pack,exo_params.group_exogena_assistant,1,1,1,1
-access_exo_params_line_assistant,exo_params.exo_params_line_assistant,model_exo_params_parameter_line,exo_params.group_exogena_assistant,1,1,1,1
