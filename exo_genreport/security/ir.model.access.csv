@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exo_genreport,exo_genreport.exo_genreport,model_exo_genreport_generador,exo_params.group_exogena_manager,1,1,1,1
+access_exo_genreport_conc_acc,exo_genreport.conc_acc,model_exo_genreport_conc_acc,exo_params.group_exogena_manager,1,1,1,1
+
+access_exo_genreport_assistant,exo_genreport.exo_genreport_assistant,model_exo_genreport_generador,exo_params.group_exogena_assistant,1,1,1,0
+access_exo_genreport_conc_acc_assistant,exo_genreport.conc_acc_assistant,model_exo_genreport_conc_acc,exo_params.group_exogena_assistant,1,1,0,1

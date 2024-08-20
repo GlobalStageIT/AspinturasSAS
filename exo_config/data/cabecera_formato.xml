@@ -1,0 +1,597 @@
+<odoo>
+    <!-- registros sobre categorias disponibles -->
+    <data>
+        <record id="cab1" model="exo_config.cabecera_formato">
+            <field name="description">CONCEPTO</field>
+            <field name="data_type">c</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="cab2" model="exo_config.cabecera_formato">
+            <field name="description">TIPO DE DOCUMENTO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">2</field>
+            <field name="sequence_art">2</field>
+        </record>
+        <record id="cab3" model="exo_config.cabecera_formato">
+            <field name="description">NÚMERO IDENTIFICACIÓN</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">3</field>
+            <field name="sequence_art">3</field>
+        </record>
+        <record id="cab4" model="exo_config.cabecera_formato">
+            <field name="description">DV</field>
+            <field name="data_type">n</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">4</field>
+        </record>
+        <record id="cab5" model="exo_config.cabecera_formato">
+            <field name="description">PRIMER APELLIDO DEL INFORMADO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">5</field>
+        </record>
+        <record id="cab6" model="exo_config.cabecera_formato">
+            <field name="description">SEGUNDO APELLIDO DEL INFORMADO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">6</field>
+        </record>
+        <record id="cab7" model="exo_config.cabecera_formato">
+            <field name="description">PRIMER NOMBRE DEL INFORMADO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">7</field>
+        </record>
+        <record id="cab8" model="exo_config.cabecera_formato">
+            <field name="description">OTROS NOMBRES DEL INFORMADO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">8</field>
+        </record>
+        <record id="cab9" model="exo_config.cabecera_formato">
+            <field name="description">RAZÓN SOCIAL DEL INFORMADO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">9</field>
+            <field name="sequence_art">4</field>
+        </record>
+        <record id="cab10" model="exo_config.cabecera_formato">
+            <field name="description">DIRECCIÓN</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">10</field>
+            <field name="sequence_art">5</field>
+        </record>
+        <record id="cab11" model="exo_config.cabecera_formato">
+            <field name="description">CÓDIGO DPTO</field>
+            <field name="data_type">n</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">11</field>
+            <field name="sequence_art">9</field>
+        </record>
+        <record id="cab12" model="exo_config.cabecera_formato">
+            <field name="description">CÓDIGO MCP.</field>
+            <field name="data_type">n</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">12</field>
+            <field name="sequence_art">8</field>
+        </record>
+        <record id="cab27" model="exo_config.cabecera_formato">
+            <field name="description">PAÍS DE RESIDENCIA O DOMICILIO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">12</field>
+        </record>
+        <record id="cab55" model="exo_config.cabecera_formato">
+            <field name="description">CÓDIGO DEL BENEFICIARIO</field>
+            <field name="data_type">n</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">12</field>
+        </record>
+        <record id="cab59" model="exo_config.cabecera_formato">
+            <field name="description">TELÉFONO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">10</field>
+            <field name="sequence_art">6</field>
+        </record>
+
+        <record id="cab13" model="exo_config.cabecera_formato">
+            <field name="description">VALOR ACUMULADO DEL PAGO O ABONO SUJETO A RETENCIÓN EN LA FUENTE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">13</field>
+        </record>
+        <record id="cab14" model="exo_config.cabecera_formato">
+            <field name="description">RETENCIÓN EN LA FUENTE QUE LE PRACTICARON</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">14</field>
+        </record>
+        <!-- /////////////////////////////////////////////////////////////////// -->
+        <record id="cab15" model="exo_config.cabecera_formato">
+            <field name="description">AÑO VIGENCIA</field>
+            <field name="data_type">o</field>
+            <field name="default_data"></field>
+            <field name="data_rule">yv</field>
+            <field name="sequence">1</field>
+            <field name="sequence_art">1</field>
+        </record>
+        <record id="cab16" model="exo_config.cabecera_formato">
+            <field name="description">CONCEPTO DE INGRESOS POR ACTIVIDADES NO SUJETAS DEDUCCIONES O EXENCIONES</field>
+            <field name="data_type">c</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">16</field>
+        </record>
+        <record id="cab17" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DE LAS ACTIVIDADES NO SUJETAS DEDUCCIONES Y EXENCIONES</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">17</field>
+        </record>
+
+        <!-- /////////////////////////////////////////////////////////////////// -->
+        <record id="cab18" model="exo_config.cabecera_formato">
+            <field name="description">CORREO ELECTRÓNICO</field>
+            <field name="data_type">a</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">18</field>
+            <field name="sequence_art">7</field>
+        </record>
+        <record id="cab19" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DEL PAGO O ABONO DE LA CUENTA</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">19</field>
+        </record>
+        <record id="cab19_2021" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DEL DESCUENTO TRIBUTARIO TOTAL DEL AÑO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">19</field>
+        </record>
+        <record id="cab20" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DEL DESCUENTO TRIBUTARIO</field>
+            <field name="data_type">v</field>
+            <field name="default_data">0</field>
+            <field name="data_rule">n</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- /////////////////////////////////////////////////////////////////// -->
+        <record id="cab21" model="exo_config.cabecera_formato">
+            <field name="description">PAGO O ABONO EN CUENTA DEDUCIBLE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">21</field>
+        </record>
+        <record id="cab22" model="exo_config.cabecera_formato">
+            <field name="description">PAGO O ABONO EN CUENTA NO DEDUCIBLE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">22</field>
+        </record>
+        <record id="cab23" model="exo_config.cabecera_formato">
+            <field name="description">IVA MAYOR VALOR DEL COSTO O GASTO DEDUCIBLE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">23</field>
+        </record>
+        <record id="cab24" model="exo_config.cabecera_formato">
+            <field name="description">IVA MAYOR VALOR DEL COSTO O GASTO NO DEDUCIBLE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">24</field>
+        </record>
+        <record id="cab25" model="exo_config.cabecera_formato">
+            <field name="description">RETENCIÓN EN LA FUENTE PRACTICADA RENTA CRÉDITO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">25</field>
+        </record>
+        <record id="cab26" model="exo_config.cabecera_formato">
+            <field name="description">RETENCIÓN EN LA FUENTE ASUMIDA RENTA</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">26</field>
+        </record>
+        <record id="cab67" model="exo_config.cabecera_formato">
+            <field name="description">RETENCIÓN EN LA FUENTE PRACTICA IVA REGIMÉN COMÚN</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">27</field>
+        </record>
+        <record id="cab68" model="exo_config.cabecera_formato">
+            <field name="description">RETENCIÓN EN LA FUENTE PRACTICA IVA NO DOMICILIADOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">27</field>
+        </record>
+
+        <!-- //////////////////1005//////////////////// -->
+         <record id="cab28" model="exo_config.cabecera_formato">
+            <field name="description">IMPUESTO DESCONTABLE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">28</field>
+        </record>
+        <record id="cab29" model="exo_config.cabecera_formato">
+            <field name="description">IVA RESULTANTE POR DEVOLUCIONES EN VENTAS ANULADAS. RESCINDIDAS O RESUELTAS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">29</field>
+        </record>
+
+        <!-- //////////////////1006//////////////////// -->
+         <record id="cab30" model="exo_config.cabecera_formato">
+            <field name="description">IMPUESTO GENERADO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">30</field>
+        </record>
+        <record id="cab31" model="exo_config.cabecera_formato">
+            <field name="description">IVA RECUPERADO EN DEVOLUCIONES EN COMPRAS ANULADAS. RESCINDIDAS O RESUELTAS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">31</field>
+        </record>
+        <record id="cab32" model="exo_config.cabecera_formato">
+            <field name="description">IMPUESTO AL CONSUMO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">32</field>
+        </record>
+
+        <!-- //////////////////1007//////////////////// -->
+         <record id="cab33" model="exo_config.cabecera_formato">
+            <field name="description">INGRESOS BRUTOS RECIBIDOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">33</field>
+        </record>
+        <record id="cab34" model="exo_config.cabecera_formato">
+            <field name="description">DEVOLUCIONES. REBAJAS Y DESCUENTOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">34</field>
+        </record>
+
+        <!-- //////////////////1008//////////////////// -->
+         <record id="cab35" model="exo_config.cabecera_formato">
+            <field name="description">SALDO CUENTAS POR COBRAR AL 31-12</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">35</field>
+        </record>
+
+        <!-- //////////////////1009//////////////////// -->
+         <record id="cab36" model="exo_config.cabecera_formato">
+            <field name="description">SALDO CUENTAS POR PAGAR AL 31-12</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">36</field>
+        </record>
+
+        <!-- //////////////////2276//////////////////// -->
+         <record id="cab37" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR SALARIOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">37</field>
+        </record>
+        <record id="cab38" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR EMOLUMENTOS ECLESIÁSTICOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule"></field>
+            <field name="sequence">38</field>
+        </record>
+        <record id="cab39" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR HONORARIOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">39</field>
+        </record>
+        <record id="cab40" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR SERVICIOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">40</field>
+        </record>
+        <record id="cab41" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR COMISIONES</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">41</field>
+        </record>
+        <record id="cab42" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR PRESTACIONES SOCIALES</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">42</field>
+        </record>
+        <record id="cab43" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR VIÁTICOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">43</field>
+        </record>
+        <record id="cab44" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR GASTOS DE REPRESENTACIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">44</field>
+        </record>
+        <record id="cab45" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR COMPENSACIONES TRABAJO ASOCIADO COOPERATIVO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">45</field>
+        </record>
+        <record id="cab46" model="exo_config.cabecera_formato">
+            <field name="description">OTROS PAGOS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">46</field>
+        </record>
+        <record id="cab47" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS REALIZADOS CON BONOS ELECTRÓNICOS O DE PAPÉL DE SERVICIO. CHEQUES. TRAJETAS. VALES. ETC</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">47</field>
+        </record>
+        <record id="cab48" model="exo_config.cabecera_formato">
+            <field name="description">CESANTÍAS E INTERESES DE CESANTÍAS EFECTIVAMENTE PAGADAS. CONSIGNADAS O RECONOCIDAS EN EL PERIODO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">48</field>
+        </record>
+        <record id="cab49" model="exo_config.cabecera_formato">
+            <field name="description">PENSIONES DE JUBILACIÓN. VEJEZ O INVALIDEZ</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">49</field>
+        </record>
+        <record id="cab50" model="exo_config.cabecera_formato">
+            <field name="description">APORTES OBLIGATORIOS POR SALUD</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">51</field>
+        </record>
+        <record id="cab51" model="exo_config.cabecera_formato">
+            <field name="description">APORTES OBLIGATORIOS A FONDOS DE PENSIONES Y SOLIDARIDAD PENSIONAL Y APORTES VOLUNTARIOS AL - RAIS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">52</field>
+        </record>
+        <record id="cab52" model="exo_config.cabecera_formato">
+            <field name="description">APORTES VOLUNTARIOS A FONDOS DE PENSIONES VOLUNTARIAS</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">53</field>
+        </record>
+        <record id="cab53" model="exo_config.cabecera_formato">
+            <field name="description">APORTES A CUENTAS AFC</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">54</field>
+        </record>
+        <record id="cab54" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DE LAS RETENCIONES EN LA FUENTE POR PAGOS DE RENTAS DE TRABAJO O PENSIONES</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">56</field>
+        </record>
+        <record id="cab69" model="exo_config.cabecera_formato">
+            <field name="description">TOTAL INGRESOS BRUTOS DE RENTAS DE TRABAJO O PENSIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">50</field>
+        </record>
+        <record id="cab70" model="exo_config.cabecera_formato">
+            <field name="description">APORTES A CUENTAS AVC</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">55</field>
+        </record>
+        <record id="cab71" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS REALIZADOS CON BONOS ELECTRÓNICOS O DE PAPEL DE SERVICIOS. CHEQUES. TARJETAS. VALES. ETC</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">57</field>
+        </record>
+        <record id="cab72" model="exo_config.cabecera_formato">
+            <field name="description">APOYOS ECONÓMICOS NO REEMBOLSABLES O CONDONADOS. ENTREGADOS POR EL ESTADO O FINANCIADOS CON RECURSOS PÚBLICOS. PARA FINANCIAR PROGRAMAS DE EDUCACIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">58</field>
+        </record>
+        <record id="cab73" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR ALIMENTACIÓN MAYORES A 41 UVT</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">59</field>
+        </record>
+        <record id="cab74" model="exo_config.cabecera_formato">
+            <field name="description">PAGOS POR ALIMENTACIÓN HASTA 41 UVT</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">60</field>
+        </record>
+        <record id="cab75" model="exo_config.cabecera_formato">
+            <field name="description">IDENTIFICACIÓN DEL FIDEICOMISO O CONTRATO</field>
+            <field name="data_type">v</field>
+            <field name="default_data">0</field>
+            <field name="data_rule">n</field>
+            <field name="sequence">61</field>
+        </record>
+        <record id="cab76" model="exo_config.cabecera_formato">
+            <field name="description">TIPO DE DOCUMENTO PARTICIPANTE EN CONTRATO DE COLABORACIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data">0</field>
+            <field name="data_rule">n</field>
+            <field name="sequence">62</field>
+        </record>
+        <record id="cab77" model="exo_config.cabecera_formato">
+            <field name="description">IDENTIFICACIÓN PARTICIPANTE EN CONTRATO COLABORACIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data">0</field>
+            <field name="data_rule">n</field>
+            <field name="sequence">63</field>
+        </record>
+
+        <!-- ////////////// -->
+        <record id="cab56" model="exo_config.cabecera_formato">
+            <field name="description">CONCEPTO DEL PAGO O ABONO EN CUENTA</field>
+            <field name="data_type">c</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">56</field>
+            <field name="sequence_art">56</field>
+        </record>
+        <record id="cab57" model="exo_config.cabecera_formato">
+            <field name="description">VALOR COMPRAS ANUAL</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">57</field>
+            <field name="sequence_art">57</field>
+        </record>
+        <record id="cab58" model="exo_config.cabecera_formato">
+            <field name="description">VALOR DEVOLUCIONES</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">58</field>
+            <field name="sequence_art">58</field>
+        </record>
+
+        <!-- //////Art 3//////// -->
+        <record id="cab60" model="exo_config.cabecera_formato">
+            <field name="description">Valor total del ingreso bruto</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">60</field>
+            <field name="sequence_art">60</field>
+        </record>
+        <record id="cab61" model="exo_config.cabecera_formato">
+            <field name="description">Valor total de las devoluciones. rebajas y descuentos por ventas realizadas</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">61</field>
+            <field name="sequence_art">61</field>
+        </record>
+
+        <!-- //////Art 4//////// -->
+        <record id="cab62" model="exo_config.cabecera_formato">
+            <field name="description">BASE RETENCIÓN</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">62</field>
+            <field name="sequence_art">62</field>
+
+        </record>
+        <record id="cab63" model="exo_config.cabecera_formato">
+            <field name="description">TARIFA APLICADA</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">63</field>
+            <field name="sequence_art">63</field>
+        </record>
+        <record id="cab64" model="exo_config.cabecera_formato">
+            <field name="description">MONTO RETENIDO ANUALMENTE</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">64</field>
+            <field name="sequence_art">64</field>
+        </record>
+
+        <!-- //////Art 6//////// -->
+        <record id="cab65" model="exo_config.cabecera_formato">
+            <field name="description">MONTO DEL PAGO</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">62</field>
+            <field name="sequence_art">62</field>
+        </record>
+        <record id="cab66" model="exo_config.cabecera_formato">
+            <field name="description">MONTO RETENCIÓN ANUAL</field>
+            <field name="data_type">v</field>
+            <field name="default_data"></field>
+            <field name="data_rule">n</field>
+            <field name="sequence">66</field>
+            <field name="sequence_art">66</field>
+        </record>
+    </data>
+</odoo>

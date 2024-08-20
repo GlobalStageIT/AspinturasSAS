@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <!-- form view: vista principal de selección de formatos -->
+        <record model="ir.ui.view" id="parameter_pack_form_view">
+            <field name="name">exo_params_parameter_pack.form</field>
+            <field name="model">exo_params.parameter_pack</field>
+            <field name="arch" type="xml">
+                <form string="Gestión generación reportes exógena">
+                    <sheet>
+                        <group>
+                            <field name="company_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Parámetros">
+                                <field name="parameters" widget="one2many_list">
+                                    <tree string="Parámetros" editable="top" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True}">
+                                        <field name="parameter" />
+                                        <field name="model" domain="[('model','=','res.partner')]"/>
+                                        <field name="field" domain="[('model','=','res.partner')]"/>
+                                        <field name="related_model" />
+                                        <field name="related_field"  domain="[('model','=',False)]"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--tree view o list view exo_params_parameter_pack-->
+        <record model="ir.ui.view" id="parameter_pack_tree_view">
+            <field name="name">exo_params_parameter_pack.tree</field>
+            <field name="model">exo_params.parameter_pack</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_id"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action list -->
+        <record model="ir.actions.act_window" id="exo_params.action_parameter_pack">
+              <field name="name">Parametrización reportes éxogena</field>
+              <field name="res_model">exo_params.parameter_pack</field>
+<!--              <field name="view_type">form</field>-->
+              <field name="view_mode">tree,form</field>
+<!--              <field name="groups">group_exogena_manager</field>-->
+              <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face">Configure la primera parametrización</p>
+              </field>
+        </record>
+        <!-- top level menu: no parent -->
+        <menuitem id="exo_parameters_main_menu_group" name="Información Exógena" parent="account.menu_finance_reports"/>
+        <menuitem id="exo_parameters_main_menu" name="Parametrización Reportes Exógena" parent="exo_parameters_main_menu_group" action="exo_params.action_parameter_pack"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="group_exogena_assistant" model="res.groups">
+            <field name="name">Reportes Éxogena Assistant Group</field>
+        </record>
+        <record id="group_exogena_manager" model="res.groups">
+            <field name="name">Reportes Éxogena Manager Group</field>
+            <field name="implied_ids" eval="[(4, ref('group_exogena_assistant'))]"/>
+        </record>
+
+    </data>
+</odoo>
