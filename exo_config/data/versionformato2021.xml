@@ -1,0 +1,451 @@
+<odoo>
+    <!-- registros sobre modulo de formatos -->
+    <!-- En campo categorias se guarda la relacion many2many: entre corchetes van los ids relacionados de categorias
+            ej: <field name="categorias" eval="[(6, 0, [(1),(2),(3)])]"></field>
+    -->
+    <data>
+        <record id="dian_2021_1001_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1001')"></field><!-- Formato 1001 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0,[ref('dian_conc_5002_1'), ref('dian_conc_5003_1'), ref('dian_conc_5004_1'), ref('dian_conc_5005_1'),
+                                                     ref('dian_conc_5006_1'), ref('dian_conc_5007_1'), ref('dian_conc_5008_1'), ref('dian_conc_5010_1'),
+                                                     ref('dian_conc_5011_1'), ref('dian_conc_5012_1'), ref('dian_conc_5013_1'), ref('dian_conc_5014_1'),
+                                                     ref('dian_conc_5015_1'), ref('dian_conc_5016_1'), ref('dian_conc_5018_1'), ref('dian_conc_5019_1'),
+                                                     ref('dian_conc_5020_1'), ref('dian_conc_5023_1'), ref('dian_conc_5024_1'), ref('dian_conc_5025_1'),
+                                                     ref('dian_conc_5026_1'), ref('dian_conc_5027_1'), ref('dian_conc_5028_1'), ref('dian_conc_5029_1'),
+                                                     ref('dian_conc_5030_1'), ref('dian_conc_5031_1'), ref('dian_conc_5032_1'), ref('dian_conc_5033_1'),
+                                                     ref('dian_conc_5034_1'), ref('dian_conc_5035_1'), ref('dian_conc_5044_1'), ref('dian_conc_5045_1'),
+                                                     ref('dian_conc_5046_1'), ref('dian_conc_5047_1'), ref('dian_conc_5048_1'), ref('dian_conc_5053_1'),
+                                                     ref('dian_conc_5054_1'), ref('dian_conc_5055_1'), ref('dian_conc_5056_1'), ref('dian_conc_5058_1'),
+                                                     ref('dian_conc_5059_1'), ref('dian_conc_5060_1'), ref('dian_conc_5061_1'), ref('dian_conc_5063_1'),
+                                                     ref('dian_conc_5064_1'), ref('dian_conc_5065_1'), ref('dian_conc_5066_1'), ref('dian_conc_5067_1'),
+                                                     ref('dian_conc_5068_1'), ref('dian_conc_5069_1'), ref('dian_conc_5070_1'), ref('dian_conc_5071_1'),
+                                                     ref('dian_conc_5072_1'), ref('dian_conc_5073_1'), ref('dian_conc_5074_1'), ref('dian_conc_5075_1'),
+                                                     ref('dian_conc_5076_1'), ref('dian_conc_5078_1'), ref('dian_conc_5079_1'), ref('dian_conc_5080_1'),
+                                                     ref('dian_conc_5081_1'), ref('dian_conc_5082_1'), ref('dian_conc_5083_1'), ref('dian_conc_5084_1'),
+                                                     ref('dian_conc_5085_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera27'),
+                ref('cabecera21'),
+                ref('cabecera22'),
+                ref('cabecera23'),
+                ref('cabecera24'),
+                ref('cabecera25'),
+                ref('cabecera26'),
+                ref('cabecera67'),
+                ref('cabecera68')])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ////////////////////////////////////////////////////////////////////////////// -->
+        <record id="dian_2021_1003_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1003')"></field><!-- Formato 1003 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0,[ref('dian_conc_1301_1'),ref('dian_conc_1302_1'),
+                                                     ref('dian_conc_1303_1'),ref('dian_conc_1304_1'),
+                                                     ref('dian_conc_1305_1'),ref('dian_conc_1306_1'),
+                                                     ref('dian_conc_1307_1'),ref('dian_conc_1308_1'),
+                                                     ref('dian_conc_1309_1'),ref('dian_conc_1310_1'),
+                                                     ref('dian_conc_1311_1'),ref('dian_conc_1312_1'),
+                                                     ref('dian_conc_1313_1'),ref('dian_conc_1314_1'),
+                                                     ref('dian_conc_1320_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera4'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera13'),
+                ref('cabecera14')])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+        <!-- ////////////////////////////////////////////////////////////////////////////// -->
+        <record id="dian_2021_1004_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1004')"></field><!-- Formato 1004 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0,[ref('dian_conc_8303_1'),ref('dian_conc_8305_1'),
+                             ref('dian_conc_8316_1'),ref('dian_conc_8317_1'),ref('dian_conc_8318_1'),
+                             ref('dian_conc_8319_1'),ref('dian_conc_8320_1'),ref('dian_conc_8321_1'),
+                             ref('dian_conc_8322_1'),ref('dian_conc_8323_1'),ref('dian_conc_8324_1'),
+                             ref('dian_conc_8325_1'),ref('dian_conc_8326_1'),ref('dian_conc_8327_1'),
+                             ref('dian_conc_8328_1'),ref('dian_conc_8329_1'),ref('dian_conc_8330_1'),
+                             ref('dian_conc_8331_1'),ref('dian_conc_8332_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera27'),
+                ref('cabecera18'),
+                ref('cabecera19_2021'),
+                ref('cabecera20')])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ////////////////////////////////////////////////////////////////////////////// -->
+        <record id="dian_2021_1005_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1005')"></field><!-- Formato 1005 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0, [])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera4'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera28'),
+                ref('cabecera29')
+                ])]"></field>
+            <field name="scenario">c</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ///////////////////////////////////1006/////////////////////////////////////////// -->
+        <record id="dian_2021_1006_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1006')"></field><!-- Formato 1006 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0, [])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera4'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera30'),
+                ref('cabecera31'),
+                ref('cabecera32')
+                ])]"></field>
+            <field name="scenario">c</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ///////////////////////////////////1007/////////////////////////////////////////// -->
+        <record id="dian_2021_1007_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1007')"></field><!-- Formato 1007 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0, [
+                ref('dian_conc_4001_1'),
+                ref('dian_conc_4002_1'),
+                ref('dian_conc_4003_1'),
+                ref('dian_conc_4004_1'),
+                ref('dian_conc_4005_1'),
+                ref('dian_conc_4006_1'),
+                ref('dian_conc_4007_1'),
+                ref('dian_conc_4008_1'),
+                ref('dian_conc_4009_1'),
+                ref('dian_conc_4011_1'),
+                ref('dian_conc_4012_1'),
+                ref('dian_conc_4013_1'),
+                ref('dian_conc_4014_1'),
+                ref('dian_conc_4015_1'),
+                ref('dian_conc_4016_1'),
+                ref('dian_conc_4017_1')
+                ])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera27'),
+                ref('cabecera33'),
+                ref('cabecera34')
+                ])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ///////////////////////////////////1008/////////////////////////////////////////// -->
+        <record id="dian_2021_1008_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1008')"></field><!-- Formato 1008 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0,[ref('dian_conc_1315_1'),ref('dian_conc_1316_1'),
+            ref('dian_conc_1317_1'),ref('dian_conc_1318_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera4'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera27'),
+                ref('cabecera35')
+                ])]"></field>
+            <field name="scenario">b</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ///////////////////////////////////1009/////////////////////////////////////////// -->
+        <record id="dian_2021_1009_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_1009')"></field><!-- Formato 1009 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0,[ref('dian_conc_2201_1'),
+            ref('dian_conc_2202_1'),ref('dian_conc_2203_1'),ref('dian_conc_2204_1'),
+            ref('dian_conc_2205_1'),ref('dian_conc_2206_1'),ref('dian_conc_2207_1'),
+            ref('dian_conc_2208_1'),ref('dian_conc_2209_1'),ref('dian_conc_2211_1'),
+            ref('dian_conc_2212_1'),ref('dian_conc_2213_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera4'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera27'),
+                ref('cabecera36')
+                ])]"></field>
+            <field name="scenario">b</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <!-- ///////////////////////////////////2276/////////////////////////////////////////// -->
+        <record id="dian_2021_2276_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('dian_2276')"></field><!-- Formato 2276 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6, 0, [ref('dian_entidad_1_1'),
+            ref('dian_entidad_2_1'),ref('dian_entidad_3_1'),ref('dian_entidad_4_1'),
+            ref('dian_entidad_5_1'),ref('dian_entidad_6_1'),ref('dian_entidad_7_1'),
+            ref('dian_entidad_8_1')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera1'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera5'),
+                ref('cabecera6'),
+                ref('cabecera7'),
+                ref('cabecera8'),
+                ref('cabecera10'),
+                ref('cabecera11'),
+                ref('cabecera12'),
+                ref('cabecera27'),
+                ref('cabecera37'),
+                ref('cabecera38'),
+                ref('cabecera39'),
+                ref('cabecera40'),
+                ref('cabecera41'),
+                ref('cabecera42'),
+                ref('cabecera43'),
+                ref('cabecera44'),
+                ref('cabecera45'),
+                ref('cabecera46'),
+                ref('cabecera48'),
+                ref('cabecera49'),
+                ref('cabecera69'),
+                ref('cabecera50'),
+                ref('cabecera51'),
+                ref('cabecera52'),
+                ref('cabecera53'),
+                ref('cabecera70'),
+                ref('cabecera54'),
+                ref('cabecera71'),
+                ref('cabecera72'),
+                ref('cabecera73'),
+                ref('cabecera74'),
+                ref('cabecera75'),
+                ref('cabecera76'),
+                ref('cabecera77')
+                ])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+
+        <!-- dist_conc_v_nroversion DIAN ciudad_consecutivo -->
+        <record id="dist_2021_11001_v_1" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('distrital_1')"></field><!-- Articulo 1 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6,0,[ref('dist_conc_11001_1'),
+            ref('dist_conc_11001_2'),ref('dist_conc_11001_3'),ref('dist_conc_11001_5'),
+            ref('dist_conc_11001_6'),ref('dist_conc_11001_7'),ref('dist_conc_11001_8'),
+            ref('dist_conc_11001_9'),ref('dist_conc_11001_10'),ref('dist_conc_11001_11'),
+            ref('dist_conc_11001_12'),ref('dist_conc_11001_13'),ref('dist_conc_11001_14'),
+            ref('dist_conc_11001_15'),ref('dist_conc_11001_16')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera15'),
+                ref('cabecera16'),
+                ref('cabecera17')])]"></field>
+            <field name="scenario">b</field>
+            <field name="has_parameters" eval="False"></field>
+        </record>
+
+        <record id="dist_2021_11001_v_2" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('distrital_2')"></field><!-- Articulo 2 -->
+            <field name="categories_ids" eval="[(6, 0, [])]"></field>
+            <field name="concepts_ids" eval="[(6,0,[ref('dist_conc_11001_20'),
+            ref('dist_conc_11001_21'),ref('dist_conc_11001_22'),
+            ref('dist_conc_11001_23')])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera15'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera59'),
+                ref('cabecera18'),
+                ref('cabecera12'),
+                ref('cabecera11'),
+                ref('cabecera56'),
+                ref('cabecera57'),
+                ref('cabecera58')
+                ])]"></field>
+            <field name="scenario">a</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <record id="dist_2021_11001_v_3" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('distrital_3')"></field><!-- Articulo 3 -->
+            <field name="categories_ids" eval="[(6, 0,[])]"></field>
+            <field name="concepts_ids" eval="[(6,0,[])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera15'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera59'),
+                ref('cabecera18'),
+                ref('cabecera12'),
+                ref('cabecera11'),
+                ref('cabecera60'),
+                ref('cabecera61')
+                ])]"></field>
+            <field name="scenario">c</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <record id="dist_2021_11001_v_4" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('distrital_4')"></field><!-- Articulo 4 -->
+            <field name="categories_ids" eval="[(6, 0,[])]"></field>
+            <field name="concepts_ids" eval="[(6,0,[])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera15'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera59'),
+                ref('cabecera18'),
+                ref('cabecera12'),
+                ref('cabecera11'),
+                ref('cabecera62'),
+                ref('cabecera63'),
+                ref('cabecera64')
+                ])]"></field>
+            <field name="scenario">c</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+
+        <record id="dist_2021_11001_v_6" model="exo_config.versionformato">
+            <field name="year">2021</field>
+            <field name="version">1</field>
+            <field name="presentation_type">1</field>
+            <field name="format_id" eval="ref('distrital_6')"></field><!-- Articulo 6 -->
+            <field name="categories_ids" eval="[(6, 0,[])]"></field>
+            <field name="concepts_ids" eval="[(6,0,[])]"></field>
+            <field name="headers_ids" eval="[(6,0,[
+                ref('cabecera15'),
+                ref('cabecera2'),
+                ref('cabecera3'),
+                ref('cabecera9'),
+                ref('cabecera10'),
+                ref('cabecera59'),
+                ref('cabecera18'),
+                ref('cabecera12'),
+                ref('cabecera11'),
+                ref('cabecera63'),
+                ref('cabecera65'),
+                ref('cabecera66')
+                ])]"></field>
+            <field name="scenario">c</field>
+            <field name="has_parameters" eval="True"></field>
+        </record>
+    </data>
+</odoo>

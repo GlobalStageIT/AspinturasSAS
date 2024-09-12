@@ -9,12 +9,11 @@
         Módulo de parametrización de información Exógena
     """,
 
-    'author': "globalstageit",
-    'website': "https://www.globalstageit.com",
-
+    'author': "Servisoft Latam",
+    
 
     'category': 'Uncategorized',
-    'version': '14.2.0.0.2',
+    'version': '15.2.0.0.2',
     'images': ['static/description/icon.png'],
 
     'depends': ['base','account_accountant'],
