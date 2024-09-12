@@ -9,11 +9,11 @@
         Módulo de parametrización de información Exógena
     """,
 
-    'author': "Servisoft Latam",
-    
+    'author': "servisoft latam",
+    'website': "https://www.servisoftlatam.com",
 
     'category': 'Uncategorized',
-    'version': '15.2.0.0.2',
+    'version': '14.2.0.0.2',
     'images': ['static/description/icon.png'],
 
     'depends': ['base','account_accountant'],
