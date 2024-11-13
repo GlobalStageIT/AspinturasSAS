@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-inherit="hr_holidays.dashboard.calendar.button" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[@class='btn btn-primary btn-time-off']" position="after">
+            <button class="btn btn-primary btn-vacation-novelty" type="button">
+                <t t-esc="vacation_novelty"/>
+            </button>
+        </xpath>
+    </t>
+</templates>
+

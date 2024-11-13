@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="loan_type_ahorro_1" model="hr.loan.type">
+            <field name="name">Ahorro</field>
+            <field name="novelty_type_id" ref="lt_hr_novelty.novelty_type_libranzas_1"/>
+            <field name="code">DESC_AHOR</field>
+        </record>
+
+        <record id="loan_type_prestamo_2" model="hr.loan.type">
+            <field name="name">Préstamo</field>
+            <field name="novelty_type_id" ref="lt_hr_novelty.novelty_type_libranzas_2"/>
+            <field name="code">DESC_PRESTAMO</field>
+        </record>
+
+        <record id="loan_type_libranza_3" model="hr.loan.type">
+            <field name="name">Libranza</field>
+            <field name="novelty_type_id" ref="lt_hr_novelty.novelty_type_libranzas_3"/>
+            <field name="code">DESC_LIBR</field>
+        </record>
+
+        <record id="loan_type_embargo_3" model="hr.loan.type">
+            <field name="name">Embargo</field>
+            <field name="novelty_type_id" ref="lt_hr_novelty.novelty_type_libranzas_5"/>
+            <field name="code">DESC_EMBA</field>
+        </record>
+
+    </data>
+</odoo>

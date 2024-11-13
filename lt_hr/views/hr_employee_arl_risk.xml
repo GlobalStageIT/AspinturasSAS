@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_employee_arl_risk_filter" model="ir.ui.view">
+            <field name="name">hr.employee.arl.risk.filter</field>
+            <field name="model">hr.employee.arl.risk</field>
+            <field name="arch" type="xml">
+                <search string="Clases de Riesgo">
+                    <field name="name" string="Clase"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_employee_arl_risk_form" model="ir.ui.view">
+            <field name="name">hr.employee.arl.risk.form</field>
+            <field name="model">hr.employee.arl.risk</field>
+            <field name="arch" type="xml">
+                <form string="Tipo de Riesgo">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                            </group>
+                            <group>
+                                <field name="contribution_percentage"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_employee_arl_risk_tree" model="ir.ui.view">
+            <field name="name">hr.employee.arl.risk.tree</field>
+            <field name="model">hr.employee.arl.risk</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos de riesgos">
+                    <field name="name"/>
+                    <field name="contribution_percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_employee_arl_risk" model="ir.actions.act_window">
+            <field name="name">Tipos de Riesgos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.arl.risk</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="lt_hr.hr_employee_arl_risk_filter"/>
+        </record>
+
+        <menuitem
+                id="menu_hr_employee_arl_risk"
+                action="action_hr_employee_arl_risk"
+                parent="hr.menu_human_resources_configuration"
+                sequence="3"
+        />
+
+    </data>
+</odoo>

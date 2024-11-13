@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_lt_hr" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.lt_hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="om_hr_payroll.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='om_hr_payroll_account']/div" position="after">
+                <div class="row mt16 o_settings_container">
+                    <div class="o_setting_right_pane">
+                        <label string="Liquidation Journal" for="liquidation_journal_id"/>
+                        <div class="text-muted">
+                            Selects the journal for posting payrolls
+                        </div>
+                        <field name="liquidation_journal_id"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

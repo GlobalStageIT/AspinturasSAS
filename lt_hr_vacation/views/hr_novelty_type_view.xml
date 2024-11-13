@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_novelty_type_form_lt_hr_vacation" model="ir.ui.view">
+        <field name="name">hr.novelty.type.form.lt_hr_vacation</field>
+        <field name="model">hr.novelty.type</field>
+        <field name="inherit_id" ref="lt_hr_novelty.view_hr_novelty_type_form"/>
+        <field name="arch" type="xml">
+             <field name="apply_quantity" position="after">
+                 <field name="is_vacation_compensated" groups="base.group_no_one"/>
+                 <field name="is_ns_vacation_compensated" groups="base.group_no_one"/>
+             </field>
+        </field>
+    </record>
+</odoo>

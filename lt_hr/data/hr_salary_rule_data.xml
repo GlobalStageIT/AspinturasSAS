@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="rule_1" model="hr.salary.rule">
+            <field name="name">SALARIO BASICO</field>
+            <field name="category_id" ref="CALCULOS"/>
+            <field name="code">BASIC</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="1"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = contract.wage</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = contract.wage / 30
+result_qty = 30
+            </field>
+        </record>
+
+        <record id="rule_2" model="hr.salary.rule">
+            <field name="name">COSTO TOTAL</field>
+            <field name="category_id" ref="CALCULOS"/>
+            <field name="code">COSTO_TOTAL</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="59"/>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=categories.BASIC + categories.NO_SALARIAL + categories.PROVISIONES_PREST + categories.PROVISIONES_SSI + categories.LIQUIDACION</field>
+        </record>
+
+        <record id="rule_3" model="hr.salary.rule">
+            <field name="name">Net Salary</field>
+            <field name="category_id" ref="NETO"/>
+            <field name="code">NETO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="47"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=categories.BASIC + categories.NO_SALARIAL + categories.DED + categories.OTROS_DESEMBOLSOS + categories.LIQUIDACION</field>
+        </record>
+
+        <record id="rule_7" model="hr.salary.rule">
+            <field name="name">UVT</field>
+            <field name="category_id" ref="CONSTANTES"/>
+            <field name="code">UVT</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="19"/>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = self.get_parameter('UVT')</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = self.get_parameter('UVT') / 30
+result_qty = 30
+            </field>
+        </record>
+
+        <record id="rule_8" model="hr.salary.rule">
+            <field name="name">SALARIO MINIMO</field>
+            <field name="category_id" ref="CONSTANTES"/>
+            <field name="code">SALARIOMINIMO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="2"/>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = self.get_parameter('SMMLV')</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = self.get_parameter('SMMLV') / 30
+result_qty = 30
+            </field>
+        </record>
+
+        <record id="rule_9" model="hr.salary.rule">
+            <field name="name">DIA DE RETIRO</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIA_DE_RETIRO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="3"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIA_DE_RETIRO.number_of_days&gt;0 if worked_days.DIA_DE_RETIRO else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIA_DE_RETIRO.number_of_days</field>
+        </record>
+
+        <record id="rule_10" model="hr.salary.rule">
+            <field name="name">DIA DE INGRESO</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIA_DE_INGRESO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="4"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIA_DE_INGRESO.number_of_days&gt;0 if worked_days.DIA_DE_INGRESO else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIA_DE_INGRESO.number_of_days</field>
+        </record>
+
+        <record id="rule_11" model="hr.salary.rule">
+            <field name="name">DIAS INCAP GEN</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_IGEN</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="5"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_IGEN.number_of_days&gt;0 if worked_days.DIAS_IGEN else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_IGEN.number_of_days</field>
+        </record>
+
+        <record id="rule_12" model="hr.salary.rule">
+            <field name="name">DIAS INCAP LAB</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_INCLAB</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="6"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_INCLAB.number_of_days&gt;0 if worked_days.DIAS_INCLAB else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_INCLAB.number_of_days</field>
+        </record>
+
+        <record id="rule_13" model="hr.salary.rule">
+            <field name="name">DIAS VACACIONES</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_VACACIONES</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="7"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_VACACIONES.number_of_days&gt;0 if worked_days.DIAS_VACACIONES else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_VACACIONES.number_of_days</field>
+        </record>
+
+        <record id="rule_14" model="hr.salary.rule">
+            <field name="name">DIAS LICENCIA MAT</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_LIC_MAT</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="8"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=inputs.DIAS_LIC_MAT.amount&gt;0 if inputs.DIAS_LIC_MAT else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=inputs.DIAS_LIC_MAT.amount</field>
+        </record>
+
+        <record id="rule_15" model="hr.salary.rule">
+            <field name="name">DIAS LICENCIA REM</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_LIC_REM</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="9"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_LIC_REM.number_of_days&gt;0 if worked_days.DIAS_LIC_REM else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_LIC_REM.number_of_days</field>
+        </record>
+
+        <record id="rule_16" model="hr.salary.rule">
+            <field name="name">DIAS LICENCIA NO REM</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_LIC_NO_REM</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="10"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_LIC_NO_REM.number_of_days&gt;0 if worked_days.DIAS_LIC_NO_REM else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_LIC_NO_REM.number_of_days</field>
+        </record>
+
+        <record id="rule_17" model="hr.salary.rule">
+            <field name="name">DIAS AUSENCIA NO JUST</field>
+            <field name="category_id" ref="DIAS NOVEDADES"/>
+            <field name="code">DIAS_AUSEN_NO_JUST</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="11"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_AUSEN_NO_JUST.number_of_days&gt;0 if worked_days.DIAS_AUSEN_NO_JUST else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.DIAS_AUSEN_NO_JUST.number_of_days</field>
+        </record>
+
+        <record id="rule_18" model="hr.salary.rule">
+            <field name="name">DIAS NOMINA</field>
+            <field name="category_id" ref="CALCULOS"/>
+            <field name="code">DIAS_NOMINA</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="14"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = self.get_payslip_days()</field>
+        </record>
+
+        <record id="rule_19" model="hr.salary.rule">
+            <field name="name">DIAS SUELDO</field>
+            <field name="category_id" ref="CALCULOS"/>
+            <field name="code">DIAS_SUELDO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="12"/>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result=worked_days.WORK100.number_of_days &gt; 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=worked_days.WORK100.number_of_days</field>
+        </record>
+
+        <record id="rule_21" model="hr.salary.rule">
+            <field name="name">SALARIO NO PREST</field>
+            <field name="category_id" ref="NO SALARIAL"/>
+            <field name="code">SALARIO_NOPREST</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="16"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result=(contract.bearing_aid)&gt;0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result=(contract.bearing_aid)/30 or 0
+result_qty = DIAS_NOMINA
+            </field>
+        </record>
+
+        <record id="rule_22" model="hr.salary.rule">
+            <field name="name">SUELDO</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">SUELDO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="18"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = BASIC /30
+result_qty = DIAS_SUELDO
+            </field>
+        </record>
+
+        <record id="rule_23" model="hr.salary.rule">
+            <field name="name">INCAPACIDAD GEN</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">ING_IGEN</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="20"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_IGEN.number_of_days&gt;0 if worked_days.DIAS_IGEN else False </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+salario_incap=BASIC * 2/3
+if worked_days.DIAS_IGEN.number_of_days &gt; 2:
+    if salario_incap &lt; SALARIOMINIMO:
+        salario_incap= SALARIOMINIMO
+    result = salario_incap / 30
+    result_qty = worked_days.DIAS_IGEN.number_of_days - 2
+else:
+    result = 0
+    result_qty = 0
+            </field>
+        </record>
+
+        <record id="rule_24" model="hr.salary.rule">
+            <field name="name">INCAPACIDAD LAB</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">ING_INCLAB</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="21"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_INCLAB.number_of_days&gt;0 if worked_days.DIAS_INCLAB else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = BASIC/30
+result_qty = worked_days.DIAS_INCLAB.number_of_days
+            </field>
+        </record>
+
+        <record id="rule_25" model="hr.salary.rule">
+            <field name="name">VACACIONES</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">ING_VACACIONES</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="23"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=DIAS_VACACIONES&gt;0 if rules.DIAS_VACACIONES else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = BASIC/30
+result_qty = DIAS_VACACIONES
+            </field>
+        </record>
+
+        <record id="rule_26" model="hr.salary.rule">
+            <field name="name">LICENCIA REM</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">ING_LIC_REM</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="25"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_LIC_REM.number_of_days&gt;0 if worked_days.DIAS_LIC_REM else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = BASIC /30
+result_qty = worked_days.DIAS_LIC_REM.number_of_days
+            </field>
+        </record>
+
+        <record id="rule_27" model="hr.salary.rule">
+            <field name="name">LICENCIA MAT</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">ING_LIC_MAT</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="27"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=worked_days.DIAS_LIC_MAT.number_of_days&gt;0 if worked_days.DIAS_LIC_MAT else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = BASIC /30
+result_qty = worked_days.DIAS_LIC_MAT.number_of_days
+            </field>
+        </record>
+
+        <record id="rule_28" model="hr.salary.rule">
+            <field name="name">COMISIONES - INCENTIVOS</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">COMISIONES</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="29"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=inputs.COMISIONES.amount&gt;0 if inputs.COMISIONES else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.COMISIONES.amount or 0</field>
+        </record>
+
+        <record id="rule_29" model="hr.salary.rule">
+            <field name="name">H EXTRAS Y RECARGOS</field>
+            <field name="category_id" ref="BÁSICO"/>
+            <field name="code">H_EXTRAS</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="32"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=inputs.HED or inputs.HEN or inputs.HEDF or inputs.HENF or inputs.HRN or inputs.HRF or inputs.HRFN</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+total_qty = self.get_qty_earn('HED') + self.get_qty_earn('HEN') + self.get_qty_earn('HEDF') + self.get_qty_earn('HENF') + self.get_qty_earn('HRN') + self.get_qty_earn('HRF') + self.get_qty_earn('HRFN')
+
+total_HED = inputs.HED.amount if inputs.HED else 0
+total_HEN = inputs.HEN.amount if inputs.HEN else 0
+total_HEDF = inputs.HEDF.amount if inputs.HEDF else 0
+total_HENF = inputs.HENF.amount if inputs.HENF else 0
+total_HRN = inputs.HRN.amount if inputs.HRN else 0
+total_HRF = inputs.HRF.amount if inputs.HRF else 0
+total_HRFN = inputs.HRFN.amount if inputs.HRFN else 0
+
+result = (total_HED + total_HEN + total_HEDF + total_HENF + total_HRN + total_HRF + total_HRFN) / total_qty
+result_qty = total_qty
+            </field>
+        </record>
+
+        <record id="rule_30" model="hr.salary.rule">
+            <field name="name">PRIMA SEMESTRAL</field>
+            <field name="category_id" ref="NO SALARIAL"/>
+            <field name="code">PRIMA_SEMESTRAL</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="31"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.PAGO_PRIMA_SEMESTRAL.amount or 0</field>
+        </record>
+
+        <record id="rule_31" model="hr.salary.rule">
+            <field name="name">BASE SALARIAL</field>
+            <field name="category_id" ref="BASE SALARIAL"/>
+            <field name="code">BASE_SAL</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="34"/>
+            <field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+sal_noprest=0
+if rules.SALARIO_NOPREST or rules.PAGO_NO_SALARIAL or contract.transport_aid:
+    sal_noprest = SALARIO_NOPREST + PAGO_NO_SALARIAL + contract.transport_aid
+base_mas_bene = categories.BASIC + sal_noprest
+base_40 = (base_mas_bene)*0.4
+if sal_noprest &gt; base_40:
+    result = categories.BASIC + sal_noprest - base_40
+else:
+    result=categories.BASIC
+            </field>
+        </record>
+
+        <record id="rule_32" model="hr.salary.rule">
+            <field name="name">REEMBOLSO</field>
+            <field name="category_id" ref="NO SALARIAL"/>
+            <field name="code">REEMBOLSO</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="17"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.REEMBOLSO.amount &gt;0 if inputs.REEMBOLSO else False</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.REEMBOLSO.amount or 0</field>
+        </record>
+
+        <record id="rule_33" model="hr.salary.rule">
+            <field name="name">PAGO NO SALARIAL</field>
+            <field name="category_id" ref="NO SALARIAL"/>
+            <field name="code">PAGO_NO_SALARIAL</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="16"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result=(contract.welfare_aid + contract.food_aid + contract.hra + contract.da + contract.travel_allowance + contract.meal_allowance + contract.medical_allowance + contract.other_allowance)&gt;0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result=(contract.welfare_aid + contract.food_aid + contract.hra + contract.da + contract.travel_allowance + contract.meal_allowance + contract.medical_allowance + contract.other_allowance)/30 or 0
+result_qty = DIAS_NOMINA
+            </field>
+        </record>
+
+        <record id="rule_34" model="hr.salary.rule">
+            <field name="name">AUXILIO TRANSP</field>
+            <field name="category_id" ref="NO SALARIAL"/>
+            <field name="code">AUXTRANSPVIG</field>
+            <field name="active" eval="False"/>
+            <field name="sequence" eval="16"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">res = BASIC&lt;=2*SALARIOMINIMO</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result_qty=DIAS_SUELDO
+auxilio_transp=self.get_parameter('AUXTRA')
+result=auxilio_transp/30
+            </field>
+        </record>
+
+        <record id="rule_35" model="hr.salary.rule">
+            <field name="name">DESC SALUD 4%</field>
+            <field name="category_id" ref="DEDUCCIÓN"/>
+            <field name="code">DESC_SALUD</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="41"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.04
+    else:
+        result = base_aportes*0.7*0.04
+else:
+    if BASE_SAL&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =base_aportes*0.04
+            </field>
+        </record>
+
+        <record id="rule_36" model="hr.salary.rule">
+            <field name="name">DESC PENSION 4%</field>
+            <field name="category_id" ref="DEDUCCIÓN"/>
+            <field name="code">DESC_PENSION</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="42"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">result=contract.state=='open'</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.04
+    else:
+        result = base_aportes*0.7*0.04
+else:
+    if BASE_SAL&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result = base_aportes*0.04
+            </field>
+        </record>
+
+        <record id="rule_37" model="hr.salary.rule">
+            <field name="name">FONDO SOLIDARIDAD</field>
+            <field name="category_id" ref="DEDUCCIÓN"/>
+            <field name="code">FONDO_SOL</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="43"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result=categories.BASIC&gt;=4*SALARIOMINIMO</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+result=0
+if contract.integral_salary:
+    if BASE_SAL*0.7 &gt;=20*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.02
+    elif BASE_SAL*0.7 &gt;=19*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.018
+    elif BASE_SAL*0.7 &gt;=18*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.016
+    elif BASE_SAL*0.7 &gt;=17*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.014
+    elif BASE_SAL*0.7 &gt;=16*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.012
+    elif BASE_SAL*0.7 &gt;=4*SALARIOMINIMO:
+        result=BASE_SAL*0.7*0.01
+else:
+    if BASE_SAL &gt;=20*SALARIOMINIMO:
+        result=BASE_SAL*0.02
+    elif BASE_SAL &gt;=19*SALARIOMINIMO:
+        result=BASE_SAL*0.018
+    elif BASE_SAL &gt;=18*SALARIOMINIMO:
+        result=BASE_SAL*0.016
+    elif BASE_SAL &gt;=17*SALARIOMINIMO:
+        result=BASE_SAL*0.014
+    elif BASE_SAL &gt;=16*SALARIOMINIMO:
+        result=BASE_SAL*0.012
+    elif BASE_SAL &gt;=4*SALARIOMINIMO:
+        result=BASE_SAL*0.01
+            </field>
+        </record>
+
+        <record id="rule_38" model="hr.salary.rule">
+            <field name="name">RETEFUENTE</field>
+            <field name="category_id" ref="DEDUCCIÓN"/>
+            <field name="code">RETEFUENTE_CALC</field>
+            <field name="active" eval="True"/>
+            <field name="sequence" eval="44"/>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">#ESTA REGLA SOLO SE CALCULA SI EL INPUT DE RETEFUENTE MANUAL ESTÁ EN $0, DE MANERA QUE SEAN EXCLUYENTES
+                result=(categories.BASIC + categories.NO_SALARIAL)*0.75 &gt; 95*UVT</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DÉBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+
+# -------DEFINIR INPUTS O CAMPO ORIGEN--------------------------
+incentivo_vivienda = contract.rtefte_incentivo_vivienda if contract.rtefte_incentivo_vivienda else 0  # FILA 10 se crea en el contrato
+aportes_vol_pens_empleador = contract.rtefte_aportes_vol_pens_empleador if contract.rtefte_aportes_vol_pens_empleador else 0  # FILA 13 se crea en el contrato
+aportes_vol_pensi_obl = inputs.RTFNTE_AP_VOL_PENS_OBL.amount if inputs.RTFNTE_AP_VOL_PENS_OBL else 0  # FILA 20
+otros_ing_no_rent = inputs.RTFNTE_OTR_ING_NO_RENT.amount if inputs.RTFNTE_OTR_ING_NO_RENT else 0 # FILA 21
+pago_int_vivienda = inputs.RTFNTE_PAGO_INT_VIVENDA.amount if inputs.RTFNTE_PAGO_INT_VIVENDA else 0 # FILA 26
+if pago_int_vivienda &gt; 100 * UVT: pago_int_vivienda = 100 * UVT
+pagos_por_dependientes = inputs.RTFNTE_PAGOS_DEPENDIENTES.amount if inputs.RTFNTE_PAGOS_DEPENDIENTES else 0 # FILA 27
+if pagos_por_dependientes &gt; 32 * UVT: pagos_por_dependientes = 32 * UVT
+pagos_med_prepagada = inputs.RTFNTE_PAGOS_MED_PREPAG.amount if inputs.RTFNTE_PAGOS_MED_PREPAG else 0 # FILA 28
+if pagos_med_prepagada &gt; 16 * UVT: pagos_med_prepagada = 16 * UVT
+aportes_pens_vol = inputs.RTFNTE_APORTES_PENS_VOLNT.amount if inputs.RTFNTE_APORTES_PENS_VOLNT else 0 # FILA 33 lo debe limitar el contador con suma anual
+aportes_AFC = inputs.RTFNTE_APORTES_AFC.amount if inputs.RTFNTE_APORTES_AFC else 0 # FILA 34 lo debe limitar el contador con suma anual
+otras_rentas_exentas = inputs.RTFNTE_OTRAS_RENTAS_EXENTAS.amount if inputs.RTFNTE_OTRAS_RENTAS_EXENTAS else 0 # FILA 35
+# -----------------------------------------------------------------------------------------
+
+# ------RETENCIÓN RENTAS DE TRABAJO---------------------
+base_salarial = BASE_SAL
+bonificacion_no_sal = 0
+if rules.SALARIO_NOPREST or rules.PAGO_NO_SALARIAL or contract.transport_aid:
+    bonificacion_no_sal = PAGO_NO_SALARIAL + contract.transport_aid + contract.transport_aid
+ingresos_laborales = base_salarial + incentivo_vivienda + bonificacion_no_sal
+
+if aportes_vol_pensi_obl &gt; ingresos_laborales * 0.25: aportes_vol_pensi_obl = ingresos_laborales * 0.25
+
+# ----INGRESOS NO CONSTITUTIVOS DE RENTA----------
+total_ingresos_no_const = 0
+if rules.DESC_SALUD: total_ingresos_no_const = total_ingresos_no_const + DESC_SALUD
+if rules.DESC_PENSION: total_ingresos_no_const = total_ingresos_no_const + DESC_PENSION
+if rules.FONDO_SOL: total_ingresos_no_const = total_ingresos_no_const + FONDO_SOL
+total_ingresos_no_const = total_ingresos_no_const + aportes_vol_pensi_obl + otros_ing_no_rent
+subtotal_1 = round(ingresos_laborales - total_ingresos_no_const, -3)
+
+# ------DEDUCCIONES---------------------------------------------------
+total_deducciones = pago_int_vivienda + pagos_por_dependientes + pagos_med_prepagada
+subtotal_2 = subtotal_1 - total_deducciones
+
+# -------RENTAS EXENTAS-----------------------------------------------
+total_rentas_exentas = aportes_pens_vol + aportes_AFC + otras_rentas_exentas
+subtotal_3 = subtotal_2 - total_rentas_exentas
+
+# --------RENTA DE TRABAJO EXENTA MAX 25%--------------
+renta_trab_exenta_25 = round(subtotal_3 * 0.25, -3)
+if renta_trab_exenta_25 &gt; 240 * UVT: renta_trab_exenta_25 = 240 * UVT
+subtotal_4 = subtotal_3 - renta_trab_exenta_25
+
+# ---------MINIMOS DEDUCCIONES -------------------------
+cifra_control_40 = round(subtotal_1 * 0.4, -3)
+deducciones_acum = total_deducciones + total_rentas_exentas + renta_trab_exenta_25
+max_deduc_420uvt = round(420 * UVT, -3)
+
+# ---------INGRESO LABORAL BASE PARA RETEFUENTE ------
+ing_base_refuente = subtotal_1 - min(cifra_control_40, deducciones_acum, max_deduc_420uvt)
+ingreso_gravado_uvt = ing_base_refuente / UVT
+
+# ---------------------CALCULO RETEFUENTE------------------------------
+if ingreso_gravado_uvt &lt; 95:
+    retefuente = 0
+elif ingreso_gravado_uvt &gt; 95 and ingreso_gravado_uvt &lt;= 150:
+    retefuente = round((ingreso_gravado_uvt - 95) * 0.19 * UVT, -3)
+elif ingreso_gravado_uvt &gt; 150 and ingreso_gravado_uvt &lt;= 360:
+    retefuente = round((ingreso_gravado_uvt - 150) * 0.28 * UVT + 10 * UVT, -3)
+elif ingreso_gravado_uvt &gt; 360 and ingreso_gravado_uvt &lt;= 640:
+    retefuente = round((ingreso_gravado_uvt - 360) * 0.33 * UVT + 69 * UVT, -3)
+elif ingreso_gravado_uvt &gt; 640 and ingreso_gravado_uvt &lt;= 945:
+    retefuente = round((ingreso_gravado_uvt - 640) * 0.35 * UVT + 162 * UVT, -3)
+elif ingreso_gravado_uvt &gt; 945 and ingreso_gravado_uvt &lt;= 2300:
+    retefuente = round((ingreso_gravado_uvt - 945) * 0.37 * UVT + 268 * UVT, -3)
+elif ingreso_gravado_uvt &gt; 2300:
+    retefuente = round((ingreso_gravado_uvt - 2300) * 0.39 * UVT + 773 * UVT, -3)
+
+result = retefuente
+
+if inputs.RETEFUENTE_MAN and inputs.RETEFUENTE_MAN.amount &gt; 0:
+    result = inputs.RETEFUENTE_MAN.amount
+                </field>
+        </record>
+
+    <record id="rule_40" model="hr.salary.rule">
+        <field name="name">DESC PRESTAMO</field>
+        <field name="category_id" ref="DEDUCCIÓN"/>
+        <field name="code">OTROS_PREST</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="46"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.DESC_PRESTAMO.amount &lt; 0 if inputs.DESC_PRESTAMO else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DÉBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+result = inputs.DESC_PRESTAMO.amount or 0</field>
+    </record>
+
+    <record id="rule_41" model="hr.salary.rule">
+        <field name="name">PROVISION EPS</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_EPS</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="49"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=categories.BASIC&gt;=10*SALARIOMINIMO</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DÉBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+base_aportes=categories.BASIC
+if base_aportes&gt;25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+result =base_aportes*0.085</field>
+    </record>
+
+    <record id="rule_42" model="hr.salary.rule">
+        <field name="name">PROVISION EPS APRENDIZ SENA</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_EPS_APR_SENA</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="48"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = rules.NET &gt; categories.NET * 0.10</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DÉBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+base_aportes=BASE_SAL
+if BASE_SAL&gt;25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+if base_aportes&lt;SALARIOMINIMO*DIAS_NOMINA/30:
+    base_aportes=SALARIOMINIMO*DIAS_NOMINA/30
+result =base_aportes*0.125</field>
+    </record>
+
+    <record id="rule_43" model="hr.salary.rule">
+        <field name="name">PROVISION AFP</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_AFP</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="50"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=contract.state=='open'</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DÉBITO PARA QUE SE REGISTRE POSITIVO EN EL CRÉDITO
+base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.12
+    else:
+        result = base_aportes*0.7*0.12
+else:
+    if BASE_SAL&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =base_aportes*0.12</field>
+    </record>
+
+    <record id="rule_44" model="hr.salary.rule">
+        <field name="name">PROVISION ARL</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_ARL</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="51"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">sal_noprest = SALARIO_NOPREST + PAGO_NO_SALARIAL + contract.transport_aid
+base_mas_bene = SUELDO + sal_noprest
+base_40 = (base_mas_bene)*0.4
+base_aportes = SUELDO + (sal_noprest - base_40)
+if (sal_noprest -  base_40) &lt; 0:
+  base_aportes = SUELDO
+if contract.integral_salary:
+   if base_aportes*0.7&gt;25*SALARIOMINIMO:
+      base_aportes = 25*SALARIOMINIMO
+      result = base_aportes*employee.arl_contribution_percentage
+   else:
+      result = base_aportes*0.7*employee.arl_contribution_percentage
+else:
+    if base_aportes&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result = base_aportes*employee.arl_contribution_percentage</field>
+    </record>
+
+    <record id="rule_45" model="hr.salary.rule">
+        <field name="name">PROVISION CCF</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_CCF</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="52"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">#NO HAY APORTES EN INCAPACIDAD NI LICENCIA MATERNIDAD
+
+base_aportes=categories.BASIC
+if contract.integral_salary:
+    if base_aportes*0.7&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.04
+    else:
+        result = base_aportes*0.7*0.04
+else:
+    if base_aportes&gt;25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =base_aportes*0.04</field>
+    </record>
+
+    <record id="rule_46" model="hr.salary.rule">
+        <field name="name">PROVISION SENA</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_SENA</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="53"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">base_aportes=SUELDO
+if rules.COMISIONES:
+    base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+    base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+    base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+    base_aportes= base_aportes + ING_VACACIONES
+result=base_aportes&gt;=10*SALARIOMINIMO</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#NO APORTA EN INCAPACIDAD #APORTA EN VACACIONES, LICENCIA REM
+
+base_aportes=SUELDO
+if rules.COMISIONES:
+    base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+    base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+    base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+    base_aportes= base_aportes + ING_VACACIONES
+
+base_aportes=BASE_SAL
+if BASE_SAL&gt;25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+
+result =base_aportes*0.02</field>
+    </record>
+
+    <record id="rule_47" model="hr.salary.rule">
+        <field name="name">PROVISION ICBF</field>
+        <field name="category_id" ref="PROVISIONES SSI"/>
+        <field name="code">PROVISION_ICBF</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="54"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">base_aportes=SUELDO
+if rules.COMISIONES:
+    base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+    base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+    base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+    base_aportes= base_aportes + ING_VACACIONES
+result=base_aportes&gt;=10*SALARIOMINIMO</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#NO APORTA EN INCAPACIDAD
+#APORTA EN VACACIONES, LICENCIA REM
+
+base_aportes=SUELDO
+if rules.COMISIONES:
+    base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+    base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+    base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+    base_aportes= base_aportes + ING_VACACIONES
+
+#base_aportes=BASE_SAL
+if base_aportes&gt;25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+
+result =base_aportes*0.03</field>
+    </record>
+
+    <record id="rule_48" model="hr.salary.rule">
+        <field name="name">PROVISION CESANT</field>
+        <field name="category_id" ref="PROVISIONES PREST"/>
+        <field name="code">PROVISION_CESANT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="55"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = contract.integral_salary = False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">aux_transp=0
+if contract.transport_aid:
+    aux_transp=contract.transport_aid
+result =(categories.BASIC+aux_transp)*30/360</field>
+    </record>
+
+     <record id="rule_49" model="hr.salary.rule">
+        <field name="name">PROVISION INT CESANT</field>
+        <field name="category_id" ref="PROVISIONES PREST"/>
+        <field name="code">PROVISION_INT_CESANT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="56"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = contract.integral_salary = False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">aux_transp=0
+if contract.transport_aid:
+    aux_transp=contract.transport_aid
+result =0.12*(categories.BASIC+aux_transp)*30/360</field>
+    </record>
+
+    <record id="rule_50" model="hr.salary.rule">
+        <field name="name">PROVISION VAC</field>
+        <field name="category_id" ref="PROVISIONES PREST"/>
+        <field name="code">PROVISION_VAC</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="57"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">code</field>
+        <field name="condition_python">#NO COTIZA POR HORAS EXTRAS, COMISIONES
+base_vac=categories.BASIC
+if rules.H_EXTRAS:
+ base_vac=base_vac - H_EXTRAS
+if rules.COMISIONES:
+ base_vac=base_vac - COMISIONES
+
+result=base_vac*15/360
+
+#result =(BASIC*DIAS_NOMINA/30)*15/360</field>
+    </record>
+
+    <record id="rule_51" model="hr.salary.rule">
+        <field name="name">PROVISION PRIMA</field>
+        <field name="category_id" ref="PROVISIONES PREST"/>
+        <field name="code">PROVISION_PRIMA</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="58"/>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">aux_transp=0
+if contract.transport_aid:
+    aux_transp=contract.transport_aid
+result =(categories.BASIC+aux_transp)*15/180</field>
+    </record>
+
+    <record id="rule_53" model="hr.salary.rule">
+        <field name="name">LIQ CESANTIAS</field>
+        <field name="category_id" ref="LIQUIDACION"/>
+        <field name="code">LIQ_CESANTIAS</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="22"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#salario_prom_cesant = inputs.SALARIO_PROM_LIQ_CESANT.amount   Quitar de los inputs los dias y el salario promedio
+#dias_liq_cesant =  inputs.DIAS_LIQ_CESANT.amount
+#result = salario_prom_cesant*dias_liq_cesant/360
+result=inputs.CESANTIAS_ACUMULADAS.amount</field>
+    </record>
+
+    <record id="rule_54" model="hr.salary.rule">
+        <field name="name">LIQ INT CESANT</field>
+        <field name="category_id" ref="LIQUIDACION"/>
+        <field name="code">LIQ_INT_CESANT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="24"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">dias_liq_cesant =  inputs.DIAS_LIQ_CESANT.amount
+result = 0.12*LIQ_CESANTIAS*dias_liq_cesant/360</field>
+    </record>
+
+    <record id="rule_55" model="hr.salary.rule">
+        <field name="name">LIQ VACACIONES</field>
+        <field name="category_id" ref="LIQUIDACION"/>
+        <field name="code">LIQ_VACACIONES</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="26"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">vac= inputs.DIAS_LIQ_VAC.amount*15/360
+vac = vac - inputs.DIAS_LIQ_VAC_DISFRUT.amount
+valor = BASIC + inputs.COMISIONES_LIQ.amount
+result = valor*vac/30</field>
+    </record>
+
+    <record id="rule_56" model="hr.salary.rule">
+        <field name="name">LIQ PRIMA</field>
+        <field name="category_id" ref="LIQUIDACION"/>
+        <field name="code">LIQ_PRIMA</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="28"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#dias_prima=inputs.DIAS_COT_PRIMA.amount
+#salario_prima = inputs.SALARIO_PROM_PRIMA.amount
+#result = salario_prima*dias_prima/360
+result = inputs.PRIMA_ACUMULADA.amount</field>
+    </record>
+
+    <record id="rule_57" model="hr.salary.rule">
+        <field name="name">LIQ NETO A PAGAR</field>
+        <field name="category_id" ref="NETO LIQ"/>
+        <field name="code">LIQ_NETO_A_PAGAR</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="30"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = rules.NET &gt; categories.NET * 0.10
+result = categories.LIQUIDACION</field>
+    </record>
+
+    <record id="rule_58" model="hr.salary.rule">
+        <field name="name">INTERESES CESANT NOMINA</field>
+        <field name="category_id" ref="OTROS DESEMBOLSOS"/>
+        <field name="code">INTERESES_CESANTIAS_NOMINA</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="33"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.INT_CESANT_NOMINA.amount &gt; 0 if inputs.INT_CESANT_NOMINA else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.INT_CESANT_NOMINA.amount</field>
+    </record>
+
+    <record id="rule_59" model="hr.salary.rule">
+        <field name="name">DIAS COT VAC</field>
+        <field name="category_id" ref="BALANCE VACACIONES"/>
+        <field name="code">DIAS_LIQ_VAC</field>
+        <field name="active" eval="False"/>
+        <field name="sequence" eval="35"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">dias_cot = DIAS_NOMINA
+if dias_cot &gt; 30:
+ dias_cot=30
+result = dias_cot*15/360</field>
+    </record>
+
+    <record id="rule_60" model="hr.salary.rule">
+        <field name="name">DIAS LIQ VAC</field>
+        <field name="category_id" ref="BALANCE VACACIONES"/>
+        <field name="code">DIAS_LIQ_VAC</field>
+        <field name="active" eval="False"/>
+        <field name="sequence" eval="36"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result=0
+if inputs.DIAS_LIQ_VAC.amount:
+ result= inputs.DIAS_LIQ_VAC.amount</field>
+    </record>
+
+    <record id="rule_61" model="hr.salary.rule">
+        <field name="name">DIAS DISFRUT VAC</field>
+        <field name="category_id" ref="BALANCE VACACIONES"/>
+        <field name="code">DIAS_DISFRUT_VAC</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="37"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result=0
+result = (DIAS_VACACIONES if rules.DIAS_VACACIONES else 0) + self.get_qty_earn('VACO')</field>
+    </record>
+
+    <record id="rule_62" model="hr.salary.rule">
+        <field name="name">DESC PAGO AFC</field>
+        <field name="category_id" ref="DEDUCCIÓN"/>
+        <field name="code">DESC_PAGO_AFC</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="38"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.RTFNTE_APORTES_AFC.amount &gt; 0 if inputs.RTFNTE_APORTES_AFC else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = inputs.RTFNTE_APORTES_AFC.amount or 0</field>
+    </record>
+
+    <record id="rule_64" model="hr.salary.rule">
+        <field name="name">ANTICIPO CESANTIAS</field>
+        <field name="category_id" ref="OTROS DESEMBOLSOS"/>
+        <field name="code">ANTICIPO_CESANT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="40"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.ANTIC_CESANTIAS.amount &gt; 0 if inputs.ANTIC_CESANTIAS else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.ANTIC_CESANTIAS.amount</field>
+    </record>
+
+    <record id="rule_68" model="hr.salary.rule">
+        <field name="name">DESC LIBRANZA</field>
+        <field name="category_id" ref="DEDUCCIÓN"/>
+        <field name="code">DESC_LIBR</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="46"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.DESC_LIBR.amount &gt; 0 if inputs.DESC_LIBR else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = inputs.DESC_LIBR.amount or 0</field>
+    </record>
+
+    <record id="rule_69" model="hr.salary.rule">
+        <field name="name">DESC FACTURA</field>
+        <field name="category_id" ref="DEDUCCIÓN"/>
+        <field name="code">DESC_FACT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="46"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.DESC_FACT.amount &gt; 0 if inputs.DESC_FACT else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = inputs.DESC_FACT.amount or 0</field>
+    </record>
+
+    <record id="rule_70" model="hr.salary.rule">
+        <field name="name">INCAPACIDAD GEN PRIMEROS 2 DIAS</field>
+        <field name="category_id" ref="BÁSICO"/>
+        <field name="code">ING_IGEN_DOS_DIAS</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="20"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=worked_days.DIAS_IGEN.number_of_days &gt; 0 if worked_days.DIAS_IGEN else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">salario_incap=BASIC
+if worked_days.DIAS_IGEN.number_of_days &gt;= 2:
+   result = salario_incap / 30
+   result_qty = 2
+elif worked_days.DIAS_IGEN.number_of_days != 0 and worked_days.DIAS_IGEN.number_of_days &lt; 2:
+   result = salario_incap / 30
+   result_qty = worked_days.DIAS_IGEN.number_of_days</field>
+    </record>
+
+    <record id="rule_71" model="hr.salary.rule">
+        <field name="name">DESC AHORRO</field>
+        <field name="category_id" ref="DEDUCCIÓN"/>
+        <field name="code">DESC_AHOR</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="46"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.DESC_AHOR.amount &gt; 0 if inputs.DESC_AHOR else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = inputs.DESC_AHOR.amount or 0</field>
+    </record>
+
+    <record id="rule_72" model="hr.salary.rule">
+        <field name="name">DESEMBOLSO AHORRO</field>
+        <field name="category_id" ref="OTROS DESEMBOLSOS"/>
+        <field name="code">DESEM_AHORRO</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="43"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=inputs.DESEM_AHORRO.amount &gt; 0 if inputs.DESEM_AHORRO else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.DESEM_AHORRO.amount or 0</field>
+    </record>
+
+    <record id="rule_73" model="hr.salary.rule">
+        <field name="name">LICENCIA PAT</field>
+        <field name="category_id" ref="BÁSICO"/>
+        <field name="code">ING_LIC_PAT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="27"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=worked_days.DIAS_LIC_PAT.number_of_days &gt; 0 if worked_days.DIAS_LIC_PAT else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = BASIC /30
+result_qty = worked_days.DIAS_LIC_PAT.number_of_days</field>
+    </record>
+
+    <record id="rule_74" model="hr.salary.rule">
+        <field name="name">DIAS LICENCIA PAT</field>
+        <field name="category_id" ref="DIAS NOVEDADES"/>
+        <field name="code">DIAS_LIC_PAT</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="8"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=worked_days.DIAS_LIC_PAT.number_of_days &gt; 0 if worked_days.DIAS_LIC_PAT else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result=worked_days.DIAS_LIC_PAT.number_of_days</field>
+    </record>
+
+    <record id="rule_75" model="hr.salary.rule">
+        <field name="name">VACACIONES EN DINERO</field>
+        <field name="category_id" ref="OTROS DESEMBOLSOS"/>
+        <field name="code">VACA_DINERO</field>
+        <field name="active" eval="True"/>
+        <field name="sequence" eval="43"/>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result=inputs.VACA_DINERO.amount &gt; 0 if inputs.VACA_DINERO else False</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.VACA_DINERO.amount or 0</field>
+    </record>
+
+    </data>
+</odoo>

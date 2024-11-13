@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="risk_1" model='hr.employee.arl.risk'>
+            <field name="name">Riesgo I</field>
+            <field name="contribution_percentage">0.522</field>
+        </record>
+
+        <record id="risk_2" model='hr.employee.arl.risk'>
+            <field name="name">Riesgo II</field>
+            <field name="contribution_percentage">1.044</field>
+        </record>
+
+        <record id="risk_3" model='hr.employee.arl.risk'>
+            <field name="name">Riesgo III</field>
+            <field name="contribution_percentage">2.436</field>
+        </record>
+
+        <record id="risk_4" model='hr.employee.arl.risk'>
+            <field name="name">Riesgo IV</field>
+            <field name="contribution_percentage">4.350</field>
+        </record>
+
+        <record id="risk_5" model='hr.employee.arl.risk'>
+            <field name="name">Riesgo V</field>
+            <field name="contribution_percentage">6.960</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_hr_novelty_type_form_loan" model="ir.ui.view">
+            <field name="name">hr.novelty.type.form.loan</field>
+            <field name="model">hr.novelty.type</field>
+            <field name="inherit_id" ref="lt_hr_novelty.view_hr_novelty_type_form"/>
+            <field name="arch" type="xml">
+                <field name="apply_quantity" position="after">
+                    <field name="loan_type" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

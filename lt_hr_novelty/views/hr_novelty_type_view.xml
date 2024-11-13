@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <record id="view_hr_novelty_type_tree" model="ir.ui.view">
+            <field name="name">hr.novelty.type.tree</field>
+            <field name="model">hr.novelty.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="factor"/>
+                    <field name="type" decoration-danger="type == 'deduction'" decoration-success="type == 'income'"
+                           widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_novelty_type_form" model="ir.ui.view">
+            <field name="name">hr.novelty.type.form</field>
+            <field name="model">hr.novelty.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="type" invisible="1"/>
+                        <widget name="web_ribbon" title="Deduction" bg_color="bg-danger"
+                                attrs="{'invisible': ['|', ('type', '=', 'income'), ('type', '=', False)]}"/>
+                        <widget name="web_ribbon" title="Income"
+                                attrs="{'invisible': ['|', ('type', '=', 'deduction'), ('type', '=', False)]}"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="category_id"/>
+                                <field name="apply_factor" invisible="1"/>
+                                <field name="factor" attrs="{'invisible': [('apply_factor', '=', False)], 'required': [('apply_factor', '=', True)]}"/>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="apply_date_end"/>
+                                <field name="apply_quantity"/>
+                                <field name="take_ns" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="formula"/>
+                        </group>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_novelty_type_search" model="ir.ui.view">
+            <field name="name">view.novelty.type.search</field>
+            <field name="model">hr.novelty.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="factor"/>
+                    <field name="type"/>
+                    <filter name="filter_income"
+                            string="Income"
+                            domain="[('type','=','income')]"/>
+                    <filter name="filter_deduction"
+                            string="Deduction"
+                            domain="[('type','=','deduction')]"/>
+                    <separator/>
+                    <group expand="0" string="Novelty's Type">
+                        <filter name="groupby_category_id" context="{'group_by' : 'category_id'}"
+                                string="Category"/>
+                    </group>
+                    <group expand="0" string="Type">
+                        <filter name="groupby_type" context="{'group_by' : 'type'}" string="Type"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Define the action for the tree view -->
+        <record id="action_hr_novelty_type" model="ir.actions.act_window">
+            <field name="name">Novelty Type</field>
+            <field name="res_model">hr.novelty.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_hr_novelty_type_tree"/>
+            <field name="context">{'search_default_groupby_category_id': True}</field>
+            <field name="search_view_id" ref="view_hr_novelty_type_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first type of novelty of payslip.</p>
+            </field>
+        </record>
+
+        <!-- Define the menu item for the tree view -->
+        <menuitem id="menu_hr_novelty_type"
+                  name="Type"
+                  action="action_hr_novelty_type"
+                  parent="menu_hr_novelty_configuration"
+                  sequence="5"/>
+
+    </data>
+</odoo>

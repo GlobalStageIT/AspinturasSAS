@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="view_account_form_lt_hr" model="ir.ui.view">
+        <field name="name">view.account.form.lt_hr</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='allowed_journal_ids']" position="after">
+                <field name="group_payslip"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

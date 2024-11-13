@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_novelty,access_hr_novelty,model_hr_novelty,,1,1,1,1
+access_hr_novelty_type,access_hr_novelty_type,model_hr_novelty_type,,1,1,1,1
+access_hr_novelty_category,access_hr_novelty_category,model_hr_novelty_category,,1,1,1,1

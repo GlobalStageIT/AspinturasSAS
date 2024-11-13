@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="contribution_1" model="hr.contribution.register">
+            <field name="name">Empleado</field>
+        </record>
+
+        <record id="contribution_2" model="hr.contribution.register">
+            <field name="name">EPS</field>
+        </record>
+
+        <record id="contribution_3" model="hr.contribution.register">
+            <field name="name">AFP</field>
+        </record>
+
+        <record id="contribution_4" model="hr.contribution.register">
+            <field name="name">ARL</field>
+        </record>
+
+        <record id="contribution_5" model="hr.contribution.register">
+            <field name="name">CCF</field>
+        </record>
+
+        <record id="contribution_6" model="hr.contribution.register">
+            <field name="name">SENA</field>
+        </record>
+
+        <record id="contribution_7" model="hr.contribution.register">
+            <field name="name">ICBF</field>
+        </record>
+    </data>
+</odoo>

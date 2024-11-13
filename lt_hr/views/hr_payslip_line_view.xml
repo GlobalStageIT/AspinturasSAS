@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_payslip_line_search" model="ir.ui.view">
+            <field name="name">hr.payslip.line.select</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Payslip Lines">
+                    <field name="name" string="Payslip Lines"
+                           filter_domain="['|',('name','ilike',self),('code','ilike',self)]"/>
+                    <field name="amount_select"/>
+                    <field name="slip_id"/>
+                    <field name="company_id"/>
+                    <group col="8" colspan="4" expand="0" string="Group By">
+                        <filter string="Salary Rule Category" name="category_id" context="{'group_by':'category_id'}"/>
+                        <filter string="Contribution Register" name="register_id" context="{'group_by':'register_id'}"/>
+                        <filter string="Amount Type" name="amount_select" context="{'group_by':'amount_select'}"/>
+                        <filter string="Employees" name="employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Slip" name="slip_id" context="{'group_by':'slip_id'}"/>
+                        <filter string="Company" name="company_id" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_payslip_line_pivot" model="ir.ui.view">
+            <field name="name">hr.payslip.line.select</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Payslip Line Analysis" sample="1">
+                    <field name="total" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_hr_payslip_line" model="ir.actions.act_window">
+            <field name="name">Payslip Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.payslip.line</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_id" ref="om_hr_payroll.view_hr_payslip_line_tree"/>
+            <field name="search_view_id" ref="hr_payslip_line_search"/>
+        </record>
+
+        <menuitem id="hr_payslip_line_menu"
+                  name="Payslip Line's"
+                  action="lt_hr.action_hr_payslip_line"
+                  parent="om_hr_payroll.menu_payroll_employee"
+                  sequence="30"/>
+
+    </data>
+</odoo>

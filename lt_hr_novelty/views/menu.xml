@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- Define the menu item for the tree view -->
+        <menuitem id="menu_hr_novelty_global"
+                  name="Novelty's"
+                  parent="om_hr_payroll.menu_hr_payroll_root"
+                  sequence="30"/>
+
+        <menuitem id="menu_hr_novelty_configuration"
+                  name="Configuration"
+                  parent="menu_hr_novelty_global"
+                  sequence="10"/>
+
+    </data>
+</odoo>

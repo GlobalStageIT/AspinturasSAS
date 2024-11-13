@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="categ_1" model="hr.salary.rule.category">
+            <field name="name">BÁSICO</field>
+            <field name="code">BASIC</field>
+        </record>
+        <record id="categ_2" model="hr.salary.rule.category">
+            <field name="name">PRIMA</field>
+            <field name="code">ALW</field>
+        </record>
+        <record id="categ_3" model="hr.salary.rule.category">
+            <field name="name">BRUTO</field>
+            <field name="code">GROSS</field>
+        </record>
+        <record id="categ_4" model="hr.salary.rule.category">
+            <field name="name">DEDUCCIÓN</field>
+            <field name="code">DED</field>
+        </record>
+        <record id="categ_5" model="hr.salary.rule.category">
+            <field name="name">NETO</field>
+            <field name="code">NET</field>
+        </record>
+        <record id="categ_6" model="hr.salary.rule.category">
+            <field name="name">CONTRIBUCIÓN COMPAÑIA</field>
+            <field name="code">COMP</field>
+        </record>
+        <record id="categ_7" model="hr.salary.rule.category">
+            <field name="name">NO SALARIAL</field>
+            <field name="code">NO_SALARIAL</field>
+        </record>
+        <record id="categ_8" model="hr.salary.rule.category">
+            <field name="name">CALCULOS</field>
+            <field name="code">CALCULOS</field>
+        </record>
+        <record id="categ_9" model="hr.salary.rule.category">
+            <field name="name">CONSTANTES</field>
+            <field name="code">CONSTANTES</field>
+        </record>
+        <record id="categ_10" model="hr.salary.rule.category">
+            <field name="name">SUPLEMENTARIO</field>
+            <field name="code">SUPL</field>
+        </record>
+        <record id="categ_11" model="hr.salary.rule.category">
+            <field name="name">BASE SALARIAL</field>
+            <field name="code">BASE_SALARIAL</field>
+        </record>
+        <record id="categ_12" model="hr.salary.rule.category">
+            <field name="name">DIAS NOVEDADES</field>
+            <field name="code">DIAS_NOVEDADES</field>
+        </record>
+        <record id="categ_13" model="hr.salary.rule.category">
+            <field name="name">PROVISIONES SSI</field>
+            <field name="code">PROVISIONES_SSI</field>
+        </record>
+        <record id="categ_14" model="hr.salary.rule.category">
+            <field name="name">PROVISIONES PREST</field>
+            <field name="code">PROVISIONES_PREST</field>
+        </record>
+        <record id="categ_15" model="hr.salary.rule.category">
+            <field name="name">LIQUIDACION</field>
+            <field name="code">LIQUIDACION</field>
+        </record>
+        <record id="categ_16" model="hr.salary.rule.category">
+            <field name="name">NETO LIQ</field>
+            <field name="code">NETO_LIQ</field>
+        </record>
+        <record id="categ_17" model="hr.salary.rule.category">
+            <field name="name">BALANCE VACACIONES</field>
+            <field name="code">BALANCE_VACACIONES</field>
+        </record>
+        <record id="categ_18" model="hr.salary.rule.category">
+            <field name="name">OTROS DESEMBOLSOS</field>
+            <field name="code">OTROS_DESEMBOLSOS</field>
+        </record>
+    </data>
+</odoo>

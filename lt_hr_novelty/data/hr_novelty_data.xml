@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_approval_hr_novelty_from_list" model="ir.actions.server">
+            <field name="name">Action Approval</field>
+            <field name="model_id" ref="lt_hr_novelty.model_hr_novelty"/>
+            <field name="binding_model_id" ref="lt_hr_novelty.model_hr_novelty"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    for record in records:
+                        action = record.action_approval()
+            </field>
+        </record>
+
+        <record id="action_self_calculating_hr_novelty_from_list" model="ir.actions.server">
+            <field name="name">Re Calcular</field>
+            <field name="model_id" ref="lt_hr_novelty.model_hr_novelty"/>
+            <field name="binding_model_id" ref="lt_hr_novelty.model_hr_novelty"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    for record in records:
+                        action = record.self_calculating()
+            </field>
+        </record>
+
+    </data>
+</odoo>

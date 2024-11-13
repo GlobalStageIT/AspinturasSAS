@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_lt_hr" model="ir.ui.view">
+        <field name="name">hr.payslip.form.lt_hr</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[1]" position="before">
+                <field name="is_liquidation" invisible="1"/>
+            </xpath>
+            <field name="payroll_period_id" position="after">
+                <field name="date_liquidation" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('is_liquidation', '=', False)], 'required': [('is_liquidation', '=', True)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_compute_total_hr_payslip_from_list" model="ir.actions.server">
+        <field name="name">Calcular Totales</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.compute_totals()
+        </field>
+    </record>
+
+    <record id="action_done_hr_payslip_from_list" model="ir.actions.server">
+        <field name="name">Confirmar</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.action_payslip_done()
+        </field>
+    </record>
+
+    <record id="action_cancel_hr_payslip_from_list" model="ir.actions.server">
+        <field name="name">Cancelar</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.with_context(force_delete=True).action_payslip_cancel()
+        </field>
+    </record>
+
+        <record id="action_draft_hr_payslip_from_list" model="ir.actions.server">
+        <field name="name">Pasar a borrador</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.action_payslip_draft()
+        </field>
+    </record>
+
+    <record id="action_senf_email_hr_payslip_from_list" model="ir.actions.server">
+        <field name="name">Send Email</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.action_send_email()
+        </field>
+    </record>
+
+</odoo>

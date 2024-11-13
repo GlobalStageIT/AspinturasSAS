@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_hr_vacation_novelty_tree" model="ir.ui.view">
+        <field name="name">hr.novelty.tree.lt_hr_vacation</field>
+        <field name="model">hr.novelty</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0" edit="0">
+                <field name="name"/>
+                <field name="novelty_type_id"/>
+                <field name="employee_id"/>
+                <field name="contract_id"/>
+                <field name="date_start"/>
+                <field name="quantity"/>
+                <field name="total_compensated"/>
+                <field name="state" decoration-info="state == 'draft'" decoration-danger="state == 'rejected'"
+                       decoration-warning="state == 'pending_approval'" decoration-success="state == 'approval'"
+                       widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_vacation_novelty_form" model="ir.ui.view">
+        <field name="name">hr.novelty.form</field>
+        <field name="model">hr.novelty</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <field name="type" invisible="1"/>
+                    <widget name="web_ribbon" title="Deduction" bg_color="bg-danger"
+                            attrs="{'invisible': ['|', ('type', '=', 'income'), ('type', '=', False)]}"/>
+                    <widget name="web_ribbon" title="Income"
+                            attrs="{'invisible': ['|', ('type', '=', 'deduction'), ('type', '=', False)]}"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page name="Properties" string="Properties">
+                            <group>
+                                <group>
+                                    <field name="company_id" readonly="1"/>
+                                    <field name="novelty_type_id" readonly="1"/>
+                                    <field name="employee_id" readonly="1"/>
+                                    <field name="contract_id" readonly="1"
+                                           domain="[('employee_id', '=', employee_id)]"/>
+                                    <field name="wage" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="form_vacation" required="1"/>
+                                    <p>
+                                        Upload the THU-FOR-027 Vacation Financial Compensation Request form, available
+                                        in the
+                                        <a href="https://sig.linktic.com/users/login"
+                                           style="font-weight: bold; color: blue; text-decoration: underline;">SIG</a>.
+                                    </p>
+                                    <field name="date_start"/>
+                                    <field name="quantity"/>
+                                    <field name="ns_value" readonly="1" force_save="1"/>
+                                    <field name="s_value" readonly="1" force_save="1"/>
+                                    <field name="total_compensated" readonly="1" force_save="1" style="color: green"/>
+                                    <field name="value" invisible="1" force_save="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="formula"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_vacation_novelty" model="ir.actions.act_window">
+        <field name="name">Compensated Vacations</field>
+        <field name="res_model">hr.novelty</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="lt_hr_novelty.view_hr_novelty_search"/>
+        <field name="view_id" ref="view_hr_vacation_novelty_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data found.
+            </p>
+            <p>
+                Use this menu to get an overview of your Compensated Holidays.
+            </p>
+        </field>
+        <field name="domain">[('employee_id.user_id.id', '=', uid), ('novelty_type_id.is_vacation_compensated', '=', True)]</field>
+        <field name="context">{}</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_hr_vacation_novelty"
+              action="action_hr_vacation_novelty"
+              parent="hr_holidays.menu_hr_holidays_my_leaves"
+              sequence="2"/>
+
+    <!-- Define the action for the tree view -->
+    <record id="lt_hr_novelty.action_hr_novelty" model="ir.actions.act_window">
+        <field name="name">Novelty</field>
+        <field name="res_model">hr.novelty</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="lt_hr_novelty.view_hr_novelty_tree"/>
+        <field name="context">{'search_default_groupby_novelty_type_id': True}</field>
+        <field name="search_view_id" ref="lt_hr_novelty.view_hr_novelty_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the first novelty of payslip.</p>
+        </field>
+    </record>
+
+    <record id="view_hr_novelty_form_lt_hr_vacation" model="ir.ui.view">
+        <field name="name">hr.novelty.form.lt_hr_vacation</field>
+        <field name="model">hr.novelty</field>
+        <field name="inherit_id" ref="lt_hr_novelty.view_hr_novelty_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/field[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <field name="novelty_id" invisible="1"/>
+                    <button name="novelty_preview" type="object" class="oe_stat_button" icon="fa-book"
+                            attrs="{'invisible': [('novelty_id', '=', False)]}">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Compensated Money</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+            <field name="value" position="after">
+                <field name="is_vacation_compensated" invisible="1"/>
+                <field name="form_vacation" attrs="{'invisible':[('is_vacation_compensated','=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>
