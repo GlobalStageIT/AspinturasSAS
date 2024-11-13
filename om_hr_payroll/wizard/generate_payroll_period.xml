@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="generate_payroll_period" model="ir.ui.view">
+            <field name="name">generate_payroll_period</field>
+            <field name="model">generate.payroll.period</field>
+            <field name="arch" type="xml">
+                <form string="Generate Payroll Period">
+                    <field name="company_id" invisible="1"/>
+                    <group>
+                        <span colspan="4" nolabel="1">This wizard will generate period payslips for year and type
+                            selected.
+                        </span>
+                    </group>
+                    <group colspan="4">
+                        <field name="payment_frequency_id"/>
+                        <field name="year"/>
+                        <field name="start_period"/>
+                    </group>
+                    <footer>
+                        <button icon="fa-cogs" string="Generate" name="compute_sheet" type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+<!--        <record id="generate_payroll_period_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Generate Payroll Period</field>-->
+<!--            <field name="res_model">generate.payroll.period</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="generate_payroll_period"/>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

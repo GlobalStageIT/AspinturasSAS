@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <record id="hr_payment_frequency_form" model="ir.ui.view">
+            <field name="name">hr.payment.frequency.form</field>
+            <field name="model">hr.payment.frequency</field>
+            <field name="arch" type="xml">
+                <form string="Payment Frequency">
+                    <sheet>
+                        <group>
+                            <div class="oe_tittle">
+                                <label for="name"/>
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="code" force_save="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_payment_frequency_tree" model="ir.ui.view">
+            <field name="name">hr.payment.frequency.tree</field>
+            <field name="model">hr.payment.frequency</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_payment_frequency_search" model="ir.ui.view">
+            <field name="name">view.payment.frequency.search</field>
+            <field name="model">hr.payment.frequency</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <separator/>
+                    <group expand="0" string="Code">
+                        <filter name="groupby_code" context="{'group_by' : 'code'}" string="Code"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_payment_frequency_action" model="ir.actions.act_window">
+            <field name="name">Payment Frequency</field>
+            <field name="res_model">hr.payment.frequency</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_payment_frequency_tree"/>
+            <field name="search_view_id" ref="view_payment_frequency_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the payment frequency.</p>
+            </field>
+        </record>
+
+        <menuitem name="Payment Frequency"
+                  action="hr_payment_frequency_action"
+                  id="hr_payment_frequency_menu"
+                  parent="menu_hr_payroll_configuration"
+                  groups="base.group_no_one"
+                  sequence="120"
+        />
+    </data>
+</odoo>
