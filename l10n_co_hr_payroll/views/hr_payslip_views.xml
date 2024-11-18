@@ -23,7 +23,7 @@
         <field name="name">hr.payslip.form.l10n_co_hr_payroll.inherit</field>
         <field name="model">hr.payslip</field>
         <field name="priority">20</field>
-        <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//div[@name='button_box']" position="inside">
@@ -314,7 +314,7 @@
         <field name="name">hr.payslip.tree.l10n.co.payroll</field>
         <field name="model">hr.payslip</field>
         <field name="priority">20</field>
-        <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_tree"/>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_tree"/>
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//field[@name='state']" position="before">
@@ -329,8 +329,8 @@
 
     <record id="action_status_document_log" model="ir.actions.server">
         <field name="name">Replace with log DIAN</field>
-        <field name="model_id" ref="hr_payroll_community.model_hr_payslip"/>
-        <field name="binding_model_id" ref="hr_payroll_community.model_hr_payslip"/>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
         <field name="state">code</field>
         <field name="code">records.status_document_log()</field>
     </record>

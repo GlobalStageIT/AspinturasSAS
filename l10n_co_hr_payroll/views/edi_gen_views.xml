@@ -49,5 +49,6 @@
               id="menu_payslip_edi_generate_wizard"
               name="Generate Edi Payslips"
               parent="l10n_co_hr_payroll.menu_payslip_edi"
-              groups="hr_payroll_community.group_hr_payroll_community_user"/>
+              sequence="20"
+    />
 </odoo>

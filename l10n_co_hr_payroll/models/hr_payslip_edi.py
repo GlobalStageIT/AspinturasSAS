@@ -99,7 +99,7 @@ class HrPayslipEdi(models.Model):
             employee = rec.employee_id
 
             date_ym = dt.date(rec.year, int(rec.month), 1)
-            locale = self.env.context.get('lang') or 'en_US'
+            locale = rec.env.context.get('lang') or 'en_US'
             rec.name = _('Salary Slip of %s for %s') % (
                 employee.name,
                 tools.ustr(babel.dates.format_date(date=date_ym, format='MMMM-y', locale=locale))

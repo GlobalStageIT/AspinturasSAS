@@ -115,7 +115,7 @@ class HrPayslip(models.Model):
             earn_list = []
             for earn_id in rec.earn_ids:
                 earn_list.append({
-                    'name': earn_id.rule_input_id.name,
+                    'name': earn_id.name,
                     'sequence': earn_id.sequence,
                     'code': earn_id.code,
                     'amount': abs(earn_id.amount),
@@ -128,7 +128,7 @@ class HrPayslip(models.Model):
             deduction_list = []
             for deduction_id in rec.deduction_ids:
                 deduction_list.append({
-                    'name': deduction_id.rule_input_id.name,
+                    'name': deduction_id.name,
                     'sequence': deduction_id.sequence,
                     'code': deduction_id.code,
                     'amount': abs(deduction_id.amount)
@@ -457,253 +457,253 @@ class HrPayslip(models.Model):
             vouchers = []
 
             # Earn details iteration
-            for earn_id in rec.earn_ids:
-                if not earn_id.rule_input_id.input_id.edi_is_detailed:
-                    raise UserError(_("This concept must be calculated through the salary rules: %s")
-                                    % earn_id.rule_input_id.input_id.name)
-
-                if earn_id.category in (
-                        'basic',
-                        'company_withdrawal_bonus',
-                        'compensation',
-                        'endowment',
-                        'layoffs',
-                        'layoffs_interest',
-                        'primas',
-                        'primas_non_salary',
-                        'refund',
-                        'sustainment_support',
-                        'telecommuting'
-                ):
-                    raise UserError(_("This concept must be configured in salary rules as not detailed: %s")
-                                    % earn_id.rule_input_id.input_id.name)
-
-                if earn_id.category == 'advances':
-                    if earn_id.total:
-                        advances.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'assistances':
-                    if earn_id.total:
-                        assistances.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'assistances_non_salary':
-                    if earn_id.total:
-                        assistances.append({
-                            "non_salary_payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'bonuses':
-                    if earn_id.total:
-                        bonuses.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'bonuses_non_salary':
-                    if earn_id.total:
-                        bonuses.append({
-                            "non_salary_payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'commissions':
-                    if earn_id.total:
-                        commissions.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'compensations_extraordinary':
-                    if earn_id.total:
-                        compensations.append({
-                            "extraordinary": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'compensations_ordinary':
-                    if earn_id.total:
-                        compensations.append({
-                            "ordinary": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'daily_overtime':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 1,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'daily_surcharge_hours_sundays_holidays':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 5,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'hours_night_surcharge':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 3,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'incapacities_common':
-                    if earn_id.quantity and earn_id.total:
-                        incapacities.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "incapacity_code": 1,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'incapacities_professional':
-                    if earn_id.quantity and earn_id.total:
-                        incapacities.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "incapacity_code": 2,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'incapacities_working':
-                    if earn_id.quantity and earn_id.total:
-                        incapacities.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "incapacity_code": 3,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'legal_strikes':
-                    if earn_id.quantity:
-                        legal_strikes.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                        })
-                elif earn_id.category == 'licensings_maternity_or_paternity_leaves':
-                    if earn_id.quantity and earn_id.total:
-                        licensings_maternity_or_paternity_leaves.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'licensings_permit_or_paid_licenses':
-                    if earn_id.quantity and earn_id.total:
-                        licensings_permit_or_paid_licenses.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'licensings_suspension_or_unpaid_leaves':
-                    if earn_id.quantity:
-                        licensings_suspension_or_unpaid_leaves.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity)
-                        })
-                elif earn_id.category == 'other_concepts':
-                    if earn_id.total:
-                        other_concepts.append({
-                            "description": earn_id.name,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'other_concepts_non_salary':
-                    if earn_id.total:
-                        other_concepts.append({
-                            "description": earn_id.name,
-                            "non_salary_payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'overtime_night_hours':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 2,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'sunday_holiday_daily_overtime':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 4,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'sunday_holidays_night_surcharge_hours':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 7,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'sunday_night_overtime_holidays':
-                    if earn_id.quantity and earn_id.total:
-                        overtimes_surcharges.append({
-                            "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
-                            "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
-                            "quantity": abs(earn_id.quantity),
-                            "time_code": 6,
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'third_party_payments':
-                    if earn_id.total:
-                        third_party_payments.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'transports_assistance':
-                    if earn_id.total:
-                        transports.append({
-                            "assistance": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'transports_non_salary_viatic':
-                    if earn_id.total:
-                        transports.append({
-                            "non_salary_viatic": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'transports_viatic':
-                    if earn_id.total:
-                        transports.append({
-                            "viatic": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vacation_common':
-                    if earn_id.quantity and earn_id.total:
-                        vacation_common.append({
-                            "start": fields.Date.to_string(earn_id.date_start),
-                            "end": fields.Date.to_string(earn_id.date_end),
-                            "quantity": abs(earn_id.quantity),
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vacation_compensated':
-                    if earn_id.quantity and earn_id.total:
-                        vacation_compensated.append({
-                            "quantity": abs(earn_id.quantity),
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vouchers':
-                    if earn_id.total:
-                        vouchers.append({
-                            "payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vouchers_non_salary':
-                    if earn_id.total:
-                        vouchers.append({
-                            "non_salary_payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vouchers_non_salary_food':
-                    if earn_id.total:
-                        vouchers.append({
-                            "non_salary_food_payment": abs(earn_id.total)
-                        })
-                elif earn_id.category == 'vouchers_salary_food':
-                    if earn_id.total:
-                        vouchers.append({
-                            "salary_food_payment": abs(earn_id.total)
-                        })
+            # for earn_id in rec.earn_ids:
+            #     if not earn_id.rule_input_id.input_id.edi_is_detailed:
+            #         raise UserError(_("This concept must be calculated through the salary rules: %s")
+            #                         % earn_id.rule_input_id.input_id.name)
+            #
+            #     if earn_id.category in (
+            #             'basic',
+            #             'company_withdrawal_bonus',
+            #             'compensation',
+            #             'endowment',
+            #             'layoffs',
+            #             'layoffs_interest',
+            #             'primas',
+            #             'primas_non_salary',
+            #             'refund',
+            #             'sustainment_support',
+            #             'telecommuting'
+            #     ):
+            #         raise UserError(_("This concept must be configured in salary rules as not detailed: %s")
+            #                         % earn_id.rule_input_id.input_id.name)
+            #
+            #     if earn_id.category == 'advances':
+            #         if earn_id.total:
+            #             advances.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'assistances':
+            #         if earn_id.total:
+            #             assistances.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'assistances_non_salary':
+            #         if earn_id.total:
+            #             assistances.append({
+            #                 "non_salary_payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'bonuses':
+            #         if earn_id.total:
+            #             bonuses.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'bonuses_non_salary':
+            #         if earn_id.total:
+            #             bonuses.append({
+            #                 "non_salary_payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'commissions':
+            #         if earn_id.total:
+            #             commissions.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'compensations_extraordinary':
+            #         if earn_id.total:
+            #             compensations.append({
+            #                 "extraordinary": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'compensations_ordinary':
+            #         if earn_id.total:
+            #             compensations.append({
+            #                 "ordinary": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'daily_overtime':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 1,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'daily_surcharge_hours_sundays_holidays':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 5,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'hours_night_surcharge':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 3,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'incapacities_common':
+            #         if earn_id.quantity and earn_id.total:
+            #             incapacities.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "incapacity_code": 1,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'incapacities_professional':
+            #         if earn_id.quantity and earn_id.total:
+            #             incapacities.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "incapacity_code": 2,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'incapacities_working':
+            #         if earn_id.quantity and earn_id.total:
+            #             incapacities.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "incapacity_code": 3,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'legal_strikes':
+            #         if earn_id.quantity:
+            #             legal_strikes.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #             })
+            #     elif earn_id.category == 'licensings_maternity_or_paternity_leaves':
+            #         if earn_id.quantity and earn_id.total:
+            #             licensings_maternity_or_paternity_leaves.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'licensings_permit_or_paid_licenses':
+            #         if earn_id.quantity and earn_id.total:
+            #             licensings_permit_or_paid_licenses.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'licensings_suspension_or_unpaid_leaves':
+            #         if earn_id.quantity:
+            #             licensings_suspension_or_unpaid_leaves.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity)
+            #             })
+            #     elif earn_id.category == 'other_concepts':
+            #         if earn_id.total:
+            #             other_concepts.append({
+            #                 "description": earn_id.name,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'other_concepts_non_salary':
+            #         if earn_id.total:
+            #             other_concepts.append({
+            #                 "description": earn_id.name,
+            #                 "non_salary_payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'overtime_night_hours':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 2,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'sunday_holiday_daily_overtime':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 4,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'sunday_holidays_night_surcharge_hours':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 7,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'sunday_night_overtime_holidays':
+            #         if earn_id.quantity and earn_id.total:
+            #             overtimes_surcharges.append({
+            #                 "start": self._format_date_hours(earn_id.date_start, earn_id.time_start),
+            #                 "end": self._format_date_hours(earn_id.date_end, earn_id.time_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "time_code": 6,
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'third_party_payments':
+            #         if earn_id.total:
+            #             third_party_payments.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'transports_assistance':
+            #         if earn_id.total:
+            #             transports.append({
+            #                 "assistance": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'transports_non_salary_viatic':
+            #         if earn_id.total:
+            #             transports.append({
+            #                 "non_salary_viatic": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'transports_viatic':
+            #         if earn_id.total:
+            #             transports.append({
+            #                 "viatic": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vacation_common':
+            #         if earn_id.quantity and earn_id.total:
+            #             vacation_common.append({
+            #                 "start": fields.Date.to_string(earn_id.date_start),
+            #                 "end": fields.Date.to_string(earn_id.date_end),
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vacation_compensated':
+            #         if earn_id.quantity and earn_id.total:
+            #             vacation_compensated.append({
+            #                 "quantity": abs(earn_id.quantity),
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vouchers':
+            #         if earn_id.total:
+            #             vouchers.append({
+            #                 "payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vouchers_non_salary':
+            #         if earn_id.total:
+            #             vouchers.append({
+            #                 "non_salary_payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vouchers_non_salary_food':
+            #         if earn_id.total:
+            #             vouchers.append({
+            #                 "non_salary_food_payment": abs(earn_id.total)
+            #             })
+            #     elif earn_id.category == 'vouchers_salary_food':
+            #         if earn_id.total:
+            #             vouchers.append({
+            #                 "salary_food_payment": abs(earn_id.total)
+            #             })
 
             # Deduction details
             deduction_afc = 0
@@ -727,53 +727,53 @@ class HrPayslip(models.Model):
             deduction_third_party_payments = []
 
             # Deduction details iteration
-            for deduction_id in rec.deduction_ids:
-                if not deduction_id.rule_input_id.input_id.edi_is_detailed:
-                    raise UserError(_("This concept must be calculated through the salary rules: %s")
-                                    % deduction_id.rule_input_id.input_id.name)
-
-                # For trade unions and sanctions this settings is temporary
-                if deduction_id.category in (
-                        'afc',
-                        'complementary_plans',
-                        'cooperative',
-                        'debt',
-                        'education',
-                        'health',
-                        'pension_fund',
-                        'pension_security_fund',
-                        'pension_security_fund_subsistence',
-                        'refund',
-                        'sanctions_private',
-                        'sanctions_public',
-                        'tax_lien',
-                        'trade_unions',
-                        'voluntary_pension',
-                        'withholding_source'
-                ):
-                    raise UserError(_("This concept must be configured in salary rules as not detailed: %s")
-                                    % deduction_id.rule_input_id.input_id.name)
-                elif deduction_id.category == 'advances':
-                    if deduction_id.amount:
-                        deduction_advances.append({
-                            "payment": abs(deduction_id.amount)
-                        })
-                elif deduction_id.category == 'libranzas':
-                    if deduction_id.amount:
-                        deduction_libranzas.append({
-                            "description": deduction_id.name,
-                            "payment": abs(deduction_id.amount)
-                        })
-                elif deduction_id.category == 'other_deductions':
-                    if deduction_id.amount:
-                        deduction_others.append({
-                            "payment": abs(deduction_id.amount)
-                        })
-                elif deduction_id.category == 'third_party_payments':
-                    if deduction_id.amount:
-                        deduction_third_party_payments.append({
-                            "payment": abs(deduction_id.amount)
-                        })
+            # for deduction_id in rec.deduction_ids:
+            #     if not deduction_id.rule_input_id.input_id.edi_is_detailed:
+            #         raise UserError(_("This concept must be calculated through the salary rules: %s")
+            #                         % deduction_id.rule_input_id.input_id.name)
+            #
+            #     # For trade unions and sanctions this settings is temporary
+            #     if deduction_id.category in (
+            #             'afc',
+            #             'complementary_plans',
+            #             'cooperative',
+            #             'debt',
+            #             'education',
+            #             'health',
+            #             'pension_fund',
+            #             'pension_security_fund',
+            #             'pension_security_fund_subsistence',
+            #             'refund',
+            #             'sanctions_private',
+            #             'sanctions_public',
+            #             'tax_lien',
+            #             'trade_unions',
+            #             'voluntary_pension',
+            #             'withholding_source'
+            #     ):
+            #         raise UserError(_("This concept must be configured in salary rules as not detailed: %s")
+            #                         % deduction_id.rule_input_id.input_id.name)
+            #     elif deduction_id.category == 'advances':
+            #         if deduction_id.amount:
+            #             deduction_advances.append({
+            #                 "payment": abs(deduction_id.amount)
+            #             })
+            #     elif deduction_id.category == 'libranzas':
+            #         if deduction_id.amount:
+            #             deduction_libranzas.append({
+            #                 "description": deduction_id.name,
+            #                 "payment": abs(deduction_id.amount)
+            #             })
+            #     elif deduction_id.category == 'other_deductions':
+            #         if deduction_id.amount:
+            #             deduction_others.append({
+            #                 "payment": abs(deduction_id.amount)
+            #             })
+            #     elif deduction_id.category == 'third_party_payments':
+            #         if deduction_id.amount:
+            #             deduction_third_party_payments.append({
+            #                 "payment": abs(deduction_id.amount)
+            #             })
 
             # Salary computation iteration
             for line_id in rec.line_ids:
@@ -1363,8 +1363,8 @@ class HrPayslip(models.Model):
                 payload = copied_payslip.get_json_request()
                 copied_payslip.write({'edi_payload': json.dumps(payload, indent=2, sort_keys=False)})
 
-        formview_ref = self.env.ref('hr_payroll_community.view_hr_payslip_form', False)
-        treeview_ref = self.env.ref('hr_payroll_community.view_hr_payslip_tree', False)
+        formview_ref = self.env.ref('om_hr_payroll.view_hr_payslip_form', False)
+        treeview_ref = self.env.ref('om_hr_payroll.view_hr_payslip_tree', False)
 
         if copied_payslip is not None:
             domain = "[('id', 'in', %s)]" % copied_payslip.ids
