@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="edit_holiday_status_form_lt_hr_vacation" model="ir.ui.view">
+        <field name="name">hr.leave.type.lt_hr_vacation</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+             <field name="request_unit" position="after">
+                 <field name="is_vacation"/>
+                 <field name="dominican_discount"/>
+             </field>
+        </field>
+    </record>
+</odoo>

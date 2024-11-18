@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="hr_payroll_salary_structure_estr_sal_admin" model="hr.payroll.structure">
+            <field name="code">ESTR SALARIAL ADMIN</field>
+            <field name="name">ESTR_SAL_ADMIN</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_3'), ref('rule_7'), ref('rule_8'), ref('rule_9'), ref('rule_10'), ref('rule_11'), ref('rule_12'), ref('rule_13'), ref('rule_14'), ref('rule_74'), ref('rule_15'), ref('rule_16'), ref('rule_17'), ref('rule_18'), ref('rule_19'), ref('rule_21'), ref('rule_22'), ref('rule_23'), ref('rule_24'), ref('rule_25'), ref('rule_26'), ref('rule_27'), ref('rule_73'), ref('rule_28'), ref('rule_29'), ref('rule_31'), ref('rule_32'), ref('rule_33'), ref('rule_34'), ref('rule_35'), ref('rule_36'), ref('rule_37'), ref('rule_38'), ref('rule_40'), ref('rule_41'), ref('rule_43'), ref('rule_44'), ref('rule_45'), ref('rule_46'), ref('rule_47'), ref('rule_48'), ref('rule_49'), ref('rule_50'), ref('rule_51'), ref('rule_58'), ref('rule_59'), ref('rule_61'), ref('rule_64'), ref('rule_75'), ref('rule_68'), ref('rule_69'), ref('rule_70'), ref('rule_71'), ref('rule_72')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="hr_payroll_salary_structure_estr_sal_ventas" model="hr.payroll.structure">
+            <field name="code">ESTR SALARIAL VENTAS</field>
+            <field name="name">ESTR_SAL_VENTAS</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_3'), ref('rule_7'), ref('rule_8'), ref('rule_9'), ref('rule_10'), ref('rule_11'), ref('rule_12'), ref('rule_13'), ref('rule_14'), ref('rule_74'), ref('rule_15'), ref('rule_16'), ref('rule_17'), ref('rule_18'), ref('rule_19'), ref('rule_21'), ref('rule_22'), ref('rule_23'), ref('rule_24'), ref('rule_25'), ref('rule_26'), ref('rule_27'), ref('rule_73'), ref('rule_28'), ref('rule_29'), ref('rule_31'), ref('rule_32'), ref('rule_33'), ref('rule_34'), ref('rule_35'), ref('rule_36'), ref('rule_37'), ref('rule_38'), ref('rule_40'), ref('rule_41'), ref('rule_43'), ref('rule_44'), ref('rule_45'), ref('rule_46'), ref('rule_47'), ref('rule_48'), ref('rule_49'), ref('rule_50'), ref('rule_51'), ref('rule_58'), ref('rule_59'), ref('rule_61'), ref('rule_64'), ref('rule_75'), ref('rule_68'), ref('rule_69'), ref('rule_70'), ref('rule_71'), ref('rule_72')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="hr_payroll_salary_structure_estr_sal_produccion" model="hr.payroll.structure">
+            <field name="code">ESTR SALARIAL PRODUCCION</field>
+            <field name="name">ESTR_SAL_PRODUCCION</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_3'), ref('rule_7'), ref('rule_8'), ref('rule_9'), ref('rule_10'), ref('rule_11'), ref('rule_12'), ref('rule_13'), ref('rule_14'), ref('rule_74'), ref('rule_15'), ref('rule_16'), ref('rule_17'), ref('rule_18'), ref('rule_19'), ref('rule_21'), ref('rule_22'), ref('rule_23'), ref('rule_24'), ref('rule_25'), ref('rule_26'), ref('rule_27'), ref('rule_73'), ref('rule_28'), ref('rule_29'), ref('rule_31'), ref('rule_32'), ref('rule_33'), ref('rule_34'), ref('rule_35'), ref('rule_36'), ref('rule_37'), ref('rule_38'), ref('rule_40'), ref('rule_41'), ref('rule_43'), ref('rule_44'), ref('rule_45'), ref('rule_46'), ref('rule_47'), ref('rule_48'), ref('rule_49'), ref('rule_50'), ref('rule_51'), ref('rule_58'), ref('rule_59'), ref('rule_61'), ref('rule_64'), ref('rule_75'), ref('rule_68'), ref('rule_69'), ref('rule_70'), ref('rule_71'), ref('rule_72')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="hr_payroll_salary_structure_estr_sal_liquid" model="hr.payroll.structure">
+            <field name="code">LIQ</field>
+            <field name="name">LIQUIDACION</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_3'), ref('rule_53'), ref('rule_54'), ref('rule_55'), ref('rule_56'), ref('rule_75'), ref('rule_68'), ref('rule_69'), ref('rule_71'), ref('rule_72')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="hr_payroll_salary_structure_aprendiz_sena_admin" model="hr.payroll.structure">
+            <field name="code">APRENDIZ SENA ADMIN</field>
+            <field name="name">ESTR_SAL_APR_SENA</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_22'), ref('rule_3'), ref('rule_33'), ref('rule_40'), ref('rule_34'), ref('rule_8'), ref('rule_28'), ref('rule_31'), ref('rule_19'), ref('rule_13'), ref('rule_11'), ref('rule_12'), ref('rule_14'), ref('rule_74'), ref('rule_15'), ref('rule_16'), ref('rule_17'), ref('rule_25'), ref('rule_23'), ref('rule_27'), ref('rule_73'), ref('rule_21'), ref('rule_44'), ref('rule_10'), ref('rule_9'), ref('rule_42'), ref('rule_18'), ref('rule_70')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="hr_payroll_salary_structure_estr_sal_sena_admin_lectiva" model="hr.payroll.structure">
+            <field name="code">APRENDIZ SENA LECTIVA</field>
+            <field name="name">ESTR_SAL_SENA_LECTIVA</field>
+            <field eval="[(6, 0, [ref('rule_1'), ref('rule_2'), ref('rule_22'), ref('rule_3'), ref('rule_33'), ref('rule_40'), ref('rule_34'), ref('rule_8'), ref('rule_28'), ref('rule_31'), ref('rule_19'), ref('rule_13'), ref('rule_11'), ref('rule_12'), ref('rule_14'), ref('rule_74'), ref('rule_15'), ref('rule_16'), ref('rule_17'), ref('rule_25'), ref('rule_23'), ref('rule_27'), ref('rule_73'), ref('rule_21'), ref('rule_44'), ref('rule_10'), ref('rule_9'), ref('rule_42'), ref('rule_18'), ref('rule_70')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+    </data>
+</odoo>

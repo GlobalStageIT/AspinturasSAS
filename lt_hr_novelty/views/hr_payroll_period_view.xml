@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="hr_payroll_period_form_lt_hr_vacation" model="ir.ui.view">
+            <field name="name">hr.payroll.period.form.lt_hr_vacation</field>
+            <field name="model">hr.payroll.period</field>
+            <field name="inherit_id" ref="om_hr_payroll.hr_payroll_period_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[2]" position="after">
+                    <separator string="Novelty Dates"/>
+                    <group>
+                        <group>
+                            <field name="novelty_date_start"/>
+                        </group>
+                        <group>
+                            <field name="novelty_date_end"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_payroll_period_tree_lt_hr_vacation" model="ir.ui.view">
+            <field name="name">hr.payroll.period.tree.lt_hr_vacation</field>
+            <field name="model">hr.payroll.period</field>
+            <field name="inherit_id" ref="om_hr_payroll.hr_payroll_period_tree"/>
+            <field name="arch" type="xml">
+                <field name="date_end" position="after">
+                    <field name="novelty_date_start"/>
+                    <field name="novelty_date_end"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

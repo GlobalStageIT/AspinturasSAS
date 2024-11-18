@@ -1,0 +1,102 @@
+<odoo>
+    <data>
+        <record id="hr_payroll_period_form" model="ir.ui.view">
+            <field name="name">hr.payroll.period.form</field>
+            <field name="model">hr.payroll.period</field>
+            <field name="arch" type="xml">
+                <form string="Payroll Period" create="0">
+                    <sheet>
+                        <group>
+                            <div>
+                                <h1>
+                                    <field name="name" nolabel="1" placeholder="Name"/>
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="payment_frequency_id"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_payroll_period_tree" model="ir.ui.view">
+            <field name="name">hr.payroll.period.tree</field>
+            <field name="model">hr.payroll.period</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="payment_frequency_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_payroll_period_search" model="ir.ui.view">
+            <field name="name">view.payroll.period.search</field>
+            <field name="model">hr.payroll.period</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="payment_frequency_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="company_id"/>
+                    <separator/>
+                    <filter name="date_start" string="Date Start" date="date_start"/>
+                    <filter name="date_end" string="Date End" date="date_end"/>
+                    <separator/>
+                    <group expand="0" string="Date Start">
+                        <filter name="groupby_date_start" context="{'group_by' : 'date_start:year'}" string="Date Start"/>
+                    </group>
+                    <group expand="0" string="Date End">
+                        <filter name="groupby_date_end" context="{'group_by' : 'date_end'}" string="Date End"/>
+                    </group>
+                    <group expand="0" string="Payment Frequency">
+                        <filter name="groupby_payment_frequency_id" context="{'group_by' : 'payment_frequency_id'}"
+                                string="Payment Frequency"/>
+                    </group>
+                    <group expand="0" string="Company">
+                        <filter name="groupby_company_id" context="{'group_by' : 'company_id'}"
+                                string="Company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_payroll_period_action" model="ir.actions.act_window">
+            <field name="name">Payroll Period</field>
+            <field name="res_model">hr.payroll.period</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_payroll_period_tree"/>
+            <field name="context">{'search_default_groupby_date_start': True}</field>
+            <field name="search_view_id" ref="view_payroll_period_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first payroll period.</p>
+            </field>
+        </record>
+
+        <menuitem
+                name="Payroll Period"
+                action="hr_payroll_period_action"
+                id="hr_payroll_period_menu"
+                parent="menu_hr_payroll_configuration"
+                sequence="110"
+        />
+    </data>
+</odoo>

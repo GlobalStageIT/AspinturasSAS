@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="novelty_category_cuota_sostenimiento_4" model="hr.novelty.category">
+            <field name="name">Cuota de sostenimiento</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_auxilio_transporte_6" model="hr.novelty.category">
+            <field name="name">Auxilio de transporte</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_recargos_7" model="hr.novelty.category">
+            <field name="name">Recargos</field>
+            <field name="apply_factor">True</field>
+        </record>
+
+        <record id="novelty_category_horas_extras_8" model="hr.novelty.category">
+            <field name="name">Horas extras</field>
+            <field name="apply_factor">True</field>
+        </record>
+
+        <record id="novelty_category_vacaciones_compensadas_12" model="hr.novelty.category">
+            <field name="name">Vacaciones compensadas en dinero</field>
+            <field name="apply_factor">False</field>
+            <field name="self_calculating">True</field>
+            <field name="type_calculation">days</field>
+        </record>
+
+        <record id="novelty_category_dotacion_14" model="hr.novelty.category">
+            <field name="name">Dotación</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_auxilio_no_prestacional_15" model="hr.novelty.category">
+            <field name="name">Auxilio no prestacional</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_libranzas_21" model="hr.novelty.category">
+            <field name="name">Libranzas o prestamos</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_medicina_prepagada_22" model="hr.novelty.category">
+            <field name="name">Medicina Prepagada</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_ahorros_23" model="hr.novelty.category">
+            <field name="name">Ahorros</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_descuentos_trabajadores_24" model="hr.novelty.category">
+            <field name="name">Descuentos trabajadores</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <record id="novelty_category_indemnizaciones_laborales_26" model="hr.novelty.category">
+            <field name="name">Indemnizaciones laborales</field>
+            <field name="apply_factor">False</field>
+        </record>
+
+        <!-- Otros -->
+        <record id="novelty_category_otros" model="hr.novelty.category">
+            <field name="name">Otros</field>
+            <field name="apply_factor">False</field>
+        </record>
+    </data>
+</odoo>

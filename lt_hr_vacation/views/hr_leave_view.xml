@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_leave_tree_lt_hr_vacation" model="ir.ui.view">
+        <field name="name">hr.leave.tree.lt_hr_vacation</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+        <field name="arch" type="xml">
+             <field name="date_from" position="replace">
+                 <field name="request_date_from"/>
+             </field>
+             <field name="date_to" position="replace">
+                 <field name="request_date_to"/>
+             </field>
+        </field>
+    </record>
+
+    <menuitem
+            id="hr_holidays.menu_hr_holidays_dashboard"
+            name="Overview"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="2"
+            action="hr_holidays.action_hr_holidays_dashboard"
+            groups="hr_holidays.group_hr_holidays_manager"/>
+
+    <menuitem
+            id="hr_holidays.menu_hr_holidays_approvals"
+            name="Approvals"
+            parent="hr_holidays.menu_hr_holidays_root"
+            sequence="3"
+            groups="hr_holidays.group_hr_holidays_manager"/>
+
+    <menuitem
+            id="hr_holidays.menu_open_department_leave_approve"
+            name="Time Off"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="hr_holidays.hr_leave_action_action_approve_department"
+            groups="hr_holidays.group_hr_holidays_manager"
+            sequence="1"/>
+
+    <menuitem
+            id="hr_holidays.hr_holidays_menu_manager_approve_allocations"
+            name="Allocations"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="hr_holidays.hr_leave_allocation_action_approve_department"
+            groups="hr_holidays.group_hr_holidays_manager"
+            sequence="2"/>
+
+    <record id="action_compute_hr_leave" model="ir.actions.server">
+        <field name="name">Calcular Días</field>
+        <field name="model_id" ref="hr_holidays.model_hr_leave"/>
+        <field name="binding_model_id" ref="hr_holidays.model_hr_leave"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                for record in records:
+                    action = record.with_context(re_compute=True)._compute_number_of_days()
+        </field>
+    </record>
+
+</odoo>

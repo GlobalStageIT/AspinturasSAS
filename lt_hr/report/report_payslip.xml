@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="report_report_payslip_custom" inherit_id="om_hr_payroll.report_payslip">
+            <xpath expr="//div[@class='page']" position="replace">
+                <div class="page">
+                    <h3>Comprobante de Nómina</h3>
+                    <p t-field="o.name"/>
+                    <table class="table table-sm table-bordered" style="table-layout: fixed;">
+                        <tr>
+                            <td colspan="2">
+                                <strong>Fecha Desde</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.date_from"/>
+                            </td>
+                            <td colspan="2">
+                                <strong>Fecha Hasta</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.date_to"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>Comprobante Número</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.number"/>
+                            </td>
+                            <td colspan="2">
+                                <strong>Cuenta Bancaria</strong>
+                            </td>
+                            <t t-if="o.employee_id.address_home_id.bank_ids">
+                                <t t-set="bank_id" t-value="o.employee_id.address_home_id.bank_ids[0]"/>
+                                <td colspan="2">
+                                    <span t-esc="bank_id.bank_id.name + ' - ' + bank_id.acc_number"/>
+                                </td>
+                            </t>
+                            <t t-else="else">
+                                <td colspan="2">
+                                    <span t-esc="'No configurada'"/>
+                                </td>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <strong>Nombre</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.employee_id.name"/>
+                            </td>
+                            <td colspan="2">
+                                <strong>No Identificación</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.employee_id.identification_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+<!--                            <td colspan="2">-->
+<!--                                <strong>Salario Básico</strong>-->
+<!--                            </td>-->
+<!--                            <td colspan="2">-->
+<!--                                <span t-field="o.contract_id.total_income"/>-->
+<!--                            </td>-->
+                            <td colspan="2">
+                                <strong>Cargo</strong>
+                            </td>
+                            <td colspan="2">
+                                <span t-field="o.employee_id.job_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>Detalle de Días</h4>
+                    <!-- Tabla de Días -->
+                    <table class="table table-sm table-bordered float-left" style="table-layout: fixed;">
+                        <t t-set="total_days" t-value="0"/>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Descripción</th>
+                                <th colspan="1">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tr t-foreach="o.worked_days_line_ids" t-as="line">
+                            <td colspan="2">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td colspan="1">
+                                <span t-field="line.number_of_days"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>Devengos y Deducciones</h4>
+                    <!-- Tabla de Devengos -->
+                    <table class="table table-sm table-bordered float-left" style="table-layout: fixed; width: 50%;">
+                        <t t-set="total_income" t-value="0"/>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Devengos</th>
+                                <th colspan="1">Cantidad</th>
+                                <th colspan="1">Total</th>
+                            </tr>
+                        </thead>
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.appears_on_payslip and line.amount > 0)"
+                            t-as="line" t-if="line.salary_rule_id.type_concept == 'earn'">
+                            <td colspan="2">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td colspan="1">
+                                <span t-field="line.quantity"/>
+                            </td>
+                            <td colspan="1">
+                                <span t-esc="'$ ' + '{:,.0f}'.format(line.total)"/>
+                                <t t-set="total_income" t-value="total_income + line.total"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Tabla de Deducciones -->
+                    <table class="table table-sm table-bordered float-left" style="table-layout: fixed; width: 50%;">
+                        <t t-set="total_deduction" t-value="0"/>
+                        <thead>
+                            <tr>
+                                <th colspan="2">Deducciones</th>
+                                <th colspan="1">Cantidad</th>
+                                <th colspan="1">Total</th>
+                            </tr>
+                        </thead>
+                        <tr t-foreach="o.line_ids.filtered(lambda line: line.salary_rule_id.appears_on_payslip and line.amount > 0)"
+                            t-as="line" t-if="line.salary_rule_id.type_concept == 'deduction'">
+                            <td colspan="2">
+                                <span t-field="line.name"/>
+                            </td>
+                            <td colspan="1">
+                                <span t-field="line.quantity"/>
+                            </td>
+                            <td colspan="1">
+                                <span t-esc="'$ ' + '{:,.0f}'.format(line.total)"/>
+                                <t t-set="total_deduction" t-value="total_deduction + line.total"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-sm table-bordered" style="table-layout: fixed;">
+                        <tr>
+                            <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                <strong>Total Devengos</strong>
+                            </td>
+                            <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                <span t-esc="'$ ' + '{:,.0f}'.format(total_income)"/>
+                            </td>
+                            <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                <strong>Total Deducciones</strong>
+                            </td>
+                            <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                <span t-esc="'$ ' + '{:,.0f}'.format(total_deduction)"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+                    <table class="table table-sm table-bordered float-right" style="table-layout: fixed; width: 50%;">
+                        <td colspan="2" style="text-align: center; vertical-align: middle;">
+                            <strong>
+                                <h5>Neto a Pagar</h5>
+                            </strong>
+                        </td>
+                        <td colspan="2" style="text-align: center; vertical-align: middle;">
+                            <strong>
+                                <h5 t-esc="'$ ' + '{:,.0f}'.format(total_income - total_deduction)"/>
+                            </strong>
+                        </td>
+                    </table>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

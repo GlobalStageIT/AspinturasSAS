@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sequence_hr_novelty" model="ir.sequence">
+            <field name="name">Hr Novelty Sequence</field>
+            <field name="code">hr.novelty</field>
+            <field name="prefix">NOV</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field name="padding">6</field>
+        </record>
+    </data>
+</odoo>

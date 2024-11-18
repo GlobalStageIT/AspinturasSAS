@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_contract_view_form_lt_hr" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.lt_hr</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                <field name="rtefte_incentivo_vivienda"/>
+                <field name="rtefte_aportes_vol_pens_empleador"/>
+                <field name="rtefte_pago_int_vivienda"/>
+                <field name="rtefte_pagos_med_prepagada"/>
+                <field name="rtefte_pagos_dependientes"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

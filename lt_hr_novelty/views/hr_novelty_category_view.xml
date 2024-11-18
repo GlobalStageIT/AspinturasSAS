@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+        <record id="view_hr_novelty_category_tree" model="ir.ui.view">
+            <field name="name">hr.novelty.category.tree</field>
+            <field name="model">hr.novelty.category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_novelty_category_form" model="ir.ui.view">
+            <field name="name">hr.novelty.category.form</field>
+            <field name="model">hr.novelty.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="apply_factor"/>
+                            </group>
+                            <group>
+                                <field name="self_calculating"/>
+                                <field name="type_calculation"
+                                       attrs="{'invisible': [('self_calculating', '=', False)], 'required': [('self_calculating', '=', True)]}" widget="radio"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_novelty_category_search" model="ir.ui.view">
+            <field name="name">view.novelty.category.search</field>
+            <field name="model">hr.novelty.category</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Define the action for the tree view -->
+        <record id="action_hr_novelty_category" model="ir.actions.act_window">
+            <field name="name">Novelty Category</field>
+            <field name="res_model">hr.novelty.category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_hr_novelty_category_tree"/>
+            <field name="search_view_id" ref="view_hr_novelty_category_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first category of novelty of payslip.</p>
+            </field>
+        </record>
+
+        <!-- Define the menu item for the tree view -->
+        <menuitem id="menu_hr_novelty_category"
+                  name="Category"
+                  action="action_hr_novelty_category"
+                  parent="menu_hr_novelty_configuration"
+                  sequence="10"/>
+
+    </data>
+</odoo>

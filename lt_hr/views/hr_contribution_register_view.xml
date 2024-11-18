@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_contribution_register_form_lt_hr" model="ir.ui.view">
+            <field name="name">.hr.contribution.register.form.lt_hr</field>
+            <field name="model">hr.contribution.register</field>
+            <field name="inherit_id" ref="om_hr_payroll.hr_contribution_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group>
+                        <field name="partner_from_employee_contract"/>
+                        <field name="field_id"
+                            widget = 'selection'
+                            attrs ="{'invisible': [('partner_from_employee_contract', '=', False)],
+                            'required': [('partner_from_employee_contract', '=', True)]}"/>
+                    </group>
+                </xpath>
+           </field>
+        </record>
+    </data>
+</odoo>
