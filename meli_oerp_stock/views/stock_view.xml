@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_location_form_meli">
+            <field name="name">stock.location.meli</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[@name='additional_info']" position="after">
+                  <group string="Inventario MercadoLibre" name="meli_oerp_stock_location"  col="2">
+                      <field name="mercadolibre_active" invisible="0"/>
+                      <field name="mercadolibre_logistic_type" invisible="0"/>
+                  </group>
+               </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_stock_picking_form_meli">
+            <field name="name">stock.picking.form.meli</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[1]" position="inside">
+                  <group string="MercadoLibre" name="meli_stock_picking"
+			invisible="meli_order==False"
+                    col="2">
+                  <!--group string="Producteca" name="producteca_stock_picking"
+                      attrs="{'invisible':[('sale_order.producteca_binding','=',False)]}"
+                      col="2"-->
+                      <field name="sale_id"/>
+                      <field name="meli_shipment_status_brief"/>
+                      <field name="meli_shipment_print_pdf"/>
+                      <field name="meli_shipment_print"/>
+                      <field name="meli_shipment"/>
+                      <field name="meli_order"/>
+                  </group>
+               </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
