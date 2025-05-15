@@ -1,9 +1,0 @@
-<record model="ir.ui.view" id="product_normal_mercadolibre_form_view">
-    <field name="name">product.normal.mercadolibre.form.inherit</field>
-    <field name="model">product.product</field>
-    <field name="inherit_id" ref="product.product_normal_form_view" />
-    <field name="arch" type="xml">
-      <field name="product_default_code"/>
-      <field name="product_barcode"/>
-    </field>
-</record>
