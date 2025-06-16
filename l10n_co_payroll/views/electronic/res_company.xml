@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="kumbal_nomina_electronica_co_res_company_form_view" model="ir.ui.view">
+            <field name="name">ID para nomina electronica</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- Pestaña de nomina electrónica -->
+                    <xpath expr="//form/sheet/notebook/page" position="after">
+                        <page string="Nomina Electrónica">
+                            <group>
+                                <field name="ne_habilitada_compania"/>
+
+                                <field name="nomina_electronica_id" attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name="ne_tipo_ambiente" attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name="ne_test_set_id" attrs="{'required': [('ne_tipo_ambiente', '!=', '1'),('ne_habilitada_compania','=',True)],                                                             'invisible': [('ne_tipo_ambiente', '=', '1')]}"/>
+                                <field name='ne_software_id' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='view_ne_software_pin' password='True' attrs="{'required': [('ne_software_pin', '=', False), ('ne_habilitada_compania','=',True)]}"/>
+                                <field name='ne_software_pin' invisible='1'/>
+                                <field name='ne_certificado' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='view_ne_certificado_password' password='True' attrs="{'required': [('ne_certificado_password', '=', False), ('ne_habilitada_compania','=',True)]}"/>
+                                <field name='ne_certificado_password' invisible='1' />
+                                <field name='ne_url_politica_firma' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='ne_archivo_politica_firma' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='ne_descripcion_politica_firma' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='secuencia_nomina_individual_electronica' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='secuencia_nomina_individual_ajuste' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='ne_nomina_email' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                                <field name='fecha_inicio_reporte_nominas_electronicas' attrs="{'required': [('ne_habilitada_compania','=',True)]}"/>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

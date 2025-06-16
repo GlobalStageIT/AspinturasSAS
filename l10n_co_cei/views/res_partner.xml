@@ -1,0 +1,150 @@
+<odoo>
+    <data>
+        <record id="l10n_co_cei_res_partner_view" model="ir.ui.view">
+            <field name="name">l10n_co_cei.tree.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+				<xpath expr="//field[@name='vat']" position="after">
+                    <field name="fe_habilitada"/>
+				</xpath>
+                <xpath expr="//field[@name='country_id']" position="after">
+                    <field name="postal_id" placeholder="Código Postal"/>
+                </xpath>
+                <xpath expr="//field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='postal_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page" position="after">
+                    <page string="Datos fiscales" name="fiscal_data" attrs="{'invisible': [('fe_habilitada', '!=', True)]}">
+                        <group name="fiscal_data_group">
+                            <group name="group_1">
+                                <field name="fe_habilitada" attrs="{'invisible': True}"/>
+                                <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                                <field name="company_partner_id" attrs="{'invisible': True}"/>
+                                <field name="mostrar_sucursal" attrs="{'invisible': True}"/>
+                                <field name="fe_razon_social"
+                                       attrs="{'required': [('fe_habilitada', '=', True), ('company_type', '=', 'company')],
+                                               'invisible': [('company_type', '!=', 'company')]}"/>
+                                <field name="fe_primer_nombre"
+                                       attrs="{'required': [('fe_habilitada', '=', True), ('company_type', '=', 'person')],
+                                               'invisible': [('company_type', '!=', 'person')]}"/>
+                                <field name="fe_segundo_nombre" attrs="{'invisible': [('company_type', '!=', 'person')]}"/>
+                                <field name="fe_primer_apellido"
+                                       attrs="{'required': [('fe_habilitada', '=', True), ('company_type', '=', 'person')],
+                                               'invisible': [('company_type', '!=', 'person')]}"/>
+                                <field name="fe_segundo_apellido" attrs="{'invisible': [('company_type', '!=', 'person')]}"/>
+                                <field name="fe_es_compania" attrs="{'required': [('fe_habilitada', '=', True)]}"/>
+                                <field name="fe_sucursal"  attrs="{'invisible': ['|','|',('type','!=','contact'),('parent_id', '=', False),('mostrar_sucursal', '=', False)]}" domain="[('parent_id', '=', company_partner_id), ('type','!=','contact')]"/>
+                                <field name="fe_facturador" attrs="{'invisible': [('parent_id', '=', False)]}"/>
+                            </group>
+                            <group name="group_2">
+                                <field name="fe_tipo_regimen" attrs="{'required': [('fe_habilitada', '=', True)]}"/>
+                                <field name="fe_responsabilidad_fiscal" attrs="{'invisible': True}"/>
+                                <field name="responsabilidad_fiscal_fe" attrs="{'required': [('fe_habilitada', '=', True)]}"/>
+                                <field name="fe_regimen_fiscal" attrs="{'invisible': True}"/>
+                                <field name="fe_responsabilidad_tributaria" attrs="{'required': [('fe_habilitada', '=', True)]}"/>
+                                <field name="fe_es_contribuyente"/>
+                                <field name="fe_matricula_mercantil"/>
+                                <field name="fe_destinatario_factura"/>
+                                <field name="fe_correo_electronico" attrs="{'required': [('fe_habilitada', '=', True)]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+<!--                    &lt;!&ndash; Oculta el campo Document Type de Odoo &ndash;&gt;-->
+<!--                    <xpath expr="//field[@name='l10n_co_document_type']" position="attributes">-->
+<!--                        <attribute name="attrs">{'readonly': [(True)]}</attribute>-->
+<!--                    </xpath>-->
+
+<!--                    &lt;!&ndash; Vista de los parametros diligenciados para las sucursales &ndash;&gt;-->
+<!--                    <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/kanban/templates/t/div/div[@class='oe_kanban_details']/div/div/field[@name='city']" position="attributes">-->
+<!--                        <attribute name="attrs">{'invisible': [(True)]}</attribute>-->
+<!--                    </xpath>-->
+
+                <!-- Formulario de Sucursales -->
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div" position="after">
+                    <field name="user_id" attrs="{'invisible': True}"/>
+					<field name="fe_habilitada" attrs="{'invisible': True}"/>
+                    <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                    <field name="postal_id" attrs="{'invisible': [('fe_habilitada', '!=', True)],'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}"/>
+                    <field name="journal_id_fv" domain="[('type', '=', 'sale'), ('categoria','=','factura-venta'), ('company_id', '=', company_id)]" attrs="{'invisible': [('fe_habilitada', '!=', True)]}"/>
+                    <field name="journal_id_nd" domain="[('type', '=', 'sale'), ('categoria','=','nota-debito'), ('company_id', '=', company_id)]" attrs="{'invisible': [('fe_habilitada', '!=', True)]}"/>
+                    <field name="company_id" attrs="{'invisible': [('fe_habilitada', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fe_habilitada', '=', True)] }</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)],'readonly': False}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/field[@name='phone']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/field[@name='email']" position="attributes">
+                    <attribute name="attrs">{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+
+                <!-- Cambio de posición de campos -->
+                <xpath expr="//div[@class='o_address_format']" position="after">
+                    <field name="fe_tipo_documento" attrs="{'required': [('fe_habilitada','=',True)], 'invisible': [('fe_habilitada', '!=', True)]}"/>
+                    <field name="fe_nit" placeholder="Máximo 13 caracteres." attrs="{'required': [('fe_habilitada', '=', True)], 'invisible': [('fe_habilitada', '!=', True)]}"/>
+                    <field name="fe_digito_verificacion" attrs="{'required': [('fe_tipo_documento', '=', '31'),('fe_habilitada','=',True)],
+                                                                 'invisible': ['|',('fe_tipo_documento', '!=', '31'),('fe_habilitada', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//form/sheet/group/group/div/field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/group/group/div/field[@name='city']" position="after">
+                    <field name="cities" placeholder="Ciudad" class="o_address_city"
+                           domain="[('state_id', '=?', state_id)]"
+                           context="{'default_state_id': state_id}"/>
+                </xpath>
+                <xpath expr="//form/sheet/group/group/div/field[@name='postal_id']" position="attributes">
+                    <attribute name="domain">[('city_id', '=?', cities)]</attribute>
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="domain">[('country_id', '=?', country_id)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='cities']" position="attributes">
+                    <attribute name="attrs">{'required': [('fe_habilitada', '=', True)], 'invisible': [('fe_habilitada', '!=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group/group/div/div[@class='o_address_format']/field[@name='state_id']" position="after">
+                    <field name="cities" attrs="{'required': [('type','!=', 'contact'),('fe_habilitada', '=', True)], 'invisible': [('fe_habilitada', '!=', True)]}" class="o_address_state" placeholder="Ciudad" options='{"no_open": True}'/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

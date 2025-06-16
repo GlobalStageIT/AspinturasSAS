@@ -1,0 +1,510 @@
+<!-- Version #1.0 -->
+<NominaIndividualDeAjuste xmlns="dian:gov:co:facturaelectronica:NominaIndividualDeAjuste"
+				  xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+				  xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+				  xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+				  xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"
+				  xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#"
+				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				  SchemaLocation=""
+				  xsi:schemaLocation="dian:gov:co:facturaelectronica:NominaIndividualDeAjuste NominaIndividualDeAjusteElectronicaXSD.xsd">
+<ext:UBLExtensions>
+	<ext:UBLExtension>
+		<ext:ExtensionContent/>
+  	</ext:UBLExtension>
+</ext:UBLExtensions>
+
+<TipoNota>{{TipoAjuste}}</TipoNota>
+	<Reemplazar>
+		<ReemplazandoPredecesor NumeroPred="{{NumeroSecuenciaXML.Numero}}"
+		                        CUNEPred="{{Predecesor.InformacionGeneral.CUNE}}"
+		                        FechaGenPred="{{Predecesor.InformacionGeneral.FechaGen}}"/>
+		<Periodo
+			FechaIngreso="{{Periodo.FechaIngreso}}"
+			{% if Periodo.FechaRetiro  %} FechaRetiro="{{Periodo.FechaIngreso}}"{% endif %}
+			FechaLiquidacionInicio="{{Periodo.FechaLiquidacionInicio}}"
+			FechaLiquidacionFin="{{Periodo.FechaLiquidacionFin}}"
+			TiempoLaborado="{{Periodo.TiempoLaborado}}"
+			FechaGen="{{Periodo.FechaGen}}"/>
+
+		<NumeroSecuenciaXML
+			CodigoTrabajador="{{NumeroSecuenciaXML.CodigoTrabajador}}"
+			Prefijo="{{NumeroSecuenciaXML.Prefijo}}"
+			Consecutivo="{{NumeroSecuenciaXML.Consecutivo}}"
+			Numero="{{NumeroSecuenciaXML.Numero}}"/>
+
+		<LugarGeneracionXML
+			Pais="{{LugarGeneracionXML.Pais}}"
+			DepartamentoEstado="{{LugarGeneracionXML.DepartamentoEstado}}"
+			MunicipioCiudad="{{LugarGeneracionXML.MunicipioCiudad}}"
+			Idioma="{{LugarGeneracionXML.Idioma}}"/>
+		<ProveedorXML
+			{%if ProveedorXML.RazonSocial%}
+			RazonSocial="{{ProveedorXML.RazonSocial}}"
+			{%endif%}
+			{%if ProveedorXML.PrimerApellido%}
+			PrimerApellido="{{ProveedorXML.PrimerApellido}}"
+			{%endif%}
+			{%if ProveedorXML.SegundoApellido%}
+			SegundoApellido="{{ProveedorXML.SegundoApellido}}"
+			{%endif%}
+			{%if ProveedorXML.PrimerNombre%}
+			PrimerNombre="{{ProveedorXML.PrimerNombre}}"
+			{%endif%}
+			{%if ProveedorXML.OtrosNombres%}
+			OtrosNombres="{{ProveedorXML.OtrosNombres}}"
+			{%endif%}
+			NIT="{{ProveedorXML.NIT}}"
+			DV="{{ProveedorXML.DV}}"
+			SoftwareID="{{ProveedorXML.SoftwareID}}"
+			SoftwareSC="{{ProveedorXML.SoftwareSC}}"/>
+		{%if InformacionGeneral.Ambiente=='1'%}
+		<CodigoQR>https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey={{InformacionGeneral.CUNE}}</CodigoQR>
+		{% else %}
+		<CodigoQR>https://catalogo-vpfe-hab.dian.gov.co/document/searchqr?documentkey={{InformacionGeneral.CUNE}}</CodigoQR>
+		{%endif%}
+
+
+		<InformacionGeneral
+			Version="{{InformacionGeneral.Version}}"
+			Ambiente="{{InformacionGeneral.Ambiente}}"
+			TipoXML="{{InformacionGeneral.TipoXML}}"
+			CUNE="{{InformacionGeneral.CUNE}}"
+			EncripCUNE="{{InformacionGeneral.EncripCUNE}}"
+			FechaGen="{{InformacionGeneral.FechaGen}}"
+			HoraGen="{{InformacionGeneral.HoraGen}}"
+			PeriodoNomina="{{InformacionGeneral.PeriodoNomina}}"
+			TipoMoneda="{{InformacionGeneral.TipoMoneda}}"
+			TRM="{{InformacionGeneral.TRM}}"/>
+
+		<Notas>{{Notas}}</Notas>
+		<Empleador
+			{%if Empleador.RazonSocial%}RazonSocial="{{Empleador.RazonSocial}}"{%endif%}
+			{%if Empleador.PrimerApellido%}PrimerApellido="{{Empleador.PrimerApellido}}"{%endif%}
+			{%if Empleador.SegundoApellido%}SegundoApellido="{{Empleador.SegundoApellido}}"{%endif%}
+			{%if Empleador.PrimerNombre%}PrimerNombre="{{Empleador.PrimerNombre}}"{%endif%}
+			{%if Empleador.OtrosNombres%}OtrosNombres="{{Empleador.OtrosNombres}}"{%endif%}
+			NIT="{{Empleador.NIT}}"
+			DV="{{Empleador.DV}}"
+			Pais="{{Empleador.Pais}}"
+			DepartamentoEstado="{{Empleador.DepartamentoEstado}}"
+			MunicipioCiudad="{{Empleador.MunicipioCiudad}}"
+			Direccion="{{Empleador.Direccion}}"/>
+
+		<Trabajador
+			TipoTrabajador="{{Trabajador.TipoTrabajador}}"
+			SubTipoTrabajador="{{Trabajador.SubTipoTrabajador}}"
+			AltoRiesgoPension="{{Trabajador.AltoRiesgoPension}}"
+			TipoDocumento="{{Trabajador.TipoDocumento}}"
+			NumeroDocumento="{{Trabajador.NumeroDocumento}}"
+			PrimerApellido="{{Trabajador.PrimerApellido}}"
+			SegundoApellido="{{Trabajador.SegundoApellido}}"
+			PrimerNombre="{{Trabajador.PrimerNombre}}"
+
+			{%if Trabajador.OtrosNombres%}
+			OtrosNombres="{{Trabajador.OtrosNombres}}"
+			{%endif%}
+
+			LugarTrabajoPais="{{Trabajador.LugarTrabajoPais}}"
+			LugarTrabajoDepartamentoEstado="{{Trabajador.LugarTrabajoDepartamentoEstado}}"
+			LugarTrabajoMunicipioCiudad="{{Trabajador.LugarTrabajoMunicipioCiudad}}"
+			LugarTrabajoDireccion="{{Trabajador.LugarTrabajoDireccion}}"
+			SalarioIntegral="{{Trabajador.SalarioIntegral}}"
+			TipoContrato="{{Trabajador.TipoContrato}}"
+			Sueldo="{{Trabajador.Sueldo}}"
+			CodigoTrabajador="{{Trabajador.CodigoTrabajador}}"/>
+		<Pago
+			Forma="{{Pago.Forma}}"
+			Metodo="{{Pago.Metodo}}"
+			Banco="{{Pago.Banco}}"
+			TipoCuenta="{{Pago.TipoCuenta}}"
+			NumeroCuenta="{{Pago.NumeroCuenta}}"/>
+
+		<FechasPagos>{% for FechaPago in FechasPagos %}
+			<FechaPago>{{FechaPago}}</FechaPago>
+		{% endfor %}</FechasPagos>
+
+		<Devengados>
+
+			<Basico
+				DiasTrabajados="{{Devengados.Basico.DiasTrabajados}}"
+				SueldoTrabajado="{{Devengados.Basico.SueldoTrabajado}}"/>
+
+
+			{%if (Devengados.Transporte.AuxilioTransporte|float+Devengados.Transporte.ViaticoManutAlojS|float+Devengados.Transporte.ViaticoManutAlojNS|float)>0%}
+			<Transporte
+				{%if (Devengados.Transporte.AuxilioTransporte|float)>0%}
+				AuxilioTransporte="{{Devengados.Transporte.AuxilioTransporte}}"
+				{%endif%}
+				{%if (Devengados.Transporte.ViaticoManutAlojS|float)>0%}
+				ViaticoManuAlojS="{{Devengados.Transporte.ViaticoManutAlojS}}"
+				{%endif%}
+				{%if (Devengados.Transporte.ViaticoManutAlojNS|float)>0%}
+				ViaticoManuAlojNS={{Devengados.Transporte.ViaticoManutAlojNS}}
+				{%endif%}/>
+
+			{%endif%}
+			{%if Devengados.HEDs%}
+			<HEDs>
+				{%for HED in Devengados.HEDs%}
+			<HED
+				HoraInicio="{{HED.HoraInicio}}"
+				HoraFin="{{HED.HoraFin}}"
+				Cantidad="{{HED.Cantidad|int}}"
+				Porcentaje="{{HED.Porcentaje}}"
+				Pago="{{HED.Pago}}"/>
+				{%endfor%}
+			</HEDs>
+			{%endif%}
+			{%if Devengados.HENs%}
+			<HENs>
+				{%for HEN in Devengados.HENs%}
+			<HEN
+				HoraInicio="{{HEN.HoraInicio}}"
+				HoraFin="{{HEN.HoraFin}}"
+				Cantidad="{{HEN.Cantidad|int}}"
+				Porcentaje="{{HEN.Porcentaje}}"
+				Pago="{{HEN.Pago}}"/>
+				{%endfor%}
+			</HENs>
+			{%endif%}
+
+			{%if Devengados.HRNs%}
+			<HRNs>
+				{%for HRN in Devengados.HRNs%}
+			<HRN
+				HoraInicio="{{HRN.HoraInicio}}"
+				HoraFin="{{HRN.HoraFin}}"
+				Cantidad="{{HRN.Cantidad|int}}"
+				Porcentaje="{{HRN.Porcentaje}}"
+				Pago="{{HRN.Pago}}"/>
+				{%endfor%}
+			</HRNs>
+			{%endif%}
+			{%if Devengados.HEDDFs%}
+			<HEDDFs>
+				{%for HEDDF in Devengados.HEDDFs%}
+			<HEDDF
+				HoraInicio="{{HEDDF.HoraInicio}}"
+				HoraFin="{{HEDDF.HoraFin}}"
+				Cantidad="{{HEDDF.Cantidad|int}}"
+				Porcentaje="{{HEDDF.Porcentaje}}"
+				Pago="{{HEDDF.Pago}}"/>
+				{%endfor%}
+			</HEDDFs>
+			{%endif%}
+
+			{%if Devengados.HRDDFs%}
+			<HRDDFs>
+				{%for HRDDF in Devengados.HRDDFs%}
+			<HRDDF
+				HoraInicio="{{HRDDF.HoraInicio}}"
+				HoraFin="{{HRDDF.HoraFin}}"
+				Cantidad="{{HRDDF.Cantidad|int}}"
+				Porcentaje="{{HRDDF.Porcentaje}}"
+				Pago="{{HRDDF.Pago}}"/>
+				{%endfor%}
+			</HRDDFs>
+			{%endif%}
+
+			{%if Devengados.HENDFs%}
+			<HENDFs>
+				{%for HENDF in Devengados.HENDFs%}
+			<HENDF
+				HoraInicio="{{HENDF.HoraInicio}}"
+				HoraFin="{{HENDF.HoraFin}}"
+				Cantidad="{{HENDF.Cantidad|int}}"
+				Porcentaje="{{HENDF.Porcentaje}}"
+				Pago="{{HENDF.Pago}}"/>
+				{%endfor%}
+			</HENDFs>
+			{%endif%}
+
+			{%if Devengados.HRNDFs%}
+			<HRNDFs>
+				{%for HRNDF in Devengados.HRNDFs%}
+			<HRNDF
+				HoraInicio="{{HRNDF.HoraInicio}}"
+				HoraFin="{{HRNDF.HoraFin}}"
+				Cantidad="{{HRNDF.Cantidad|int}}"
+				Porcentaje="{{HRNDF.Porcentaje}}"
+				Pago="{{HRNDF.Pago}}"/>
+				{%endfor%}
+			</HRNDFs>
+			{%endif%}
+			{%if Devengados.Vacaciones.VacacionesComunes and (Devengados.Vacaciones.VacacionesComunes.Pago|float)>0 or Devengados.Vacaciones.VacacionesCompensadas and (Devengados.Vacaciones.VacacionesCompensadas.Pago|float)>0%}
+			<Vacaciones>
+				{%if Devengados.Vacaciones.VacacionesComunes and (Devengados.Vacaciones.VacacionesComunes.Pago|float)>0%}
+				<VacacionesComunes
+					FechaInicio="{{Devengados.Vacaciones.VacacionesComunes.FechaInicio}}"
+					FechaFin="{{Devengados.Vacaciones.VacacionesComunes.FechaFin}}"
+					Cantidad="{{Devengados.Vacaciones.VacacionesComunes.Cantidad|int}}"
+					Pago="{{Devengados.Vacaciones.VacacionesComunes.Pago}}"/>
+				{%endif%}
+				{%if Devengados.Vacaciones.VacacionesCompensadas and (Devengados.Vacaciones.VacacionesCompensadas.Pago|float)>0%}
+				<VacacionesCompensadas
+					Cantidad="{{Devengados.Vacaciones.VacacionesCompensadas.Cantidad|int}}"
+					Pago="{{Devengados.Vacaciones.VacacionesCompensadas.Pago}}"/>
+				{%endif%}
+			</Vacaciones>
+			{%endif%}
+			{%if Devengados.Primas and (Devengados.Primas.Pago|float)>0%}
+			<Primas
+				Cantidad="{{Devengados.Primas.Cantidad|int}}"
+				Pago="{{Devengados.Primas.Pago}}"
+				PagoNS="{{Devengados.Primas.PagoNS}}"/>
+			{%endif%}
+			{%if Devengados.Cesantias and (Devengados.Cesantias.Pago|float+Devengados.Cesantias.PagoIntereses|float)>0  %}
+			<Cesantias
+				Pago="{{Devengados.Cesantias.Pago}}"
+				Porcentaje="{{'%0.2f'| format(Devengados.Cesantias.Porcentaje|float)}}"
+				PagoIntereses="{{Devengados.Cesantias.PagoIntereses}}"/>
+			{%endif%}
+			{%if Devengados.Incapacidades%}
+			<Incapacidades>
+				{%for Incapacidad in Devengados.Incapacidades%}
+				<Incapacidad
+					FechaInicio="{{Incapacidad.FechaInicio}}"
+					FechaFin="{{Incapacidad.FechaFin}}"
+					Cantidad="{{Incapacidad.Cantidad|int}}"
+					Tipo="{{Incapacidad.Tipo}}"
+					Pago="{{Incapacidad.Pago}}"/>
+				{%endfor%}
+			</Incapacidades>
+			{%endif%}
+			{%if Devengados.Licencias%}
+			<Licencias>
+				{%for Licencia in Devengados.Licencias%}
+					{%if Licencia.Tipo=="LicenciaMP"%}
+						<LicenciaMP
+							FechaInicio="{{Licencia.FechaInicio}}"
+							FechaFin="{{Licencia.FechaFin}}"
+							Cantidad="{{Licencia.Cantidad|int}}"
+							Pago="{{Licencia.Pago}}"/>
+					{%endif%}
+				{%endfor%}
+				{%for Licencia in Devengados.Licencias%}
+					{%if Licencia.Tipo=="LicenciaR"%}
+						<LicenciaR
+							FechaInicio="{{Licencia.FechaInicio}}"
+							FechaFin="{{Licencia.FechaFin}}"
+							Cantidad="{{Licencia.Cantidad|int}}"
+							Pago="{{Licencia.Pago}}"/>
+					{%endif%}
+				{%endfor%}
+				{%for Licencia in Devengados.Licencias%}
+					{%if Licencia.Tipo=="LicenciaNR"%}
+						<LicenciaNR
+							FechaInicio="{{Licencia.FechaInicio}}"
+							FechaFin="{{Licencia.FechaFin}}"
+							Cantidad="{{Licencia.Cantidad|int}}"/>
+					{%endif%}
+				{%endfor%}
+			</Licencias>
+			{%endif%}
+			{%if (Devengados.Bonificaciones.BonificacionS|float + Devengados.Bonificaciones.BonificacionNS|float)>0%}
+			<Bonificaciones>
+				<Bonificacion
+					{%if (Devengados.Bonificaciones.BonificacionS|float)>0%}
+					BonificacionS="{{Devengados.Bonificaciones.BonificacionS}}"
+					{%endif%}
+					{%if (Devengados.Bonificaciones.BonificacionNS|float)>0%}
+					BonificacionNS="{{Devengados.Bonificaciones.BonificacionNS}}"
+					{%endif%}
+				/>
+			</Bonificaciones>
+			{%endif%}
+			{%if (Devengados.Auxilios.AuxilioS|float +Devengados.Auxilios.AuxilioNS|float) >0%}
+			<Auxilios>
+				<Auxilio
+					{%if (Devengados.Auxilios.AuxilioS|float) >0%}
+					AuxilioS="{{Devengados.Auxilios.AuxilioS}}"
+					{%endif%}
+					{%if (Devengados.Auxilios.AuxilioNS|float) >0%}
+					AuxilioNS="{{Devengados.Auxilios.AuxilioNS}}"
+					{%endif%}
+				/>
+			</Auxilios>
+			{%endif%}
+			{%if Devengados.HuelgasLegales%}
+			<HuelgasLegales>
+				{%for HuelgaLegal in Devengados.HuelgasLegales%}
+				<HuelgaLegal
+					FechaInicio="{{HuelgaLegal.FechaInicio}}"
+					FechaFin="{{HuelgaLegal.FechaFin}}"
+					Cantidad="{{HuelgaLegal.Cantidad|int}}"/>
+				{%endfor%}
+			</HuelgasLegales>
+			{%endif%}
+			{%if Devengados.OtrosConceptos and (Devengados.OtrosConceptos.ConceptoS|float+Devengados.OtrosConceptos.ConceptoNS|float)>0%}
+			<OtrosConceptos>
+				<OtroConcepto
+					{%if Devengados.OtrosConceptos.DescripcionConcepto%}
+					DescripcionConcepto="{{Devengados.OtrosConceptos.DescripcionConcepto}}"
+					{% else %}
+					DescripcionConcepto="A"
+					{%endif%}
+					{%if Devengados.OtrosConceptos and (Devengados.OtrosConceptos.ConceptoS|float)>0%}
+					ConceptoS="{{Devengados.OtrosConceptos.ConceptoS}}"
+					{%endif%}
+					{%if Devengados.OtrosConceptos and (Devengados.OtrosConceptos.ConceptoNS|float)>0%}
+					ConceptoNS="{{Devengados.OtrosConceptos.ConceptoNS}}"
+					{%endif%}
+				/>
+
+			</OtrosConceptos>
+			{%endif%}
+			{%if (Devengados.Compensaciones.CompensacionO|float +Devengados.Compensaciones.CompensacionE|float) >0%}
+			<Compensaciones>
+				<Compensacion
+					CompensacionO="{{Devengados.Compensaciones.CompensacionO}}"
+					CompensacionE="{{Devengados.Compensaciones.CompensacionE}}"
+				/>
+			</Compensaciones>
+			{%endif%}
+			{%if Devengados.BonoEPCTVs and (Devengados.BonoEPCTVs.PagoS|float +Devengados.BonoEPCTVs.PagoNS|float +Devengados.BonoEPCTVs.PagoAlimentacionS|float +Devengados.BonoEPCTVs.PagoAlimentacionNS|float) >0%}
+			<BonoEPCTVs>
+				<BonoEPCTV
+					{%if Devengados.BonoEPCTVs and (Devengados.BonoEPCTVs.PagoS|float) >0%}
+					PagoS="{{Devengados.BonoEPCTVs.PagoS}}"
+					{%endif%}
+					{%if Devengados.BonoEPCTVs and (Devengados.BonoEPCTVs.PagoNS|float) >0%}
+					PagoNS="{{Devengados.BonoEPCTVs.PagoNS}}"
+					{%endif%}
+					{%if Devengados.BonoEPCTVs and (Devengados.BonoEPCTVs.PagoAlimentacionS|float) >0%}
+					PagoAlimentacionS="{{Devengados.BonoEPCTVs.PagoAlimentacionS}}"
+					{%endif%}
+					{%if Devengados.BonoEPCTVs and (Devengados.BonoEPCTVs.PagoAlimentacionNS|float) >0%}
+					PagoAlimentacionNS="{{Devengados.BonoEPCTVs.PagoAlimentacionNS}}"
+					{%endif%}
+				/>
+			</BonoEPCTVs>
+			{%endif%}
+			{%if Devengados.Comisiones and (Devengados.Comisiones|float)>0%}
+			<Comisiones>
+			<Comision>{{Devengados.Comisiones}}</Comision>
+			</Comisiones>
+			{%endif%}
+			{%if Devengados.PagosTerceros and (Devengados.PagosTerceros|float)>0%}
+			<PagosTerceros>
+				<PagoTercero>{{Devengados.PagosTerceros}}</PagoTercero>
+			</PagosTerceros>
+			{%endif%}
+			{%if Devengados.Anticipos and (Devengados.Anticipos|float)>0%}
+			<Anticipos>
+				<Anticipo>{{Devengados.Anticipos}}</Anticipo>
+			</Anticipos>
+			{%endif%}
+			{%if Devengados.Dotacion and (Devengados.Dotacion|float)>0%}
+			<Dotacion>{{Devengados.Dotacion}}</Dotacion>
+			{%endif%}
+			{%if Devengados.ApoyoSost and (Devengados.ApoyoSost|float)>0%}
+			<ApoyoSost>{{Devengados.ApoyoSost}}</ApoyoSost>
+			{%endif%}
+			{%if Devengados.Teletrabajo and (Devengados.Teletrabajo|float)>0%}
+			<Teletrabajo>{{Devengados.Teletrabajo}}</Teletrabajo>
+			{%endif%}
+			{%if Devengados.BonifRetiro and (Devengados.BonifRetiro|float)>0%}
+			<BonifRetiro>{{Devengados.BonifRetiro}}</BonifRetiro>
+				{%endif%}
+			{%if Devengados.Indemnizacion and (Devengados.Indemnizacion|float)>0%}
+			<Indemnizacion>{{Devengados.Indemnizacion}}</Indemnizacion>
+				{%endif%}
+			{%if Devengados.Reintegro and (Devengados.Reintegro|float)>0%}
+			<Reintegro>{{Devengados.Reintegro}}</Reintegro>
+					{%endif%}
+		</Devengados>
+		<Deducciones>
+			{%if Deducciones.Salud.Deduccion and (Deducciones.Salud.Deduccion|float)>0%}
+			<Salud
+				Porcentaje="{{Deducciones.Salud.Porcentaje}}"
+				Deduccion="{{Deducciones.Salud.Deduccion}}"/>
+			{%else%}
+			<Salud
+				Porcentaje="0.00"
+				Deduccion="0.00"/>
+			{%endif%}
+
+			{%if Deducciones.FondoPension.Deduccion and (Deducciones.FondoPension.Deduccion|float)>0%}
+			<FondoPension
+				Porcentaje="{{Deducciones.FondoPension.Porcentaje}}"
+				Deduccion="{{Deducciones.FondoPension.Deduccion}}"/>
+			{%else%}
+			<FondoPension
+				Porcentaje="0.00"
+				Deduccion="0.00"/>
+			{%endif%}
+
+			{%if (Deducciones.FondoSP.Deduccion|float+Deducciones.FondoSP.DeduccionSub|float)>0%}
+			<FondoSP Porcentaje="{{Deducciones.FondoSP.Porcentaje}}"
+					 DeduccionSP="{{Deducciones.FondoSP.Deduccion}}"
+					 PorcentajeSub="{{Deducciones.FondoSP.PorcentajeSub}}"
+					 DeduccionSub="{{Deducciones.FondoSP.DeduccionSub}}"/>
+			{%endif%}
+
+
+			{%if Deducciones.Sindicatos.Deduccion and (Deducciones.Sindicatos.Deduccion|float)>0%}
+			<Sindicatos>
+				<Sindicato
+					Porcentaje="{{Deducciones.Sindicatos.Porcentaje}}"
+					Deduccion="{{Deducciones.Sindicatos.Deduccion}}"/>
+			</Sindicatos>
+			{%endif%}
+			{%if (Deducciones.Sanciones.SancionPublic|float+Deducciones.Sanciones.SancionPriv|float)>0%}
+			<Sanciones>
+				<Sancion
+					SancionPublic="{{Deducciones.Sanciones.SancionPublic}}"
+					SancionPriv="{{Deducciones.Sanciones.SancionPriv}}"/>
+			</Sanciones>
+			{%endif%}
+			{%if Deducciones.Libranzas and Deducciones.Libranzas.Deduccion and (Deducciones.Libranzas.Deduccion|float)>0%}
+			<Libranzas>
+			<Libranza
+				Descripcion="{{Deducciones.Libranzas.Descripcion}}"
+				Deduccion="{{Deducciones.Libranzas.Deduccion}}"/>
+			</Libranzas>
+			{%endif%}
+			{%if Deducciones.PagosTerceros and (Deducciones.PagosTerceros|float)>0%}
+			<PagosTerceros>
+				<PagoTercero>{{Deducciones.PagosTerceros}}</PagoTercero>
+			</PagosTerceros>
+			{%endif%}
+			{%if Deducciones.DeduccionAnticipos and (Deducciones.DeduccionAnticipos|float)>0%}
+			<Anticipos>
+				<Anticipo>{{Deducciones.DeduccionAnticipos}}</Anticipo>
+			</Anticipos>
+			{%endif%}
+			{%if Deducciones.OtrasDeducciones and (Deducciones.OtrasDeducciones|float)>0%}
+			<OtrasDeducciones>
+				<OtraDeduccion>{{Deducciones.OtrasDeducciones}}</OtraDeduccion>
+			</OtrasDeducciones>
+			{%endif%}
+			<PensionVoluntaria>{{Deducciones.PensionVoluntaria}}</PensionVoluntaria>
+			<RetencionFuente>{{Deducciones.RetencionFuente}}</RetencionFuente>
+			<AFC>{{Deducciones.AFC}}</AFC>
+
+			{%if Deducciones.Cooperativa and  (Deducciones.Cooperativa|float)>0%}
+			<Cooperativa>{{Deducciones.Cooperativa}}</Cooperativa>
+			{%endif%}
+			{%if Deducciones.EmbargoFiscal and (Deducciones.EmbargoFiscal|float)>0%}
+			<EmbargoFiscal>{{Deducciones.EmbargoFiscal}}</EmbargoFiscal>
+			{%endif%}
+			{%if Deducciones.PlanComplementarios and (Deducciones.PlanComplementarios|float)>0%}
+			<PlanComplementarios>{{Deducciones.PlanComplementarios}}</PlanComplementarios>
+			{%endif%}
+			{%if Deducciones.Educacion and (Deducciones.Educacion|float)>0%}
+			<Educacion>{{Deducciones.Educacion}}</Educacion>
+			{%endif%}
+			{%if Deducciones.Reintegro and (Deducciones.Reintegro|float)>0%}
+			<Reintegro>{{Deducciones.Reintegro}}</Reintegro>
+			{%endif%}
+			{%if Deducciones.Deuda and (Deducciones.Deuda|float)>0%}
+			<Deuda>{{Deducciones.Deuda}}</Deuda>
+			{%endif%}
+		</Deducciones>
+		<Redondeo>0.00</Redondeo>
+		<DevengadosTotal>{{DevengadosTotal}}</DevengadosTotal>
+		<DeduccionesTotal>{{DeduccionesTotal}}</DeduccionesTotal>
+		<ComprobanteTotal>{{ComprobanteTotal}}</ComprobanteTotal>
+	</Reemplazar>
+</NominaIndividualDeAjuste>

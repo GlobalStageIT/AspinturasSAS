@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="kal_stock_picking_ticket_paperformat" model="report.paperformat">
+            <field name="name">Ticket</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">50</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">2</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">120</field>
+        </record>
+
+        <template id="custom_ticket_layout45">
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <div class="header">
+
+                <div class="row">
+                    <div class="col text-center" style="text-align:center;">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 35px;"
+                             alt="Logo"/>
+                        <div t-if="company.name" class="text-center">
+                            <span t-field="company.name"/>
+                            <t t-if="company.country_id">(<span t-esc="company.country_id.name"/>)
+                            </t>
+                        </div>
+                        <!--                        <div t-if="company.street" class="text-center">-->
+                        <!--                            <span class="o_force_ltr" t-field="company.street"/>-->
+                        <!--                            <t t-if="company.street2">,-->
+                        <!--                                <span class="o_force_ltr" t-field="company.street2"/>-->
+                        <!--                            </t>-->
+                        <!--                        </div>-->
+                        <div t-if="company.vat" class="text-center">Nit:
+                            <span class="o_force_ltr" t-field="company.vat"/>
+                        </div>
+                        <!--                        <div t-if="company.phone" class="text-center">Tel:-->
+                        <!--                            <span class="o_force_ltr" t-field="company.phone"/>-->
+                        <!--                        </div>-->
+                        <!--                        <div t-if="company.email" style="text-align:center;">-->
+                        <!--                            <span t-field="company.email"/>-->
+                        <!--                        </div>-->
+                        <!--                        <div t-if="company.website">-->
+                        <!--                            <span t-field="company.website"/>-->
+                        <!--                        </div>-->
+                        <div>--------------------------------------</div>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+
+        <!--        <report id="kal_stock_picking_ticket_report"-->
+        <!--                model="stock.picking"-->
+        <!--                string="Ticket"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="kal_stock_picking_ticket.report_stock_picking_template"-->
+        <!--                paperformat="kal_stock_picking_ticket_paperformat"-->
+        <!--                />-->
+
+        <record id="kal_stock_picking_ticket_report" model="ir.actions.report">
+            <field name="model">stock.picking</field>
+            <field name="name">Ticket recibo de paquete</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="report_name">kal_stock_report.report_stock_picking_template</field>
+            <field name="report_file">kal_stock_report.report_stock_picking_template</field>
+            <field name="print_report_name">('Ticket - %s' % (object.name))</field>
+            <field name="paperformat_id" ref="kal_stock_picking_ticket_paperformat"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="report_stock_picking_template">
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="web.basic_layout">
+                <style type="text/css">
+                    .resaltado{
+                    background: black;
+                    color: white;
+                    padding: 3px;
+                    text-transform: uppercase;
+                    font-size:60px;
+                    }
+                    td{
+                    font-size:15px;
+                    }
+                    table{
+                    text-align:left;
+                    width:100%;
+                    }
+                    @media print {
+                    .pagebreak { clear: both; page-break-before: always; } /* page-break-after works, as well */
+                    }
+
+                </style>
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="numero" t-value="0"/>
+                    <t t-foreach="o.package_ids.sorted('name')" t-as="package">
+                        <t t-set="numero" t-value="numero+1"/>
+                        <!--                            <t t-call="kal_stock_picking_ticket.custom_ticket_layout45"/>-->
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col text-center" style="text-align:center;">
+                                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                                     style="max-height: 35px;"
+                                                     alt="Logo"/>
+                                                <div t-if="company.name" class="text-center">
+                                                    <span t-field="company.name"/>
+                                                    <t t-if="company.country_id">(<span
+                                                            t-esc="company.country_id.name"/>)
+                                                    </t>
+                                                </div>
+                                                <!--                                            <div t-if="company.street" class="text-center">-->
+                                                <!--                                                <span class="o_force_ltr" t-field="company.street"/>-->
+                                                <!--                                                <t t-if="company.street2">,-->
+                                                <!--                                                    <span class="o_force_ltr" t-field="company.street2"/>-->
+                                                <!--                                                </t>-->
+                                                <!--                                            </div>-->
+                                                <div t-if="company.vat" class="text-center">Nit:
+                                                    <span class="o_force_ltr" t-field="company.vat"/>
+                                                </div>
+                                                <!--                                            <div t-if="company.phone" class="text-center">Tel:-->
+                                                <!--                                                <span class="o_force_ltr" t-field="company.phone"/>-->
+                                                <!--                                            </div>-->
+                                                                                            <div t-if="company.email" style="text-align:center;">
+                                                                                                Mail: <span t-field="company.email"/>
+                                                                                            </div>
+                                                <!--                                            <div t-if="company.website">-->
+                                                <!--                                                <span t-field="company.website"/>-->
+                                                <!--                                            </div>-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--                                             <t t-call="kal_stock_picking_ticket.custom_ticket_layout45"/>-->
+                                </tr>
+                                <tr>
+                                    <td style="width:50%">
+                                        <table>
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span style="8px;">DOC. ORIGEN:</span>
+                                                    </strong>
+                                                    <span t-field="o.origin"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span style="8px;">P. INTERNO:</span>
+                                                    </strong>
+                                                    <span t-field="o.x_studio_pedido_interno_1"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span style="8px;">PAQUETE:</span>
+                                                    </strong>
+                                                    <span t-esc="numero"/>/
+                                                    <span t-esc="len(o.package_ids)"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', o.name, 200, 73, 0)"
+                                                         style="width:200px;height:73px;" alt="Barcode"/>
+                                                </div>
+                                                <span t-esc="o.name" style="font-size:11px;"/>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+
+                                                <td style="text-align:left;">
+                                                    <strong>
+                                                        <span style="8px;">FECHA:</span>
+                                                    </strong>
+                                                    <span t-esc="o.scheduled_date.strftime('%d/%m/%Y %H:%M')"/>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:left;">
+                                                    <strong>
+                                                        <span style="8px;">CLIENTE:</span>
+                                                    </strong>
+                                                    <span t-field="o.partner_id"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: justify;overflow:hidden;">
+                                                    <strong>
+                                                        <span style="8px;">DIRECCION:</span>
+                                                    </strong> <br/>
+                                                    <div style="height: 50px;">
+                                                        <span t-esc="o.partner_id"
+                                                              t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True}'/>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="pagebreak"></div>
+                    </t>
+                </t>
+                <!--                        </t>-->
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,109 @@
+{
+   "category": [
+      {
+         "code": "ING",
+         "name": "Ingreso",
+         "parent_id": ""
+      },
+      {
+         "code": "SUB",
+         "name": "Subsidio",
+         "parent_id": ""
+      },
+      {
+         "code": "BRU",
+         "name": "Bruto",
+         "parent_id": ""
+      },
+      {
+         "code": "DED",
+         "name": "Deducción",
+         "parent_id": ""
+      },
+      {
+         "code": "NET",
+         "name": "Neto",
+         "parent_id": ""
+      },
+      {
+         "code": "DCONT",
+         "name": "Distribución contable",
+         "parent_id": ""
+      },
+      {
+         "code": "BAS_CAL",
+         "name": "Bases cálculos",
+         "parent_id": ""
+      },
+      {
+         "code": "SEG_SOC_PAR",
+         "name": "Seguridad social y parafiscales",
+         "parent_id": ""
+      },
+      {
+         "code": "PRE_SOC",
+         "name": "Prestaciones sociales",
+         "parent_id": ""
+      },
+      {
+         "code": "PRO_PRE_SOC",
+         "name": "Provision prestaciones sociales",
+         "parent_id": ""
+      },
+      {
+         "code": "ING_SAL",
+         "name": "Ingreso salarial",
+         "parent_id": "ING"
+      },
+      {
+         "code": "ING_NO_SAL",
+         "name": "Ingreso no salarial",
+         "parent_id": "ING"
+      },
+      {
+         "code": "HOR_EXT",
+         "name": "Hora extra",
+         "parent_id": "ING_SAL"
+      },
+      {
+         "code": "RECARGO",
+         "name": "Recargo",
+         "parent_id": "ING_SAL"
+      },
+      {
+         "code": "HED",
+         "name": "Hora extra diurna",
+         "parent_id": "HOR_EXT"
+      },
+      {
+         "code": "HEN",
+         "name": "Hora extra nocturna",
+         "parent_id": "HOR_EXT"
+      },
+      {
+         "code": "HEDDF",
+         "name": "Hora extra diurna Dominical",
+         "parent_id": "HOR_EXT"
+      },
+      {
+         "code": "HENDF",
+         "name": "Hora extra nocturna Dominical",
+         "parent_id": "HOR_EXT"
+      },
+      {
+         "code": "HRN",
+         "name": "Hora recargo nocturn",
+         "parent_id": "RECARGO"
+      },
+      {
+         "code": "HRDDF",
+         "name": "Hora recargo diurno Dominical",
+         "parent_id": "RECARGO"
+      },
+      {
+         "code": "HRNDF",
+         "name": "Hora recargo nocturn Dominical",
+         "parent_id": "RECARGO"
+      }
+   ]
+}

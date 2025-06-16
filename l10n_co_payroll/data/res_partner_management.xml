@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="adm1" model="res.partner.management">
+			<field name="name">SEGUROS DE VIDA COLPATRIA S.A.</field>
+			<field name="codigo">14-4</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm2" model="res.partner.management">
+			<field name="name">CIA. DE SEGUROS BOLIVAR S.A.</field>
+			<field name="codigo">14-7</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm3" model="res.partner.management">
+			<field name="name">COMPAÑIA DE SEGUROS DE VIDA AURORA</field>
+			<field name="codigo">14-8</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm4" model="res.partner.management">
+			<field name="name">SEGUROS DE VIDA ALFA S.A.</field>
+			<field name="codigo">14-17</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm5" model="res.partner.management">
+			<field name="name">LIBERTY SEGUROS DE VIDA </field>
+			<field name="codigo">14-18</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm6" model="res.partner.management">
+			<field name="name">ARP - POSITIVA COMPAÑÍA DE SEGUROS</field>
+			<field name="codigo">14-23</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm7" model="res.partner.management">
+			<field name="name">RIESGOS PROFESIONALES COLMENA S.A COMPAÑÍA DE SEGUROS DE VIDA</field>
+			<field name="codigo">14-25</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm8" model="res.partner.management">
+			<field name="name">ARL- SURA</field>
+			<field name="codigo">14-28</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm9" model="res.partner.management">
+			<field name="name"> LA EQUIDAD SEGUROS DE VIDA ORGANISMO COOPERATIVO - LA EQUIDAD VIDA</field>
+			<field name="codigo">14-29</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm10" model="res.partner.management">
+			<field name="name">MAPFRE COLOMBIA VIDA SEGUROS S.A. </field>
+			<field name="codigo">14-30</field>
+			<field name="subsistema">arl</field>
+		</record>
+		<record id="adm11" model="res.partner.management">
+			<field name="name">PROTECCIÓN</field>
+			<field name="codigo">230201</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm12" model="res.partner.management">
+			<field name="name">PORVENIR</field>
+			<field name="codigo">230301</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm13" model="res.partner.management">
+			<field name="name">OLD MUTUAL (ANTES SKANDIA)</field>
+			<field name="codigo">230901</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm14" model="res.partner.management">
+			<field name="name">OLD MUTUAL ALTERNA (ANTES SKANDIA)</field>
+			<field name="codigo">230904</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm15" model="res.partner.management">
+			<field name="name">COLFONDOS</field>
+			<field name="codigo">231001</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm16" model="res.partner.management">
+			<field name="name">CAJA DE AUXILIOS Y PRESTACIONES DE LA ASOCIACIÓN COLOMBIANA DE AVIADORES CIVILES  ACDAC "CAXDAC"</field>
+			<field name="codigo">25-2</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm17" model="res.partner.management">
+			<field name="name">FONDO DE PREVISIÓN SOCIAL DEL CONGRESO DE LA REPÚBLICA – FONPRECON</field>
+			<field name="codigo">25-3</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm18" model="res.partner.management">
+			<field name="name">PENSIONES DE ANTIOQUIA </field>
+			<field name="codigo">25-7</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm19" model="res.partner.management">
+			<field name="name">COLPENSIONES</field>
+			<field name="codigo">25-14</field>
+			<field name="subsistema">afp</field>
+		</record>
+		<record id="adm20" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR CAMACOL  COMFAMILIAR CAMACOL</field>
+			<field name="codigo">CCF02</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm21" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR COMFENALCO ANTIOQUIA</field>
+			<field name="codigo">CCF03</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm22" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE ANTIOQUIA COMFAMA</field>
+			<field name="codigo">CCF04</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm23" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR CAJACOPI ATLANTICO</field>
+			<field name="codigo">CCF05</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm24" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE BARRANQUILLA COMBARRANQUILLA</field>
+			<field name="codigo">CCF06</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm25" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR COMFAMILIAR DEL ATLANTICO</field>
+			<field name="codigo">CCF07</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm26" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE FENALCO  - ANDI COMFENALCO CARTAGENA</field>
+			<field name="codigo">CCF08</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm27" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE CARTAGENA</field>
+			<field name="codigo">CCF09</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm28" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE BOYACA - COMFABOY</field>
+			<field name="codigo">CCF10</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm29" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE CALDAS</field>
+			<field name="codigo">CCF11</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm30" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL CAQUETÁ - COMFACA</field>
+			<field name="codigo">CCF13</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm31" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL CAUCA - COMFACAUCA</field>
+			<field name="codigo">CCF14</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm32" model="res.partner.management">
+			<field name="name">COMFACESAR</field>
+			<field name="codigo">CCF15</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm33" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE CORDOBA COMFACOR</field>
+			<field name="codigo">CCF16</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm34" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR CAFAM</field>
+			<field name="codigo">CCF21</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm35" model="res.partner.management">
+			<field name="name">CAJA COLOMBIANA DE SUBSIDIO FAMILIAR COLSUBSIDIO</field>
+			<field name="codigo">CCF22</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm36" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR COMPENSAR</field>
+			<field name="codigo">CCF24</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm37" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE CUNDINAMARCA - COMFACUNDI</field>
+			<field name="codigo">CCF26</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm38" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL CHOCÓ</field>
+			<field name="codigo">CCF29</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm39" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE LA GUAJIRA</field>
+			<field name="codigo">CCF30</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm40" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL HUILA - COMFAMILIAR</field>
+			<field name="codigo">CCF32</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm41" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL MAGDALENA</field>
+			<field name="codigo">CCF33</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm42" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR REGIONAL DEL META COFREM</field>
+			<field name="codigo">CCF34</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm43" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE NARIÑO</field>
+			<field name="codigo">CCF35</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm44" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL ORIENTE COLOMBIANO COMFAORIENTE</field>
+			<field name="codigo">CCF36</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm45" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL NORTE DE SANTANDER COMFANORTE</field>
+			<field name="codigo">CCF37</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm46" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE BARRANCABERMEJA CAFABA</field>
+			<field name="codigo">CCF38</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm47" model="res.partner.management">
+			<field name="name">CAJA SANTANDEREANA DE SUBSIDIO FAMILIAR CAJASAN</field>
+			<field name="codigo">CCF39</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm48" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR COMFENALCO SANTANDER</field>
+			<field name="codigo">CCF40</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm49" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE SUCRE</field>
+			<field name="codigo">CCF41</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm50" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE FENALCO COMFENALCO QUINDIO</field>
+			<field name="codigo">CCF43</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm51" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE RISARALDA - COMFAMILIAR RISARALDA</field>
+			<field name="codigo">CCF44</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm52" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL SUR DEL TOLIMA CAFASUR</field>
+			<field name="codigo">CCF46</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm53" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL TOLIMA COMFATOLIMA</field>
+			<field name="codigo">CCF48</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm54" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE FENALCO DEL TOLIMA - COMFENALCO</field>
+			<field name="codigo">CCF50</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm55" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR COMFENALCO DEL VALLE DEL CAUCA - COMFENALCO VALLE</field>
+			<field name="codigo">CCF56</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm56" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL VALLE DEL CAUCA COMFAMILIAR ANDI - COMFANDI</field>
+			<field name="codigo">CCF57</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm57" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL PUTUMAYO - COMFAMILIAR PUTUMAYO</field>
+			<field name="codigo">CCF63</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm58" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE SAN ANDRES Y PROVIDENCIA, ISLAS CAJASAI</field>
+			<field name="codigo">CCF64</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm59" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL AMAZONAS CAFAMAZ</field>
+			<field name="codigo">CCF65</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm60" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DE ARAUCA COMFIAR</field>
+			<field name="codigo">CCF67</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm61" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR CAMPESINA COMCAJA</field>
+			<field name="codigo">CCF68</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm62" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACIÓN FAMILIAR DEL CASANARE - COMFACASANARE</field>
+			<field name="codigo">CCF69</field>
+			<field name="subsistema">ccf</field>
+		</record>
+		<record id="adm63" model="res.partner.management">
+			<field name="name">SENA</field>
+			<field name="codigo">PASENA</field>
+			<field name="subsistema">pasena</field>
+		</record>
+		<record id="adm64" model="res.partner.management">
+			<field name="name">INSTITUTO COLOMBIANO DE BIENESTAR FAMILIAR</field>
+			<field name="codigo">PAICBF</field>
+			<field name="subsistema">paicbf</field>
+		</record>
+		<record id="adm65" model="res.partner.management">
+			<field name="name">MINISTERIO DE EDUCACION</field>
+			<field name="codigo">PAMIED</field>
+			<field name="subsistema">pamied</field>
+		</record>
+		<record id="adm66" model="res.partner.management">
+			<field name="name">ESCUELA SUPERIOR DE ADMINISTRACION PUBLICA</field>
+			<field name="codigo">PAESAP</field>
+			<field name="subsistema">paesap</field>
+		</record>
+		<record id="adm67" model="res.partner.management">
+			<field name="name">COLMÉDICA EPS - ALIANSALUD DESDE EL 01/01/2011</field>
+			<field name="codigo">EPS001</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm68" model="res.partner.management">
+			<field name="name">SALUD TOTAL S.A. ENTIDAD PROMOTORA DE SALUD    </field>
+			<field name="codigo">EPS002</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm69" model="res.partner.management">
+			<field name="name">CAFESALUD MEDICINA PREPAGADA S.A.  </field>
+			<field name="codigo">EPS003</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm70" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD SANITAS S.A.  </field>
+			<field name="codigo">EPS005</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm71" model="res.partner.management">
+			<field name="name">COMPENSAR ENTIDAD PROMOTORA DE SALUD  </field>
+			<field name="codigo">EPS008</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm72" model="res.partner.management">
+			<field name="name">EPS-SURA</field>
+			<field name="codigo">EPS010</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm73" model="res.partner.management">
+			<field name="name">COMFENALCO VALLE E.P.S.  </field>
+			<field name="codigo">EPS012</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm74" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD ORGANISMO COOPERATIVO SALUDCOOP  </field>
+			<field name="codigo">EPS013</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm75" model="res.partner.management">
+			<field name="name">COOMEVA ENTIDAD PROMOTORA DE SALUD S.A.  </field>
+			<field name="codigo">EPS016</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm76" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD FAMISANAR LIMITADA CAFAM-COLSUBSIDIO  </field>
+			<field name="codigo">EPS017</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm77" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD SERVICIO OCCIDENTAL DE SALUD S.A. S.O.S. </field>
+			<field name="codigo">EPS018</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm78" model="res.partner.management">
+			<field name="name">CRUZ BLANCA ENTIDAD PROMOTORA DE SALUD S.A.  </field>
+			<field name="codigo">EPS023</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm79" model="res.partner.management">
+			<field name="name">SALUDVIDA S.A. ENTIDAD PROMOTORA DE SALUD   </field>
+			<field name="codigo">EPS033</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm80" model="res.partner.management">
+			<field name="name">NUEVA EPS S.A - NUEVA EMPRESA PROMOTORA DE SALUD NUEVA EPS S.A</field>
+			<field name="codigo">EPS037</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm81" model="res.partner.management">
+			<field name="name">ALIANZA MEDELLIN ANTIOQUIA EPS SAS (SAVIA SALUD)</field>
+			<field name="codigo">EPS040</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm82" model="res.partner.management">
+			<field name="name">MEDIMAS EPS SAS </field>
+			<field name="codigo">EPS044</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm83" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DEL ATLANTICO</field>
+			<field name="codigo">RES005</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm84" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DE SANT</field>
+			<field name="codigo">RES006</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm85" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DEL VALLE</field>
+			<field name="codigo">RES007</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm86" model="res.partner.management">
+			<field name="name">UNIVERSIDAD NACIONAL DE COLOMBIA</field>
+			<field name="codigo">RES008</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm87" model="res.partner.management">
+			<field name="name">UNIVERSIDAD CAUCA</field>
+			<field name="codigo">RES009</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm88" model="res.partner.management">
+			<field name="name">PROGRAMA DE SALUD DE LA UNIVERSIDAD DE A</field>
+			<field name="codigo">RES011</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm89" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DE CORDOBA</field>
+			<field name="codigo">RES012</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm90" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DE NARIÑO</field>
+			<field name="codigo">RES013</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm91" model="res.partner.management">
+			<field name="name">UPTC</field>
+			<field name="codigo">RES014</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm92" model="res.partner.management">
+			<field name="name">UNIVERSIDAD DE CARTAGENA</field>
+			<field name="codigo">RES010</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm93" model="res.partner.management">
+			<field name="name">EMPRESAS PÚBLICAS DE MEDELLÍN DEPARTAMENTO MÉDICO</field>
+			<field name="codigo">EAS016</field>
+			<field name="subsistema">eas</field>
+		</record>
+		<record id="adm94" model="res.partner.management">
+			<field name="name">FONDO DE PASIVO SOCIAL DE FERROCARRILES NACIONALES DE COLOMBIA</field>
+			<field name="codigo">EAS027</field>
+			<field name="subsistema">eas</field>
+		</record>
+		<record id="adm95" model="res.partner.management">
+			<field name="name">ADMINISTRADORA DE LOS RECURSOS SS ADRES (antes FOSYGA)</field>
+			<field name="codigo">MIN001</field>
+			<field name="subsistema">min</field>
+		</record>
+		<record id="adm96" model="res.partner.management">
+			<field name="name">ADMINISTRADORA DE LOS RECURSOS SS ADRES (antes FOSYGA)</field>
+			<field name="codigo">MIN002</field>
+			<field name="subsistema">min</field>
+		</record>
+		<record id="adm97" model="res.partner.management">
+			<field name="name">ADMINISTRADORA DE LOS RECURSOS SS ADRES (antes FOSYGA)</field>
+			<field name="codigo">MIN003</field>
+			<field name="subsistema">min</field>
+		</record>
+		<record id="adm98" model="res.partner.management">
+			<field name="name">CONSORCIO COLOMBIA MAYOR 2013-FONDO DE SOLIDARIDAD PENSIONAL</field>
+			<field name="codigo">FSP001</field>
+			<field name="subsistema">fsp</field>
+		</record>
+		<record id="adm99" model="res.partner.management">
+			<field name="name">COLPENSIONES-I.SS.FSP</field>
+			<field name="codigo">ISSFSP</field>
+			<field name="subsistema">fsp</field>
+		</record>
+		<record id="adm100" model="res.partner.management">
+			<field name="name">EPS-S  COMFACOR</field>
+			<field name="codigo">CCFC15</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm101" model="res.partner.management">
+			<field name="name">EPS-S COMPEN CHOCO</field>
+			<field name="codigo">CCFC20</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm102" model="res.partner.management">
+			<field name="name">EPS-S COMF HUILA</field>
+			<field name="codigo">CCFC24</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm103" model="res.partner.management">
+			<field name="name">EPS-CCFC COMFA NARIÑO</field>
+			<field name="codigo">CCFC27</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm104" model="res.partner.management">
+			<field name="name">EPS-S COMFACUNDI</field>
+			<field name="codigo">CCFC53</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm105" model="res.partner.management">
+			<field name="name">EPS-S CAJACOPI</field>
+			<field name="codigo">CCFC55</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm106" model="res.partner.management">
+			<field name="name">Cafesalud Entidad Promotora de Salud S.A</field>
+			<field name="codigo">EPSC03</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm107" model="res.partner.management">
+			<field name="name">EPS-S  CONVIDA</field>
+			<field name="codigo">EPSC22</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm108" model="res.partner.management">
+			<field name="name">CAPRESOCA EPS </field>
+			<field name="codigo">EPSC25</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm109" model="res.partner.management">
+			<field name="name">RECAUDO FOSYGA CAPITAL SALUD</field>
+			<field name="codigo">EPSC34</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm110" model="res.partner.management">
+			<field name="name">DUSAKAWI EPS</field>
+			<field name="codigo">EPSIC1</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm111" model="res.partner.management">
+			<field name="name">ASOC DE CABILDO DE RESGUARDO INDIG ZENU</field>
+			<field name="codigo">EPSIC2</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm112" model="res.partner.management">
+			<field name="name">ASOCIACION INDIGENA DEL CAUDA "A.I.C"</field>
+			<field name="codigo">EPSIC3</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm113" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD MALLAMAS</field>
+			<field name="codigo">EPSIC5</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm114" model="res.partner.management">
+			<field name="name">ENTIDAD PROMOTORA DE SALUD PIJAOSALUD E</field>
+			<field name="codigo">EPSIC6</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm115" model="res.partner.management">
+			<field name="name">EMP MUTUAL PARA EL DESAR ENDISALUD ESS</field>
+			<field name="codigo">ESSC02</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm116" model="res.partner.management">
+			<field name="name">EPS-S MUTUAL SER</field>
+			<field name="codigo">ESSC07</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm117" model="res.partner.management">
+			<field name="name">CMRC RECAUDO FOSYGA-EMSSANAR E.S.S</field>
+			<field name="codigo">ESSC18</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm118" model="res.partner.management">
+			<field name="name">COOSALUD ESS EPS-S</field>
+			<field name="codigo">ESSC24</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm119" model="res.partner.management">
+			<field name="name">EPS-S COMPARTA</field>
+			<field name="codigo">ESSC33</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm120" model="res.partner.management">
+			<field name="name">ASMET SALUD EPS SAS</field>
+			<field name="codigo">ESSC62</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm121" model="res.partner.management">
+			<field name="name">EPS-S AMBUQ  ASOCIACION MUTUAL BARRIOS UNIDOS DE QUIBDO E.S.S. AMBUQ</field>
+			<field name="codigo">ESSC76</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm122" model="res.partner.management">
+			<field name="name">ENTIDAD COOPERATIVA SOLIDARIA “ECOOPSOS”</field>
+			<field name="codigo">ESSC91</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm123" model="res.partner.management">
+			<field name="name">EPS-CCFC COM GUAJIRA</field>
+			<field name="codigo">CCFC23</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm124" model="res.partner.management">
+			<field name="name">CAJA DE COMPENSACION FAMILIAR DE SUCRE</field>
+			<field name="codigo">CCFC33</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm125" model="res.partner.management">
+			<field name="name">ANAS WAYUU E P S I FOSYGA</field>
+			<field name="codigo">EPSIC4</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm126" model="res.partner.management">
+			<field name="name">EPS-S COMFABOY</field>
+			<field name="codigo">CCFC09</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm127" model="res.partner.management">
+			<field name="name">CMRC.RECA.FOSYGA-NUEVAEPS R MOVILIDAD</field>
+			<field name="codigo">EPS041</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm128" model="res.partner.management">
+			<field name="name">COOSALUD</field>
+			<field name="codigo">EPS042</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm129" model="res.partner.management">
+			<field name="name">SALUDVIDA S.A. ENTIDAD PROMOTO</field>
+			<field name="codigo">EPSC33</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm130" model="res.partner.management">
+			<field name="name">EPS-S COMFAORIENTE</field>
+			<field name="codigo">CCFC50</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm131" model="res.partner.management">
+			<field name="name">MEDIMAS EPS SUBSIDIADO</field>
+			<field name="codigo">EPS045</field>
+			<field name="subsistema">eps</field>
+		</record>
+		<record id="adm132" model="res.partner.management">
+			<field name="name">SALUD MIA EPS </field>
+			<field name="codigo">EPS046</field>
+			<field name="subsistema">eps</field>
+		</record>
+	</data>
+</odoo>

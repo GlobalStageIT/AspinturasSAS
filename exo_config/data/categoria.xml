@@ -1,0 +1,13 @@
+<odoo>
+    <!-- registros sobre categorias disponibles -->
+    <data>
+        <record id="cat1" model="exo_config.categoria">
+            <field name="description">Valor acumulado del pago o abono sujeto a retención en la fuente</field>
+            <field name="nature">D</field>
+        </record>
+        <record id="cat2" model="exo_config.categoria">
+            <field name="description">Retención en la fuente que le practicaron</field>
+            <field name="nature">C</field>
+        </record>
+    </data>
+</odoo>

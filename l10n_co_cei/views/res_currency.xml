@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- view_currency_form -->
+        <record id="kumbal_facturacion_eletronica_co_res_currency_form_view" model="ir.ui.view">
+            <field name="name">res.currency.form</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="fe_habilitada_compania" attrs="{'invisible': True}"/>
+                        <field name="long_name" attrs="{'invisible': [('fe_habilitada_compania', '!=', True)]}"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

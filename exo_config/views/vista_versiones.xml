@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- form view: vista de un registro particular de formato -->
+        <record model="ir.ui.view" id="versiones_form_view">
+            <field name="name">versiones.form</field>
+            <field name="model">exo_config.versionformato</field>
+            <field name="arch" type="xml">
+                <form string="Versiones formatos - árticulos">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="format_id" class="oe_edit_only" />
+                            <h1><field name="format_id" /></h1>
+                            <h2 class="lead"><field name="year"/> - Version: <field name="version"/></h2>
+                        </div>
+                        <notebook>
+                            <page string="Conceptos contables">
+                                <field name="concepts_ids">
+                                    <tree string="Conceptos asociados a esta versión" editable='top'>
+                                        <field name="concept_code"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Cabeceras">
+                                <field name="headers_ids">
+                                    <tree string="Cabeceras de la version del presente formato" editable='top'>
+                                        <field name="head_id"/>
+                                        <field name="parameter_id"/>
+                                        <field name="max_length"/>
+                                        <field name="mandatory"/>
+                                        <field name="default_value"/>
+                                        <field name="has_rule"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--tree view o list view formatos-->
+        <record model="ir.ui.view" id="versiones_tree_view">
+            <field name="name">versiones.tree</field>
+            <field name="model">exo_config.versionformato</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="year"/>
+                    <field name="version"/>
+                    <field name="presentation_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="versiones_list_action">
+            <field name="name">Versiones</field>
+            <field name="res_model">exo_config.versionformato</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Crea la primera versión para este formato</p>
+            </field>
+        </record>
+</odoo>

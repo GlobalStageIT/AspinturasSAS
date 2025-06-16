@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odc_template,access_odc_template,model_odc_template,base.group_allow_export,1,1,1,1
+access_odc_template_field,access_odc_template_field,model_odc_template_field,base.group_allow_export,1,1,1,1

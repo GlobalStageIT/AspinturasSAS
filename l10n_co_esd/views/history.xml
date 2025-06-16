@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <!-- start:views -->
+        <record model="ir.ui.view" id="support_document_history_tree_view">
+            <field name="name">l10n_co_esd.history_tree</field>
+            <field name="model">l10n_co_esd.history</field>
+            <field name="arch" type="xml">
+                 <tree string="Histórico de documentos soportes electrónicos">
+                    <field name="invoice_id" />
+                    <field name="description_activity" />
+                    <field name="date_time" />
+                    <field name="state" />
+                    <field name="validation_state" />
+                    <field name="dian_state" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="support_document_history_form_view">
+            <field name="name">l10n_co_esd.history_form</field>
+            <field name="model">l10n_co_esd.history</field>
+            <field name="arch" type="xml">
+                <form string="Historico de Documentos Soporte">
+                    <sheet>
+                        <group>
+                            <field name="invoice_id" />
+                            <field name="description_activity" />
+                            <field name="date_time" />
+                            <field name="company_id" />
+                            <field name="state" />
+                            <field name="validation_state" />
+                            <field name="dian_state" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- end:views -->
+
+        <!-- start:actions -->
+        <record model="ir.actions.act_window"
+            id="l10n_co_esd_history_list_action">
+            <field name="name">Historico de Documentos Soporte</field>
+            <field name="res_model">l10n_co_esd.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first tax type
+                </p>
+            </field>
+        </record>
+        <!-- end:actions -->
+
+        <!-- start:menus -->
+        <menuitem id="l10n_co_esd_history_menu"
+			name="Historico de Facturas"
+            parent="account.menu_finance_receivables"
+			action="l10n_co_esd_history_list_action"
+            groups="l10n_co_esd.group_electronic_support_document_manager"
+        />
+        <!-- end:menus -->
+    </data>
+</odoo>
