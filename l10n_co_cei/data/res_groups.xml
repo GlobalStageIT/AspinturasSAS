@@ -1,7 +1,0 @@
-<odoo>
-    <data noupdate="0">
-        <record id="group_electronic_billing_manager" model="res.groups">
-            <field name="name">Facturación Electrónica Groups</field>
-        </record>
-    </data>
-</odoo>
