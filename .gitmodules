@@ -1,1 +1,6 @@
 
+
+[submodule "Jorels-Community/jorels-odoo-addons"]
+	path = Jorels-Community/jorels-odoo-addons
+	url = git@github.com:Jorels-Community/jorels-odoo-addons.git
+	branch = 18.0
