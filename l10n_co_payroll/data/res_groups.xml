@@ -1,7 +1,0 @@
-<odoo>
-    <data>
-        <record id="delete_electronic_payslip" model="res.groups">
-            <field name="name">Permiso para generar nómina de ajuste elminación</field>
-        </record>
-    </data>
-</odoo>
