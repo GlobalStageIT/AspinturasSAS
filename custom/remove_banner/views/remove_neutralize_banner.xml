@@ -1,13 +1,8 @@
-{
-    'name': 'Remove Banner',
-    'version': '1.0',
-    'summary': 'Desactiva el mensaje de base de pruebas',
-    'category': 'Tools',
-    'author': 'Global Stage IT',
-    'depends': ['web'],
-    'data': [
-        'views/remove_neutralize_banner.xml',
-    ],
-    'installable': True,
-    'application': False,
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="web.neutralize_banner" model="ir.ui.view">
+            <field name="active">False</field>
+        </record>
+    </data>
+</odoo>
