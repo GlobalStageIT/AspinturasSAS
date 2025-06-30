@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<templates id="template">
-    <t t-inherit="web.ListView.buttons" t-inherit-mode="extension">
-        <xpath expr="//button[hasclass('o_list_export_xlsx')]" position="after">
-            <button type="button" title="Create ODC Template" class="btn btn-secondary fa fa-file-excel-o o_button_odc_template"/>
-        </xpath>
-    </t>
-</templates>
