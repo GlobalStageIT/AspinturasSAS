@@ -69,7 +69,7 @@ class MeliUtilMultiple(models.AbstractModel):
         return self.get_new_instance()
 
     @api.model
-    def get_new_instance(self, company=None, account=None):
+    def get_new_instance(self, company=None, account=None, refresh_force=False):
 
         #_logger.info("MeliUtilMultiple.get_new_instance: " + str(account) )
 
@@ -78,7 +78,7 @@ class MeliUtilMultiple(models.AbstractModel):
             if "company_ids" in self.env.user._fields and self.env.user.company_ids:
                 for comp in self.env.user.company_ids:
                     #_logger.info("no account: " + str(account) )
-                    if comp.mercadolibre_connections and comp.mercadolibre_connections[0]:
+                    if comp.mercadolibre_connections and comp.mercadolibre_connections[0] and comp.mercadolibre_connections[0].status=='connected':
                         account = comp.mercadolibre_connections[0]
                         #_logger.info("account: " + str(account) )
 
@@ -93,6 +93,7 @@ class MeliUtilMultiple(models.AbstractModel):
 
         api_client = ApiClient()
         api_rest_client = MeliApi(api_client)
+        
         api_rest_client.meli_login_id = (account and account.meli_login_id)
         api_rest_client.client_id = (account and account.client_id) or ''
         api_rest_client.client_secret = (account and account.secret_key) or ''
@@ -101,6 +102,10 @@ class MeliUtilMultiple(models.AbstractModel):
         api_rest_client.redirect_uri = (account and account.redirect_uri) or ''
         api_rest_client.seller_id = (account and account.seller_id) or ''
         api_rest_client.AUTH_URL = company.get_ML_AUTH_URL(meli=api_rest_client)
+
+        if not account:
+            return api_rest_client
+    
         api_auth_client = meli.OAuth20Api(api_client)
         grant_type = 'authorization_code' # or 'refresh_token' if you need get one new token
         last_token = api_rest_client.access_token
@@ -126,24 +131,31 @@ class MeliUtilMultiple(models.AbstractModel):
 
                 status = "status" in rjson and rjson["status"]
                 cause = "cause" in rjson and rjson["cause"]
+                
+                if status and cause and int(status)>=400:
+                    account.message_post(body=str(rjson)+str("\naccess_token:")+str(api_rest_client.access_token)+str("\nrefresh_token:")+str(api_rest_client.refresh_token), message_type="notification" )
 
+                if status==429:
+                    return api_rest_client
+                
                 if status==500 and cause=="Internal Server Error":
-                   return api_rest_client
+                    return api_rest_client
 
                 if status==504 and cause=="Gateway Time-out":
-                   return api_rest_client
+                    return api_rest_client
 
-                if cause and status and status>=500:
+                if cause and status and int(status)>=500:
                     return api_rest_client
 
                 right_access_token = ("-"+str(account.seller_id)) in str(api_rest_client.access_token)
                 if not right_access_token:
+                    api_rest_client.needlogin_state = True
                     return api_rest_client
 
                 #_logger.info(rjson)
-                if "error" in rjson:
+                if ((rjson and "error" in rjson) or refresh_force==True):
 
-                    if account.cron_refresh:
+                    if account.cron_refresh or api_rest_client.access_token:
                         internals = {
                             "application_id": account.client_id,
                             "user_id": account.seller_id,
@@ -158,15 +170,15 @@ class MeliUtilMultiple(models.AbstractModel):
 
                         api_rest_client.needlogin_state = True
 
-                        #_logger.info(rjson)
+                        _logger.info(str(rjson))
 
-                        if rjson["error"]=="not_found":
+                        if ("error" in rjson and rjson["error"]=="not_found"):
                             api_rest_client.needlogin_state = True
                             logs+= "NOT FOUND"+"\n"
 
-                        if "message" in rjson:
-                            message = rjson["message"]
-                            if "message" in message:
+                        if ("message" in rjson) or refresh_force:
+                            message = "message" in rjson and rjson["message"]
+                            if message and "message" in message:
                                 #message is e.body, fix thiss
                                 try:
                                     mesjson = json.loads(message)
@@ -175,13 +187,16 @@ class MeliUtilMultiple(models.AbstractModel):
                                     message = "invalid_token"
                                     pass;
                             logs+= str(message)+"\n"
-                            #_logger.info("message: " +str(message))
-                            if (message=="expired_token" or message=="invalid_token" or message=="internal_server_error"):
+                            _logger.info("message: " +str(message))
+                            if (refresh_force or ( message and "invalid" in str(message)) or ( message and "expired" in str(message)) 
+                                or message=="expired_token" or message=="invalid_token" or message=="internal_server_error"):
                                 api_rest_client.needlogin_state = True
                                 try:
                                     #refresh = meli.get_refresh_token()
+                                    _logger.info("TRY meli.get_refresh_token: " +str(api_rest_client))
                                     refresh = api_rest_client.get_refresh_token()
-                                    #_logger.info("Refresh result: "+str(refresh))
+                                    _logger.info("Refresh result: "+str(refresh))
+                                    account.message_post(body=str("Refresh result: "+str(refresh))+str("\naccess_token:")+str(api_rest_client.access_token)+str("\nrefresh_token:")+str(api_rest_client.refresh_token), message_type="notification" )
                                     if (refresh):
                                         #refjson = refresh.json()
                                         refjson = refresh
@@ -194,7 +209,7 @@ class MeliUtilMultiple(models.AbstractModel):
                                                             'refresh_token': api_rest_client.refresh_token,
                                                             'code': '' } )
                                             api_rest_client.needlogin_state = False
-                                        if "status" in refjson and refjson["status"]>=500:
+                                        if "status" in refjson and int(refjson["status"])>=400:
                                             # RETRY NEXT TIME....
                                             api_rest_client.needlogin_state = False
                                 except Exception as e:
@@ -233,8 +248,8 @@ class MeliUtilMultiple(models.AbstractModel):
             if api_rest_client.needlogin_state:
                 _logger.warning( "Need login for " + str(account.name) )
 
-                if ( account.cron_refresh and company.mercadolibre_cron_refresh and company.mercadolibre_cron_mail):
-                    company.write({'mercadolibre_access_token': '', 'mercadolibre_refresh_token': '', 'mercadolibre_code': '', 'mercadolibre_cron_refresh': False } )
+                if ( account.cron_refresh and company.mercadolibre_cron_mail ):
+                    #company.write({'mercadolibre_access_token': '', 'mercadolibre_refresh_token': '', 'mercadolibre_code': '', 'mercadolibre_cron_refresh': False } )
                     account.write({'access_token': '', 'refresh_token': '', 'code': '', 'cron_refresh': False } )
 
                     # we put the job_exception in context to be able to print it inside
@@ -250,7 +265,7 @@ class MeliUtilMultiple(models.AbstractModel):
                                 company.mercadolibre_cron_mail.id
                             ).with_context(context).sudo().send_mail( (company.id), force_send=True)
                     #_logger.info("Result sending:" + str(rese) )
-                company.write({'mercadolibre_access_token': '', 'mercadolibre_refresh_token': '', 'mercadolibre_code': '', 'mercadolibre_cron_refresh': False } )
+                #company.write({'mercadolibre_access_token': '', 'mercadolibre_refresh_token': '', 'mercadolibre_code': '', 'mercadolibre_cron_refresh': False } )
                 account.write({'access_token': '', 'refresh_token': '', 'code': '', 'cron_refresh': False } )
 
         except Exception as e:

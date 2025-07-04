@@ -42,28 +42,7 @@ import base64
 from odoo.addons.meli_oerp.models.versions import *
 from odoo.addons.meli_oerp_accounting.models.versions import *
 
-#https://developers.mercadolibre.com.co/es_ar/cargar-factura
 
-#curl -X POST https://api.mercadolibre.com/packs/$PACK_ID/fiscal_documents?access_token=$ACCESS_TOKEN
-#-H 'Content-Type: multipart/form-data' \
-#-F 'fiscal_document=@/home/user/.../Factura_adjunta.pdf'
-
-#curl -X POST https://api.mercadolibre.com/packs/$PACK_ID/fiscal_documents?access_token=$ACCESS_TOKEN
-#  -H 'content-type: multipart/form-data;'
-#  -F 'fiscal_document=@/home/user/.../Factura_adjunta.pdf'
-#  -F 'fiscal_document=@/home/user/.../Factura_adjunta.xml'
-
-#https://api.mercadolibre.com/packs/2000001921401367/fiscal_documents?access_token=APP_USR-6630319130713446-021014-a71d1e5701c937af631cabdb0bf0c5c3-115266467#json
-
-"""
-							<button name='orders_post_invoice' type="object"
-								string="Publicar Facturas"
-								attrs="{'invisible':[('invoice_posted','=',True)]}"
-								class="oe_stat_button"
-								icon="fa-globe"/>
-							<field name="invoice_posted"/>
-							<field name="invoice_fiscal_documents"/>
-"""
 
 class Invoice(models.Model):
 

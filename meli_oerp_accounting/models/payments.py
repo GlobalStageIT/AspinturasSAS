@@ -291,6 +291,17 @@ class MeliPayment(models.Model):
             if (self._get_ml_validate(config=config)):
                 payment_post( self.account_supplier_payment_id )
 
+    def check_supplier_payment( self, config=None):
+                            
+        if self.account_supplier_payment_id:
+            if (self._get_ml_validate(config=config)):
+                if (self.fee_amount and self.account_supplier_payment_id.amount!=self.fee_amount):
+                    if (self.account_supplier_payment_id.state in posted_statuses or
+                       self.account_supplier_payment_id.state in cancel_statuses):
+                        self.account_supplier_payment_id.action_draft()
+                    self.account_supplier_payment_id.amount = self.fee_amount
+                    payment_post( self.account_supplier_payment_id )
+
     def create_supplier_payment_shipment(self, meli=None, config=None ):
         self.ensure_one()
 

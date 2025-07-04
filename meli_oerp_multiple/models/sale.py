@@ -36,7 +36,8 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     #mercadolibre could have more than one associated order... packs are usually more than one order
-    mercadolibre_bindings = fields.Many2many( "mercadolibre.sale_order", string="MercadoLibre Connection Bindings" )
+    mercadolibre_bindings = fields.Many2many( "mercadolibre.sale_order", string="MercadoLibre Connection Bindings",
+                                             groups="meli_oerp_multiple.group_mercadolibre_connectors_manager" )
 
     def multi_meli_order_update( self, account=None ):
         #_logger.info("meli_oerp_multiple >> _meli_order_update: "+str(self))

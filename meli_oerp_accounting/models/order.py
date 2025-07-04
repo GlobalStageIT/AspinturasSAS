@@ -139,7 +139,7 @@ class SaleOrder(models.Model):
 
                         #try:
                         draft_validate = False
-                        if inv.state in ['draft']:
+                        if inv.state in draft_statuses:
                             draft_validation = not config.mercadolibre_order_confirmation_invoice or ( config.mercadolibre_order_confirmation_invoice and not "_draft" in config.mercadolibre_order_confirmation_invoice)
                             draft_validation_full = not config.mercadolibre_order_confirmation_invoice_full or ( config.mercadolibre_order_confirmation_invoice_full and not "_draft" in config.mercadolibre_order_confirmation_invoice_full)
                             draft_validate = draft_validation
@@ -306,7 +306,7 @@ class SaleOrder(models.Model):
 
                                 if not payment.account_payment_id:
                                     payment.create_payment( meli=meli, config=config )
-                                elif payment.account_payment_id.state=='draft':
+                                elif payment.account_payment_id.state in draft_payment_status:
                                     payment.post_payment(config=config)
                         except Exception as e:
                             _logger.info("Error creating customer payment")
@@ -317,8 +317,11 @@ class SaleOrder(models.Model):
                         try:
                             if config.mercadolibre_process_payments_supplier_fea and not payment.account_supplier_payment_id:
                                 payment.create_supplier_payment( meli=meli, config=config )
-                            elif payment.account_supplier_payment_id.state=='draft':
+                            elif payment.account_supplier_payment_id.state in draft_payment_status:
                                 payment.post_supplier_payment(config=config)
+                            else:
+                                payment.check_supplier_payment(config=config)
+
                         except Exception as e:
                             _logger.info("Error creating supplier fee payment")
                             _logger.info(e, exc_info=True)
@@ -328,7 +331,7 @@ class SaleOrder(models.Model):
                         try:
                             if config.mercadolibre_process_payments_supplier_shipment and not payment.account_supplier_payment_shipment_id and (payment.order_id and payment.order_id.shipping_list_cost>0.0):
                                 payment.create_supplier_payment_shipment( meli=meli, config=config )
-                            elif payment.account_supplier_payment_shipment_id.state=='draft':
+                            elif payment.account_supplier_payment_shipment_id.state in draft_payment_status:
                                 payment.post_supplier_payment_shipment(config=config)
                         except Exception as e:
                             _logger.info("Error creating supplier shipment payment")

@@ -49,7 +49,8 @@ class product_template(models.Model):
 
     _inherit = "product.template"
 
-    mercadolibre_bindings = fields.Many2many( "mercadolibre.product_template", string="MercadoLibre Connection Bindings", copy=False )
+    mercadolibre_bindings = fields.Many2many( "mercadolibre.product_template", string="MercadoLibre Connection Bindings", copy=False,
+                                             groups="meli_oerp_multiple.group_mercadolibre_connectors_manager" )
 
     def _mercadolibre_bindings_has_fulfillment(self):
         for ptpl in self:
@@ -238,6 +239,15 @@ class product_template(models.Model):
                         _logger.info("product.template mercadolibre_unbind_from() productT.mercadolibre_bindings: "+str(productT.mercadolibre_bindings))
 
                         if (unbind_variants):
+                            _logger.info("product.template deleting variants bindings of this ptpl binding")
+                            if (pt_bind[0]):                                
+                                pt_bind_obj = self.env["mercadolibre.product_template"].browse(pt_bind[0]);                                
+                                if (pt_bind_obj and pt_bind_obj.variant_bindings):
+                                    for pv_bind in pt_bind_obj.variant_bindings:
+                                        _logger.info("product.template  unbind linking variant binding "+str(pv_bind) )
+                                        pv_bind.unlink()
+
+                            _logger.info("product.template  unbinding meli id from all possible variants of this product template")
                             for variant in productT.product_variant_ids:
                                 pv_bind = variant.mercadolibre_unbind_from( account, binding_product_tmpl_id=False, meli_id=pt_bind[2] )
 
@@ -433,7 +443,8 @@ class product_product(models.Model):
 
     _inherit = "product.product"
 
-    mercadolibre_bindings = fields.Many2many( "mercadolibre.product", string="MercadoLibre Connection Bindings", copy=False )
+    mercadolibre_bindings = fields.Many2many( "mercadolibre.product", string="MercadoLibre Connection Bindings", copy=False,
+                                             groups="meli_oerp_multiple.group_mercadolibre_connectors_manager" )
 
     def _meli_price_converted( self, meli_price=None, config=None ):
         company = (config and 'company_id' in config._fields and config.company_id) or self.env.user.company_id
@@ -1563,7 +1574,7 @@ class product_product(models.Model):
     def _product_post_set_attributes( self, product_tmpl=None, product=None, meli=None, config=None ):
         attributes = []
         attributes_ids = {}
-        variations_candidates = False
+        variations_candidates = (product_tmpl and "meli_pub_as_variant" in product_tmpl._fields and product_tmpl.meli_pub_as_variant)
         att_line_ids = ("attribute_line_ids" in product_tmpl._fields and product_tmpl.attribute_line_ids)
 
         #binding template
@@ -2106,7 +2117,7 @@ class product_product(models.Model):
                 return {}
         else:
             #caso 1 sola combinacion, se trata especialmente
-            if ( productjson and len(productjson["variations"])==1 ):
+            if ( productjson and "variations" in productjson and productjson["variations"] and len(productjson["variations"])==1 ):
                 body_varias = {
                     "title": body["title"],
                     "pictures": body["pictures"],
@@ -2586,12 +2597,12 @@ class product_product(models.Model):
             product.meli_state = ML_state
 
 
-    meli_permalink = fields.Char( compute=product_get_meli_update, size=256, string='Link',help='PermaLink in MercadoLibre' )
-    meli_permalink_edit = fields.Char( compute=product_get_meli_update, size=256, string='Link Edit',help='PermaLink Edit in MercadoLibre' )
-    meli_permalink_api = fields.Char( compute=product_get_meli_update, size=256, string='Link Api',help='PermaLink Api in MercadoLibre' )
-    meli_state = fields.Boolean( compute=product_get_meli_update, string='Login',help="Inicio de sesión requerida" )
-    meli_status = fields.Char( compute=product_get_meli_update, size=128, string='Status', help="Estado del producto en ML" )
-    meli_sub_status = fields.Char( compute=product_get_meli_update, size=128, string='Sub status',help="Sub Estado del producto en ML" )
+    meli_permalink = fields.Char( compute=product_get_meli_update, size=256, string='Link',help='PermaLink in MercadoLibre', compute_sudo=True )
+    meli_permalink_edit = fields.Char( compute=product_get_meli_update, size=256, string='Link Edit',help='PermaLink Edit in MercadoLibre', compute_sudo=True )
+    meli_permalink_api = fields.Char( compute=product_get_meli_update, size=256, string='Link Api',help='PermaLink Api in MercadoLibre', compute_sudo=True )
+    meli_state = fields.Boolean( compute=product_get_meli_update, string='Login',help="Inicio de sesión requerida", compute_sudo=True )
+    meli_status = fields.Char( compute=product_get_meli_update, size=128, string='Status', help="Estado del producto en ML", compute_sudo=True )
+    meli_sub_status = fields.Char( compute=product_get_meli_update, size=128, string='Sub status',help="Sub Estado del producto en ML", compute_sudo=True )
 
 
     def x_match_variation_id( self, meli=None, meli_id=None, meli_id_variation=None, product_sku=None, product_barcode=None ):
@@ -3116,7 +3127,7 @@ class product_product(models.Model):
                                 _logger.info( str(config and config.name) + " "+put_url +" Posted ok: " + str(rjson['available_quantity']) )
                                 pass;
                 else:
-                    put_url = "/items/"+meli_id
+                    put_url = "/items/"+str(meli_id)
                     response = meli.put( put_url, fields, {'access_token':meli.access_token})
                     posted_try = True
                     #_logger.info("x_product_post_stock responsevar : "+str(put_url)+str(response))
@@ -3378,8 +3389,10 @@ class product_product(models.Model):
 
     def process_meli_stock_moves_update( self ):
         for var in self:
+            #boms stock moves are checked in here!
             var._meli_stock_moves_update()
             pv_bind = self.env["mercadolibre.product"].search([ ("product_id","=",var.id)])
+            #stock status are checked here
             pv_bind.process_meli_stock_moves_update()
 
 

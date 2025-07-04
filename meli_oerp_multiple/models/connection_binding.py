@@ -1290,6 +1290,7 @@ class MercadoLibreConnectionBindingProductVariant(models.Model):
             bind._meli_stock_status()
 
     def process_meli_stock_moves_update( self ):
+        #BOMS: products moves are checked BEFORE at product.product._meli_stock_moves_update
         for bind in self:
             bind._meli_stock_moves_update()
 

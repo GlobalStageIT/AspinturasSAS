@@ -144,15 +144,15 @@ class res_company(models.Model):
             "PAB": { "name": "Panamá", "id": "MPA", "default_currency_id": "PAB" },
             "USD": { "name": "Uruguay", "id": "MLU", "default_currency_id": "UYU" },
         }
-        response = meli.get("/sites")
+        response = meli and meli.get("/sites")
         if (response):
             sites = response.json()
             #_logger.info(sites)
             for site in sites:
                 #_logger.info("site:")
                 #_logger.info(site)
-                _key_ = site["default_currency_id"]
-                if (_key_!="USD"):
+                _key_ = type(site)==dict and "default_currency_id" in site and site["default_currency_id"]
+                if (_key_ and _key_!="USD"):
                     ML_sites[_key_] = site
 
         currency = self.mercadolibre_currency
@@ -409,7 +409,7 @@ class res_company(models.Model):
                                                               ('tax_included','Impuestos ya incluídos del precio de lista'),
                                                               ('tax_excluded','Impuestos excluídos del precio de lista') ] )
 
-    mercadolibre_do_not_use_first_image = fields.Boolean(string="Do not use first image")
+    mercadolibre_do_not_use_first_image = fields.Boolean(string="Do not use first image",default=False)
     mercadolibre_cron_post_new_products = fields.Boolean(string='Incluir nuevos productos',help='Cron Post New Products, Product Templates or Variants with Meli Publication field checked')
     mercadolibre_cron_get_new_products = fields.Boolean(string='Importar nuevos productos',help='Cron Import New Products, Product Templates or Variants')
 

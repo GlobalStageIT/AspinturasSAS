@@ -69,7 +69,7 @@ class MercadoLibreAuthorize(OcapiAuthorize):
         _logger.info(access_tokens)
         return access_tokens
 
-class MercadoLibre(MercadoLibre):
+class MercadoLibrePremium(MercadoLibre):
     @http.route('/meli/', auth='public')
     def index(self):
         company = request.env.user.company_id
@@ -199,7 +199,7 @@ class MercadoLibre(MercadoLibre):
         if connector and connector=="mercadolibre":
             return self.get_mercadolibre_connection(**post)
         else:
-            return super(OcapiCatalog, self).get_connection(connector,**post)
+            return super(MercadoLibrePremium, self).get_connection_account(connector,**post)
 
     @http.route('/ocapi/<string:connector>/<string:meli_id>/rebind', auth='public', type='json', methods=['POST'], csrf=False, cors='*')
     def rebind(self, connector, meli_id, **post):
@@ -288,11 +288,14 @@ class MercadoLibreLoginMultiple(MercadoLibreLogin):
         if codes['code']!='none':
             #_logger.info( "Meli: Authorize: REDIRECT_URI: %s, code: %s" % ( meli_account.redirect_uri, codes['code'] ) )
             resp = meli.authorize( codes['code'], meli_account.redirect_uri)
-            meli_account.write( { 'access_token': meli.access_token,
+            login_data = { 'access_token': meli.access_token,
                              'refresh_token': meli.refresh_token,
                              'code': codes['code'],
                              'cron_refresh': True,
-                             'status': 'connected' } )
+                             'status': 'connected' }
+            meli_account.write( login_data )
+            meli_account.message_post(body=str("Login result: "+str(login_data)+str("\n"+"RESPONSE:") +str(resp) ), message_type="notification" )
+            
             return 'LOGGED WITH CODE: %s <br>ACCESS_TOKEN: %s <br>REFRESH_TOKEN: %s <br>MercadoLibre Publisher for Odoo - Copyright Moldeo Interactive <br><a href="javascript:window.history.go(-2);">Volver a Odoo</a> <script>window.history.go(-2)</script>' % ( codes['code'], meli.access_token, meli.refresh_token )
         else:
             return "<a href='"+meli.auth_url()+"'>Try to Login Again Please</a>"

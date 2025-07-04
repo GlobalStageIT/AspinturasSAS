@@ -933,14 +933,14 @@ class MercadoLibreConnectionAccount(models.Model):
     mercadolibre_orders = fields.One2many( "mercadolibre.orders", "connection_account", string="Orders" )
 
     def meli_refresh_token(self):
-        #_logger.info("meli_refresh_token")
+        _logger.info("meli_refresh_token: "+str(self and self.name))
         self.ensure_one()
         company = self.company_id or self.env.user.company_id
         #_logger.info(self.name)
         #_logger.info(self.company_id.name)
-        meli = self.env['meli.util'].get_new_instance( company, self )
+        meli = self.env['meli.util'].get_new_instance( company, self, refresh_force=True )
 
-        #_logger.info("meli:"+str(meli))
+        #_logger.info("meli_refresh_token:"+str(meli))
 
     def meli_login(self):
         #_logger.info("meli_login")

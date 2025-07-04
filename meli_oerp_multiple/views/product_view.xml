@@ -403,9 +403,10 @@
               </label-->
               <data>
                   <notebook>
-										<page string="MercadoLibre Bindings" invisible="1">
-											<field name="mercadolibre_bindings" invisible="0" >
-                          <list create="False" edit="1" delete="False" default_order='connection_account asc, name asc'>
+			<page string="MercadoLibre Bindings" invisible="1"
+				groups="meli_oerp_multiple.group_mercadolibre_connectors_manager">
+			<field name="mercadolibre_bindings" invisible="0" >
+                          <list create="0" edit="1" delete="0" default_order='connection_account asc, name asc'>
                             <field name="connection_account"/>
                             <field name="name"/>
                             <field name="sku"/>
@@ -462,9 +463,9 @@
               </label-->
               <data>
                   <notebook>
-                    <page string="MercadoLibre Bindings" invisible="1">
-                      <field name="mercadolibre_bindings" invisible="0">
-                          <list create="False" edit="1" delete="False" default_order='connection_account asc, name asc'>
+                    <page string="MercadoLibre Bindings" invisible="1" groups="meli_oerp_multiple.group_mercadolibre_connectors_manager">
+                      <field name="mercadolibre_bindings" invisible="0" groups="meli_oerp_multiple.group_mercadolibre_connectors_manager">
+                          <list create="0" edit="1" delete="0" default_order='connection_account asc, name asc'>
                             <field name="connection_account"/>
                             <field name="meli_official_store_id"/>
                             <field name="name"/>
