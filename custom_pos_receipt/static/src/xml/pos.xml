@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="custom_pos_receipt.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='props.data.cashier']" position="after">
+            <t t-if='props.data.partner'>
+                <div>Client:
+                    <t t-esc='props.data.partner.name' />
+                </div>
+            </t>
+        </xpath>    
+    </t>
+</templates>
