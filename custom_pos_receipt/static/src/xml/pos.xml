@@ -2,11 +2,22 @@
 <templates id="template" xml:space="preserve">
     <t t-name="custom_pos_receipt.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
         <xpath expr="//div[@t-if='props.data.cashier']" position="after">
-            <t t-if='props.data.partner'>
-                <div>Client:
-                    <t t-esc='props.data.partner.name' />
-                </div>
+            <t t-if="props.data.partner">
+                <div>Cliente: <t t-esc="props.data.partner.name" /></div>
+                <t t-if="props.data.partner.phone">
+                    <div>Tel: <t t-esc="props.data.partner.phone" /></div>
+                </t>
+                <t t-if="props.data.partner.email">
+                    <div>Email: <t t-esc="props.data.partner.email" /></div>
+                </t>
+                <t t-if="props.data.partner.contact_address">
+                    <div>Dirección: <t t-esc="props.data.partner.contact_address" /></div>
+                </t>
+                <t t-if="props.data.partner.vat">
+                    <div>NIT: <t t-esc="props.data.partner.vat" /></div>
+                </t>
             </t>
-        </xpath>    
+        </xpath>
     </t>
 </templates>
+
