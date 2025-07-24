@@ -422,8 +422,8 @@
                             <field name="meli_permalink_api" widget="url"/>
                           </list>
                       </field>
-										</page>
-								</notebook>
+			</page>
+		</notebook>
               </data>
               <xpath expr="//div[@name='button_box_mel']" position="after">
                 <separator string="MercadoLibre Bindings" name="mercadolibre_bindings"/>
@@ -465,7 +465,7 @@
                   <notebook>
                     <page string="MercadoLibre Bindings" invisible="1" groups="meli_oerp_multiple.group_mercadolibre_connectors_manager">
                       <field name="mercadolibre_bindings" invisible="0" groups="meli_oerp_multiple.group_mercadolibre_connectors_manager">
-                          <list create="0" edit="1" delete="0" default_order='connection_account asc, name asc'>
+                          <list create="False" edit="1" delete="False" default_order='connection_account asc, name asc'>
                             <field name="connection_account"/>
                             <field name="meli_official_store_id"/>
                             <field name="name"/>

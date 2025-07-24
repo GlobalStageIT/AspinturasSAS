@@ -347,7 +347,7 @@ class MercadoLibreOrder(models.Model):
         #classic meli_oerp version:
         if (meli_id_variation):
             product_related = product_obj.search([ ('meli_id','=',meli_id), ('meli_id_variation','=',meli_id_variation) ])
-            if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+            if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                 product_related = product_obj.sudo().search([ ('meli_id','=',meli_id), ('meli_id_variation','=',meli_id_variation)])
                 for p in product_related:
                     if (p.company_id != account.company_id):
@@ -357,7 +357,7 @@ class MercadoLibreOrder(models.Model):
         else:
             if not product_related:
                 product_related = product_obj.search([('meli_id','=', meli_id)])
-                if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+                if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                     product_related = product_obj.sudo().search([ ('meli_id','=',meli_id) ])
                     for p in product_related:
                         if (p.company_id != account.company_id):
@@ -387,7 +387,7 @@ class MercadoLibreOrder(models.Model):
             if (seller_sku):
                 #_logger.info("search_meli_product (multiple): Search using seller_sku: "+str(seller_sku))
                 product_related = product_obj.search([('default_code','=ilike',seller_sku),'|',('company_id','=',account.company_id.id),('company_id','=',False)])
-                if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+                if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                     product_relateds = product_obj.sudo().search([('default_code','=ilike',seller_sku),'|',('company_id','=',account.company_id.id),('company_id','=',False)])
                     if product_relateds:
                         for p in product_relateds:
@@ -401,7 +401,7 @@ class MercadoLibreOrder(models.Model):
                 seller_sku = ('seller_custom_field' in meli_item and meli_item['seller_custom_field'])
                 #_logger.info("search_meli_product (multiple): Search using seller_custom_field: "+str(seller_sku))
                 product_related = product_obj.search([('default_code','=ilike',seller_sku),'|',('company_id','=',account.company_id.id),('company_id','=',False)])
-                if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+                if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                     product_relateds = product_obj.sudo().search([('default_code','=ilike',seller_sku)])
                     if product_relateds:
                         for p in product_relateds:
@@ -426,7 +426,7 @@ class MercadoLibreOrder(models.Model):
                         'meli_pub': True,
                     }
                     #_logger.info("Binding item:"+str(prod_fields) +" product_related:"+str(product_related) )
-                    if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+                    if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                         prod_fields['company_id'] = account.company_id.id
                     product_related.write((prod_fields))
                     if (product_related.product_tmpl_id):
@@ -467,7 +467,7 @@ class MercadoLibreOrder(models.Model):
                         prod_fields.update(ProductType())
                         if (seller_sku):
                             prod_fields['default_code'] = seller_sku
-                        if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+                        if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
                             prod_fields['company_id'] = account.company_id.id
                         #prod_fields['default_code'] = rjson3['id']
                         #productcreated = False

@@ -1030,7 +1030,7 @@ class product_product(models.Model):
         product.write( meli_fields )
         product_template.write( tmpl_fields )
 
-        if "mercadolibre_update_product_company" in config and config.mercadolibre_update_product_company:
+        if "mercadolibre_update_product_company" in config._fields and config.mercadolibre_update_product_company:
             #_logger.info(" > mercadolibre_update_product_company ")
             product_template.company_id = account.company_id
         meli_available_quantity = rjson.get('available_quantity', 0)

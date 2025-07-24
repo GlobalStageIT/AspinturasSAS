@@ -76,7 +76,7 @@
       	<field name="name">ocapi.product.template.tree</field>
       	<field name="model">product.template</field>
       	<field name="arch" type="xml">
-      		<list create="0" edit="1" delete="1" default_order='id desc'>
+      		<list create="False" edit="1" delete="1" default_order='id desc'>
       			<field name="name" />
       		</list>
       	</field>

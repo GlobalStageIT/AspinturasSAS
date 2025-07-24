@@ -61,7 +61,7 @@ class OcapiConnectionAccount(models.Model):
 
     _name = "ocapi.connection.account"
     _description = "Odoo Connector Api Account Credentials and Configuration"
-    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin','image.mixin']
 
     def get_connector_version(self):
         for acc in self:

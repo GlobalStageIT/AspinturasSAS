@@ -23,16 +23,7 @@ def order_create_invoices( sale_order, grouped=False, final=False, date=None ):
 	return sale_order._create_invoices(grouped=grouped, final=final, date=date)
 
 def payment_post( self ):
-    try:
-        self.action_post()
-    except:
-        pass;
-    
-    try:
-        self.action_validate()
-    except:
-        pass;
-    
+    return self.action_post()
 
 def payment_group_post( self ):
     return self.post()

@@ -105,16 +105,21 @@ class MercadoLibreConnectionNotification(models.Model):
             messages = []
             if data:
 
+                if not "application_id" in data:
+                    return {"error": "Bad notification format!", "status": "520" }
+
                 if str(meli.client_id) != str(data["application_id"]):
                     return {"error": "account.client_id and application_id does not match!", "status": "520" }
 
                 if (not "_id" in data):
+                    #TODO: change to UUID style, too many notifications on the same window can overlap...
                     date_time = ml_datetime( str( datetime.now() ) )
                     base_str = str(data["application_id"]) + str(data["user_id"]) + str(date_time)
                     hash = hashlib.md5()
                     hash.update( base_str.encode() )
                     hexhash = str("n")+hash.hexdigest()
                     data["_id"] = hexhash
+
                 messages.append(data)
 
             #process all notifications
@@ -143,12 +148,15 @@ class MercadoLibreConnectionNotification(models.Model):
 
                         if all_notis:
                             #hay notis de este recurso, asignamos a esta ultima notificacion como notification_parent_id
+                            
                             last_noti = all_notis[0]
                             noti = last_noti
                             last_noti.notification_parent_id = False
+
                             for oldnoti in all_notis:
                                 if not last_noti==oldnoti:
                                     oldnoti.notification_parent_id = last_noti.id
+
                             self.env.cr.commit()
 
                             #_logger.info("Last Meli Resource Notification: "+str(noti and noti.resource)+" topic: "+str(n["topic"]))
